@@ -8,6 +8,11 @@
 <script src="<%=request.getContextPath()%>/resources/js/header.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 
+<!-- ajax 연결 -->
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css/">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/signup.css/">

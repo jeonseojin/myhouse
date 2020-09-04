@@ -1,13 +1,17 @@
 package kr.green.ebook.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.ebook.pagination.Criteria;
@@ -47,5 +51,38 @@ public class HomeController {
 		}
 		return mv;
 	}
+	//회원가입 화면
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public ModelAndView signup(ModelAndView mv) {
+		mv.setViewName("/main/signup");
+		return mv;
+	}
+	// 회원가입 정보 전송
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public ModelAndView signupPost(ModelAndView mv, MemberVo member) {
+		if(memberService.signup(member)) {//실패
+			mv.setViewName("redirect:/signup");
+	}else {//성공
+			mv.setViewName("redirect:/");
+			mv.addObject("member", member);
+		}
+		return mv;
+	}
 	
+	//아이디 중복 확인
+	@RequestMapping(value ="/idCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> idcheck(@RequestBody String id){
+	    Map<Object, Object> map = new HashMap<Object, Object>();
+	    map.put("res",memberService.getMember(id)==null);
+	    return map;
+	}
+	//이름 중복 확인
+	@RequestMapping(value ="/nameCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> namecheck(@RequestBody String name){
+	    Map<Object, Object> map = new HashMap<Object, Object>();
+	    map.put("res",memberService.getMember(name)==null);
+	    return map;
+		}
 }

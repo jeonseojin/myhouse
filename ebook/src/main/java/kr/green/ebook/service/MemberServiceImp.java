@@ -1,5 +1,7 @@
 package kr.green.ebook.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ public class MemberServiceImp implements MemberService {
 	@Autowired
     BCryptPasswordEncoder passwordEncoder;
 	
+	//비밀번호 암호화한 로그인
 	@Override
 	public MemberVo isMember(MemberVo member) {
 		MemberVo dbMember = memberDao.getMember(member.getId());
@@ -22,6 +25,36 @@ public class MemberServiceImp implements MemberService {
 			return dbMember;
 		}
 		return null;
+	}
+	//모든멤버
+	@Override
+	public MemberVo getMember(String id) {
+		return memberDao.getMember(id);
+	}
+	
+	//전부
+	@Override
+	public MemberVo getMember(HttpServletRequest r) {
+		return (MemberVo)r.getSession().getAttribute("member");
+	}
+	
+	//회원가입
+	@Override
+	public boolean signup(MemberVo member) {
+		if(member==null) return false;
+		if(memberDao.getMember(member.getId()) !=null || member.getId().length() == 0) return false;
+		if(member.getPw()==null || member.getPw().length()==0) return false;
+		if(member.getEmail()==null || member.getEmail().length()==0 || !member.getEmail().contains("@")) return false;
+		if(member.getGender()==null || member.getGender().length()==0)
+			member.setGender("mail");
+		member.setAuth("USER");
+		member.setIsDel("N");
+		
+		//비밀번호 암호화
+		String encodePw = passwordEncoder.encode(member.getPw());
+		member.setPw(encodePw);
+		memberDao.insertMember(member);
+		return false;
 	}
 
 }
