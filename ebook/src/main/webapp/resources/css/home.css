@@ -1,0 +1,173 @@
+@charset "UTF-8";
+
+		.main-banner{
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .main-banner::before{
+            right: 100%;
+        }
+        .main-banner::after{
+            left: 100%;
+        }
+        .main-banner::before,.main-banner::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9;
+            background: #fff;
+        }
+        .banner-swiper{
+            position: relative;
+            z-index: 1;
+            display: flex;
+            overflow: hidden;
+            box-sizing: content-box;
+            transition-property: transform, -webkit-transform;
+        }
+        .banner-swiper img{
+            display: block;
+            width: 100%;
+            min-height: 10px;
+        }
+        .banner-item{
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition-property: transform, -webkit-transform;
+        }
+        .banner-link{
+            position: relative;
+            height: 0;
+            display: block;
+            margin: auto;
+            background-color: #e9e9e9;
+        }
+        .banner-img{
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .banner-img>img,.banner-img>source{
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .main-ranking{
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+        .main-left{
+            width: 49%;
+            background-color: lightcoral;
+            height: 250px;
+        }
+        .main-right{
+            width: 49%;
+            background-color: thistle;
+            height: 250px;
+        }
+        .main-new{
+            width: 100%;
+            height: 150px;
+            background-color: wheat;
+        }
+        .main-update{
+            width: 100%;
+            height: 150px;
+            background-color: thistle;
+        }
+        /* 배너버튼 */
+        .banner-nav{
+        	position: absolute;
+        	top: 50%;
+        	left: 0;
+        	right: 0;
+        	margin: -25px auto 0;        	
+        }
+        .banner-btn{
+        	position: absolute;
+        	z-index: 5;
+        	box-sizing: border-box;
+        	width: 54px;
+        	height: 54px;
+        	overflow: hidden;
+        	border: 3px solid #fff;
+        	background-color: transparent;
+        	border-radius: 50%;
+        	font-size: 30px;
+        	color: #fff;
+        	line-height: 30px;
+        }
+        .banner-prev{
+        	left: 32px;
+        }
+        .banner-next{
+        	right: 32px;
+        }
+        /* 브라우저 min 961 */
+        @media (min-width: 961px){
+            .com-home{
+                min-height: 1000px;
+            }
+            .main-banner{
+                margin-bottom: 44px;
+            }
+            .main-left{
+                margin-right: 32px;
+            }
+            
+            
+        }
+        
+        @media (max-width: 960px){
+            .com-home{
+                min-height: 800px;
+            }
+            .main-left,.main-right{
+                width: 50%;
+            }
+        }
+        @media (min-width: 640px){
+            .banner-link{
+                padding-top: 38.135593%;
+            }
+        }
+        @media (max-width: 639px){
+            .main-banner{
+                margin-bottom: 16px;
+            }
+            .banner-link{
+                padding-top: 107.5%;
+            }
+            .banner-link>.banner-img-small{
+                display: block;
+            }
+            .banner-link>.banner-img-big{
+                display: none;
+            }
+        }
+
+        /* 배너크기 */
+        @media (min-width: 1281px){
+            .banner-link{
+                width: 1181px;
+            }
+        }
+        @media (max-width: 1280px) and (min-width: 640px){
+            .banner-link {
+                max-width: 1004px; 
+                
+            }
+        }
+        

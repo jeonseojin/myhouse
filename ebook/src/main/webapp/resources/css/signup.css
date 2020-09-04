@@ -1,0 +1,152 @@
+@charset "UTF-8";
+.signup-box{
+	position: relative;
+	margin: auto;
+	width: 500px;
+}
+.signup-item{
+	position: absolute;
+	display: block;
+	width: 100%;
+	margin: auto;
+	line-height: 32px;
+	padding: 20px;
+	box-sizing: border-box;
+	font-size: 16px;
+	font-weight: bold;
+	border: 2px solid #dee2e6;
+	border-top: 0;
+}
+.sign-up{
+	border: 0;
+	width: 100%;
+}
+.sign-up>input{
+	border: none;
+	width: 100%;
+	border-bottom: 1px solid #dee2e6;
+}
+.box-gender,.gender-box{
+	width: 50%
+}
+.gender-box{
+	border-top: 1px solid #dee2e6;
+	border: none;
+}
+.error{
+	font-size: 12px;
+}
+.signup-btn{
+	border: none;
+	background-color: #19ce60;
+	color: #fff;
+	width: 50%;
+	margin: auto 0;
+}
+.signin-box{
+	width: 400px;
+	height: 500px;
+	text-align: center;
+	margin: 0 auto;
+	padding: 50px;
+}
+.signin-box>h1{
+	margin-bottom: 30px;
+}
+.signin-input{
+	margin-bottom: 20px;
+}
+.signin-btn{
+	width: 100%;
+	height: 38px;
+	border: none;
+    background-color: #ed1c24;
+    font-size: 14px;
+    color: #fff;
+    border-radius: .25rem;
+}
+.signin-help{
+	margin-top: 50px;
+	width: 100%;
+	font-size: 12px;
+	color: #767676;
+	white-space: normal;
+}
+@media (min-width: 960px){
+	.signup-item{
+		min-height: 400px;
+		font: 12px;
+	}
+}
+/*admin user/toon */
+.color-gray{
+	color: gray;
+}
+.ad-toon{
+	position: relative;
+	padding-top: 20px;
+	width: 100%;
+	min-height: 700px;
+}
+.table,.table th{
+	border-top: 0;
+}
+.user-admin{
+	margin-top: 30px;
+	text-align: center;
+}
+.adt-plot{
+	min-height: 120px;
+	box-sizing: content-box;
+	text-align: center;
+}
+.toon-text-box{
+	border: none;
+}
+.toon-text-title{
+	width: 250px;
+}
+.toon-plot-box{
+	position: absolute;
+	width: 100%;
+	border: 1px solid #dee2e6;
+	height: 500px;
+}
+.ad-plot-box{
+	width: 100%;
+	height: 600px;
+}
+.ad-plot-h{
+	margin: 15px auto;
+	font-weight: bold;
+	text-align: center;
+	font-size: 17px;
+}
+.ad-plot{
+	margin-top: 2px;
+	width: 100%;
+	min-height: 350px;
+	border: 1px solid #dee2e6;
+}
+.check-box{
+	width: 100px;
+	height: 20px;
+	float: left;
+}
+.checkbox{
+	margin-right: 5px;
+}
+.pagination-box{
+	margin-top: 500px;
+}
+.textline-center{
+	text-align: center;
+	border: none;
+}
+.adt-line{
+	line-height: 100px;
+}
+.adt-img-box{
+	min-width: 100px;
+	height: 100px;
+}

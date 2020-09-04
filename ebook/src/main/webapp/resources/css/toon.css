@@ -1,0 +1,113 @@
+@charset "UTF-8";
+.toon-week-box{
+	position: sticky;
+	z-index: 6;
+	top: 0;
+	text-align: center;
+	background: #fff;
+}
+
+.toon-week{
+	background-color: #eff1f4;
+	font-weight: bold;
+	display: inline-block;
+	text-align: center;
+	border: none;
+	cursor: context-menu !important;
+}
+.toon-week:hover{
+	background-color: #dbdee3;
+}
+.toon-week[aria-selected='true']{
+	background-color: #eb0026 !important;
+	color: #fff;
+}
+.toon-box{
+	position: relative;
+	line-height: 0;
+	overflow: hidden;
+	margin-top: 40px; 
+}
+.toon-list{
+	list-style: none;
+	overflow: hidden;
+	float: left;
+}
+.toon-item{
+    position: relative;
+    float: left;
+    width: 200px;
+    height: 170px;
+    margin-right: 18px;
+}
+.img_thumb{
+    display: block;
+    vertical-align: top;
+}
+.toon-link{
+    height: 170px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+.toon-title{
+    height: 17px;
+    padding-top: 11px;
+    margin-top: 10px;
+    overflow: hidden;
+    line-height: 17px;
+    width: 100%;
+    font-size: 14px;
+    vertical-align: top;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.toon-artist{
+    overflow: hidden;
+    display: block;
+    font-size: 12px;
+    color: #777;
+    height: 15px;
+    line-height: 15px;
+}
+
+
+@media (min-width: 961px){
+	.toon-week-box{
+		padding:  8px 0;
+	}
+	.toon-week{
+		min-width: 68px;
+		height: 40px;
+		line-height: 40px;
+		border-radius: 20px;
+		margin: 8px;
+		padding: 0 16px;
+		font-size: 16px;
+	}
+}
+@media (max-width: 960px) and (min-width: 640px){
+	.toon-week-box{
+		padding-left: 8px;
+        margin-right: -16px;
+        margin-left: -16px;
+        scroll-padding-left: 16px;
+	}
+}
+@media (max-width: 960px){
+	.toon-week-box{
+		padding:  6px 0;
+		white-space: nowrap;
+        overflow: auto;
+	}
+	.toon-week{
+		min-width: 44px;
+		height: 30px;
+		line-height: 30px;
+		border-radius: 16px;
+		margin: 6px 4px;
+		padding: 0 12px;
+		font-size: 12px;
+		scroll-snap-align: start;
+	}
+}
