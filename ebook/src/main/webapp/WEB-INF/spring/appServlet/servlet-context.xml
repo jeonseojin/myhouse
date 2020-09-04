@@ -21,7 +21,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 주소연결 kr.green.ebook.*(뒤에 오는 모든 주소를 의미) -->
 	<context:component-scan base-package="kr.green.ebook.*" />
+	
 	<!-- view resolver -->
 	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	    <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
