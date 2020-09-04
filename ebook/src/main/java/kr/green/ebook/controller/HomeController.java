@@ -1,4 +1,4 @@
-package kr.green.ebook;
+package kr.green.ebook.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
