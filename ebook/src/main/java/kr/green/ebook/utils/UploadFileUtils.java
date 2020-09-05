@@ -8,8 +8,7 @@ import java.util.UUID;
 import org.springframework.util.FileCopyUtils;
 
 public class UploadFileUtils {
-	public static String uploadFile(String uploadPath,String title, String originalName, byte[] 	
-			fileData)throws Exception{
+	public static String uploadFile(String uploadPath,String title, String originalName, byte[] fileData)throws Exception{
 		UUID uid = UUID.randomUUID();
 		String savedName = uid.toString() +"_" + originalName;
 		String savedPath = calcPath(uploadPath, title);

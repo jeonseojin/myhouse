@@ -70,7 +70,12 @@
     height: 15px;
     line-height: 15px;
 }
-
+.toon-text-edition{
+	border: none;
+	width: 40px;
+	text-align: center;
+	margin-right: 3px;
+}
 
 @media (min-width: 961px){
 	.toon-week-box{

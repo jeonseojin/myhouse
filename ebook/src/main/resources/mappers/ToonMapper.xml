@@ -58,8 +58,8 @@
 <!-- 연재등록 -->
 	<insert id="insertEp">
 		insert into
-			episode(e_title,e_img)
-			values(#{ep.title},#{ep.t_img})
+			episode(e_title,e_img,e_t_title,e_edition)
+			values(#{ep.e_title},#{ep.e_img},#{ep.e_t_title},#{ep.e_edition})
 	</insert>
 	
 <!-- 장르 선택  -->

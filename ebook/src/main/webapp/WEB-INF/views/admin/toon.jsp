@@ -3,16 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <ul class="nav nav-tabs">
         <li class="nav-item ad-toon-l">
-          <a class="nav-link active" data-toggle="tab" href="#" data-target="ad-toon-all">전체작품조회</a>
+          <a class="nav-link active" href="#" data-target="ad-toon-all">전체작품조회</a>
         </li>
         <li class="nav-item ad-toon-l">
           <a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-data">작품정보</a>
         </li>
         <li class="nav-item ad-toon-l">
-          <a class="nav-link" data-toggle="tab" href="#" aria-selected="true" data-target="ad-toon-record">작품등록</a>
+          <a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-record">작품등록</a>
         </li>
         <li class="nav-item ad-toon-l">
-          <a class="nav-link" data-toggle="tab" href="#"  data-target="ad-toon-episode">작품연재등록</a>
+          <a class="nav-link" data-toggle="tab" href="#" aria-selected="true" data-toggle="tab" data-target="ad-toon-episode">작품연재등록</a>
         </li>
         <li class="nav-item ad-toon-l">
           <a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-mo-del">작품수정/삭제</a>
@@ -155,26 +155,31 @@
 				</c:if>
 			</table>
 	</div>
+	
 	<div class="ad-toon-list ad-toon-episode">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th><input type="text" class="toon-text-box toon-text-title" name="title" placeholder="제목을 입력하세요"></th>
-					<th>작가</th>
-					<th><input type="text" class="toon-text-box" name="artist" placeholder="작가를 입력하세요"></th>
-					<th>등록관리자</th>
-					<th>${member.name}(${member.id})</th>
-				</tr>
-			</thead>
-		</table>
-		<div class="ad-plot-box">
-			<h4 class="ad-plot-h">연재이미지</h4>
-			<input type="file" name="file2" name="t-img">
-			
-		</div>
-		<button class="btn btn-primary float-right">등록</button>
+		<form action="<%=request.getContextPath()%>/admin/ep" method="post" enctype="multipart/form-data">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>제목</th>
+						<th><input type="text" class="toon-text-box toon-text-title" name="e_t_title" placeholder="제목을 입력하세요"></th>
+						<th>부제목</th>
+						<th><input type="text" class="toon-text-box" name="e_title" placeholder="부 제목을 입력하세요"></th>
+						<th><input type="text" class="toon-text-edition" name="e_edition"><span>회</span></th>
+						<th>등록관리자</th>
+						<th>${member.name}(${member.id})</th>
+					</tr>
+				</thead>
+			</table>
+			<div class="ad-plot-box">
+				<h4 class="ad-plot-h">연재이미지</h4>
+				<input type="file" name="file2" name="e-img" multiple="multiple">
+				
+			</div>
+			<button class="btn btn-primary float-right">등록</button>
+		</form>
 	</div>
+	
 	<div class="ad-toon-list ad-toon-mo_del"></div>
 </div>
 
