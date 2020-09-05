@@ -1,5 +1,7 @@
 package kr.green.ebook.service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.green.ebook.dao.MemberDao;
+import kr.green.ebook.pagination.Criteria;
+import kr.green.ebook.pagination.PageMaker;
 import kr.green.ebook.vo.MemberVo;
 
 @Service
@@ -55,6 +59,18 @@ public class MemberServiceImp implements MemberService {
 		member.setPw(encodePw);
 		memberDao.insertMember(member);
 		return false;
+	}
+	@Override
+	public ArrayList<MemberVo> memberList(Criteria cri) {
+		return memberDao.memberList(cri);
+	}
+
+	@Override
+	public PageMaker getPageMakerByMember(Criteria cri) {
+		PageMaker pm = new PageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(memberDao.getTotalCountByMember(cri));
+		return pm;
 	}
 
 }

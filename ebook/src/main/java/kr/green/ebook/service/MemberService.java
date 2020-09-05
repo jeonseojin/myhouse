@@ -1,7 +1,11 @@
 package kr.green.ebook.service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
+import kr.green.ebook.pagination.Criteria;
+import kr.green.ebook.pagination.PageMaker;
 import kr.green.ebook.vo.MemberVo;
 
 public interface MemberService {
@@ -13,5 +17,9 @@ public interface MemberService {
 	MemberVo getMember(HttpServletRequest r);
 
 	boolean signup(MemberVo member);
+
+	ArrayList<MemberVo> memberList(Criteria cri);
+
+	PageMaker getPageMakerByMember(Criteria cri);
 
 }

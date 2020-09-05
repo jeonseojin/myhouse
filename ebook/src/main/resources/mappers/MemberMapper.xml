@@ -8,7 +8,7 @@
   </select>
   <insert id="insertMember">
   	insert into
-  		Member(id,pw,email,name,gender)
+  		Member(id,pw,name,email,gender)
   		values(#{member.id},#{member.pw},#{member.name},#{member.email},#{member.gender})
   </insert>
   
