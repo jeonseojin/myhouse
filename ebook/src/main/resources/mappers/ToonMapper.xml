@@ -29,87 +29,96 @@
     <select id="getTotalCountByToon" resultType="int">
 		select count(*) from toon
 			where 1=1
-  			<if test="cri.type==0">
+  			<if test="cri.type==1">
   				and (title like concat('%',#{cri.search},'%')
   					or artist like concat('%',#{cri.search},'%')
   					or lastEpisode like concat('%',#{cri.search},'%'))
   			</if>
-  			<if test="cri.type==1">
+  			<if test="cri.type==2">
   				and title like concat('%',#{cri.search},'%')
   			</if>
-  			<if test="cri.type==2">
+  			<if test="cri.type==3">
   				and artist like concat('%',#{cri.search},'%')
   			</if>
-  			<if test="cri.type==3">
+  			<if test="cri.type==4">
   				and lastEpisode like concat('%',#{cri.search},'%')
   			</if>
   			
   </select>
-<!-- 작품등록 -->
+
+ <!-- 번호작품 -->
+<select id="getToon" resultType="kr.green.ebook.vo.ToonVo">
+		select * from toon where t_num = #{num}
+</select>
+ <!-- 번호작품 -->
+<select id="getToont" resultType="kr.green.ebook.vo.ToonVo">
+		select * from toon where t_title = #{Title}
+</select>
+<!-- 작품 등록 -->
 	<insert id="insertToon">
 		insert into
-			toon(title,artist,plot,t_img,t_week,g_code)
-			values(#{toon.title},#{toon.artist},#{toon.plot},#{toon.t_img},#{toon.t_week},#{toon.g_code})
+			toon(title,t_title,artist,plot,t_img,t_week,t_type,t_typify)
+			values(#{toon.title},#{toon.t_title},#{toon.artist},#{toon.plot},#{toon.t_img},#{toon.t_week},#{toon.t_type},#{toon.t_typify})
 	</insert>
-	
-<!-- 연재등록 -->
-	<insert id="insertEp">
-		insert into
-			episode(e_title,e_img,e_t_title,e_edition)
-			values(#{ep.e_title},#{ep.e_img},#{ep.e_t_title},#{ep.e_edition})
-	</insert>
-	
-<!-- 장르 선택  -->
-	<select id="toonType">
-		select * from toon where g_code
-	</select>
-	
-<!-- 요일 -->
-	<select id="weekList" resultType="kr.green.ebook.vo.ToonVo">
-		select * from toon where t_week
-			<if test="cri.week==0">
-				and t_week like '1' 
-			</if>
-			<if test="cri.week==1">
-				and t_week like '2'
-			</if>
-			<if test="cri.week==2">
-				and t_week like '3'
-			</if>
-			<if test="cri.week==3">
-				and t_week like '4' 
-			</if>
-			<if test="cri.week==4">
-				and t_week like '5' 
-			</if>
-			<if test="cri.week==5">
-				and t_week like '6' 
-			</if>
-			<if test="cri.week==6">
-				and t_week like '7'
-			</if>
-			<if test="cri.week==7">
-				and t_week like '8' 
-			</if>
-	</select>
-	
-<!-- 연재연결 -->
-	<select id="getToon" resultType="kr.green.ebook.vo.ToonVo">
-			select * from toon where t_title = #{t_title}
-	</select>
-<!-- 조회수 / 수정 -->
+<!-- 작품 수정 및 업데이트 -->	
 	<update id="updateToon">
 		update toon
 			set
 				title = #{toon.title},
+				t_title = #{toon.t_title},
 				artist = #{toon.artist},
 				plot = #{toon.plot},
-				choice = #{toon.choice},
-				like = #{toon.like},
 				t_img = #{toon.t_img},
+				t_typify = #{toon.t_typify},
+				t_week = #{toon.t_week},
+				t_type = #{toon.t_type},
+				t_views = #{toon.t_views},
 				lastEpisode = #{toon.lastEpisode},
-				views = #{toon.views}
+				choice = #{toon.choice},
+				up = #{toon.up}
 			where
 				t_title = #{toon.t_title}
 	</update>
+<!-- 연재 등록 -->
+	<insert id="insertEp">
+		insert into
+			episode(e_t_title,e_edition,e_title,e_img,e_coin)
+			values(#{ep.e_t_title},#{ep.e_edition},#{ep.e_title},#{ep.e_img},#{ep.e_coin})
+	</insert>
+
+<!-- 요일 -->
+	<select id="weekList" resultType="kr.green.ebook.vo.ToonVo">
+		select * from toon where t_week   			
+	</select>
+<!-- 요일(영어) 선택 -->
+	<select id="getWeek" resultType="kr.green.ebook.vo.WeekVo"> 
+		select * from week where w_code = #{t_week} 
+	</select>
+<!-- 장르 선택  -->
+	<select id="toonType">
+		select * from toon where t_type
+	</select>
+	
+	<!-- 연재불러오기 -->
+	<select id="getEpList" resultType="kr.green.ebook.vo.EpisodeVo"> 
+		SELECT * FROM episode 
+			join (SELECT * FROM toon where t_title like #{title}) as at
+			on e_t_title = title
+			where e_img like concat('%',#{edition},'%');
+	</select>
+	<!-- 연재 대표이미지 -->
+	<select id="getEpcover" resultType="kr.green.ebook.vo.EpisodeVo">
+		select * from episode
+			join (SELECT * FROM toon where title like #{title}) as t
+			on e_t_title = title
+			where e_img like '%cover%'
+	</select>
+	
+<!-- 연재댓글 가져오기 -->
+	<select id="getCmtList" resultType="kr.green.ebook.vo.EpcommentVo">
+		select * from epcomment
+			join (SELECT * FROM toon where t_title like #{title}) as st
+			on co_epTitle = title
+			where co_epEdition like #{edition}
+	</select>
 </mapper>

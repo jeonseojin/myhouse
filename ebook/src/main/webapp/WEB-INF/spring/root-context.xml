@@ -17,7 +17,7 @@
 		      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		    <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		    <property name="url"
-		              value="jdbc:mysql://localhost:3306/ebook?useSSL=false&amp;serverTimezone=Asia/Seoul">
+		              value="jdbc:mysql://localhost:3306/ebook?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowpublickeyretrieval=true">
 		    </property>
 		    <property name="username" value="root"></property>
 		    <property name="password" value="cjgreen"></property>

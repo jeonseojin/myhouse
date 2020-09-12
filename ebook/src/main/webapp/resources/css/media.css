@@ -1,0 +1,14 @@
+@charset "UTF-8";
+@media(min-width:640px){
+
+}
+@media(min-width:1281px){
+}
+@media(max-height: 960px) and (min-width:640px){
+    .comicInfo{
+    }
+}
+@media(max-height: 767px) and (min-width:640px){
+    .comicInfo{
+    }
+}

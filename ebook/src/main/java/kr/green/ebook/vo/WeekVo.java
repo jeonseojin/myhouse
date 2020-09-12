@@ -1,8 +1,9 @@
 package kr.green.ebook.vo;
 
-public class weekVo {
+public class WeekVo {
 	private int w_code;
 	private String week;
+	
 	public int getW_code() {
 		return w_code;
 	}

@@ -21,5 +21,4 @@ public interface MemberService {
 	ArrayList<MemberVo> memberList(Criteria cri);
 
 	PageMaker getPageMakerByMember(Criteria cri);
-
 }

@@ -1,119 +1,252 @@
 @charset "UTF-8";
-.toon-week-box{
-	position: sticky;
-	z-index: 6;
-	top: 0;
-	text-align: center;
-	background: #fff;
-}
-
-.toon-week{
-	background-color: #eff1f4;
-	font-weight: bold;
-	display: inline-block;
-	text-align: center;
-	border: none;
-	cursor: context-menu !important;
-}
-.toon-week:hover{
-	background-color: #dbdee3;
-}
-.toon-week[aria-selected='true']{
-	background-color: #eb0026 !important;
-	color: #fff;
-}
-.toon-box{
-	position: relative;
-	line-height: 0;
-	overflow: hidden;
-	margin-top: 40px; 
-}
-.toon-list{
-	list-style: none;
-	overflow: hidden;
-	float: left;
-}
-.toon-item{
+.comicInfo{
     position: relative;
-    float: left;
-    width: 200px;
-    height: 170px;
-    margin-right: 18px;
-}
-.img_thumb{
-    display: block;
-    vertical-align: top;
-}
-.toon-link{
-    height: 170px;
-    display: block;
-    text-decoration: none;
-    color: #000;
-    font-size: 0;
-}
-.toon-title{
-    height: 17px;
-    padding-top: 11px;
-    margin-top: 10px;
-    overflow: hidden;
-    line-height: 17px;
+    color: rgb(75, 75, 75);
+    background: rgb(255, 193, 164);
+    transform: translateZ(0);
     width: 100%;
-    font-size: 14px;
-    vertical-align: top;
-    text-overflow: ellipsis;
-    cursor: pointer;
+    height: 390px;
 }
-.toon-artist{
-    overflow: hidden;
-    display: block;
-    font-size: 12px;
-    color: #777;
-    height: 15px;
-    line-height: 15px;
+.comicInfo-Epdetail{
+	position: absolute;
+	left: 50%;
+	width: 700px;
+	margin-left: -489px;
 }
-.toon-text-edition{
-	border: none;
-	width: 40px;
+.comicInfo-img{
+	position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+}
+.comicInfo-title{
+	padding-top: 43px;
+	padding-right: 120px;
 	text-align: center;
-	margin-right: 3px;
+    line-height: 47px;
+    font-size: 38px;
+    font-weight: bold;
+    color: #fff;
+}
+.comicInfo-genre{
+	display: block;
+	padding-left: ;
+	padding: 17px 0 13px 130px;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 18px;
+	vertical-align: top;
+	color:#fff;
+}
+.comicInfo-plot{
+	font-size: 14px;
+	line-height: 19px;
+}
+.comicInfo-Ulike{
+	float: left;
+	position: relative;
+	height: 50px;
+	margin-right: 10px;
+	margin-top: 30px;
+}
+.comicInfo-btn-choice{
+	width: 130px;
+	height: 50px;
+	padding: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid rgb(75,75,75); 
+	border-radius: 24px;
+	background-color: transparent;
+}
+.comicInfo-btn-updown{
+	width: 48px;
+	height: 48px;
+	border-radius: 24px;
+	margin-left: 8px;
+	border: 1px solid rgb(75, 75, 75); 
+	background-color: transparent;
+	font-size: 20px;
+}
+.comic-Content{
+	width:100%;
+}
+.cont-update{
+	position: relative;
+	padding-top: 39px;
+}
+.cont-recommend{
+	overflow: hidden;
+	margin-top: 53px;
+	padding-bottom: 40px;
+}
+.comiclist-update{
+	width: 990px;
+	margin-bottom: 15px;
+}
+.comiclist-item{
+	display: flex;
+	float: left;
+	width: 380px;
+	margin-right: 20px;
+}
+.comic-itemlink{
+	margin-right: 20px;
+}
+.comic-items-box{
+	position: relative;
+	width:120px;
+	font-size: 15px;
+	font-weight: bold;
+	color: rgb(112,112,112);
+}
+.comic-items-eptitle{
+	position: absolute;
+	top: 28px;
+	font-size: 16px;
+	font-weight: bold;
+	color: black;
+}
+.comic-itemedtion{
+	position: absolute;
+	top: 0;
+}
+.comic-itemday{
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
+}
+.epscroll-box{
+	width: 720px;
+	margin: 0 auto;
+	background-size: cover;
+}
+.epcomment-box{
+	width: 980px;
+	margin: 80px auto 0 auto;
+	position: relative;
+}
+.eptit-cmt{
+	display: block;
+	margin-bottom: 16px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.eptit-i-btn>i{
+	color: rgb(132,132,132);
+}
+.eptit-i-btn{
+	float:right;
+	width:22px;
+	height:22px;
+	vertical-align: top;
+	margin-right: 15px;
+	font-size: 20px;
+}
+.eptit-cmt-count{
+	font-weight: normal;
+	font-size: 14px;
+	color: #e83d3d;
+}
+.box-comment{
+	position: relative;
+	margin-bottom: 12px;
+	padding: 30px 20px 30px 20px;
+	border: 1px solid #e5e5e5;
+	height: 140px;
+}
+.epcomment-submit{
+	width:100%;
+	height: 100%;
+	float: left;
+	position: relative;
+	border: none;
+}
+.epcomment-regist{
+	width: 100%;
+	height: 100%;
+}
+.notmem-reg{
+	color: #a1a1a1;
+}
+.epregist-name{
+	position: absolute;
+	top: 6px;
+}
+.epregist-text{
+	display: block;
+	overflow-x: hidden;
+	overflow-y: auto;
+	float: left;
+	width: 860px;
+	height: 100%;
+	resize: none;
+	background-color: transparent;
+	box-sizing: border-box;
+	vertical-align: top;
+	line-height: 18px;
+	font-size: 12px;
+	border: 0;
 }
 
-@media (min-width: 961px){
-	.toon-week-box{
-		padding:  8px 0;
-	}
-	.toon-week{
-		min-width: 68px;
-		height: 40px;
-		line-height: 40px;
-		border-radius: 20px;
-		margin: 8px;
-		padding: 0 16px;
-		font-size: 16px;
-	}
+.epcomment-btn-submit{
+	position: absolute;
+	bottom: 0;
+	right:0;
+	width: 80px;
+	height: 100%;
+	border: none;
+	color: #e83d3d;
+	background-color: black;
 }
-@media (max-width: 960px) and (min-width: 640px){
-	.toon-week-box{
-		padding-left: 8px;
-        margin-right: -16px;
-        margin-left: -16px;
-        scroll-padding-left: 16px;
-	}
+.epcmt-box{
+	width: 100%;
+	margin-top: 30px;
+	min-height: 140px;
 }
-@media (max-width: 960px){
-	.toon-week-box{
-		padding:  6px 0;
-		white-space: nowrap;
-        overflow: auto;
-	}
-	.toon-week{
-		min-width: 44px;
-		height: 30px;
-		line-height: 30px;
-		border-radius: 16px;
-		margin: 6px 4px;
-		padding: 0 12px;
-		font-size: 12px;
-		scroll-snap-align: start;
-	}
+.epcmt-list{
+	display:block;
+	width: 93%;
+	position: relative;
+	height: 72px;
+	font-size: 12px;
+	margin: 0 auto;
+	border-bottom: 1px solid #e5e5e5;
+}
+.epcmt-up,.epcmt-down{
+	background-color: transparent;
+	border: 1px solid #e5e5e5;
+	font-size: 15px;
+	border-bottom: 0;
+}
+.epcmt-up{
+	color: red;
+	position: absolute;
+	right: 0;
+	bottom: 25px;
+}
+.epcmt-down{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	
+}
+.epcmt-down>i,.epcmt-up>i{
+	margin-right: 15px;
+}
+.epcmt-date{
+	color: rgb(98,98,98);
+}
+.epcmt-name{
+	font-weight: bold;
+}
+.epcmt-end{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+.epcmt-text{
+	width: 720px;
 }

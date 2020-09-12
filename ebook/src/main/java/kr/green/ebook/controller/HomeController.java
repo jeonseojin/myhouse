@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +31,11 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	AdminService adminService;
-	@Autowired
 	MemberService memberService;
+	@Autowired
+	AdminService adminService;
 	
+	//기본홈
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView mv, Criteria cri) {
 		mv.setViewName("/main/home");
@@ -40,8 +43,25 @@ public class HomeController {
 		mv.addObject("tlist", tlist);
 		return mv;
 	}
-	
-	// main페이지에서 header를 통한 로그인 동작
+
+	// 로그인 동작
+	@RequestMapping(value = "/signin", method = RequestMethod.GET)
+	public ModelAndView signin(ModelAndView mv) {
+		mv.setViewName("/main/signin");
+		return mv;
+	}
+	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	public ModelAndView signin(ModelAndView mv, MemberVo member) {
+		MemberVo dbMember = memberService.isMember(member);
+		if(dbMember != null) {//성공
+			mv.setViewName("redirect:/");
+			mv.addObject("member", dbMember);
+		}else {//실패
+			mv.setViewName("redirect:/signup");
+		}
+		System.out.println(member);
+		return mv;
+	}
 	@RequestMapping(value = "/common/signin", method = RequestMethod.POST)
 	public ModelAndView hSignin(ModelAndView mv, MemberVo member) {
 		MemberVo dbMember = memberService.isMember(member);
@@ -53,6 +73,15 @@ public class HomeController {
 		}
 		return mv;
 	}
+	
+	//로그아웃
+	@RequestMapping(value = "/signout", method = RequestMethod.GET)
+	public ModelAndView signout(ModelAndView mv, HttpServletRequest r) {
+		mv.setViewName("redirect:/");
+		r.getSession().removeAttribute("member");
+		return mv;
+	}
+	
 	//회원가입 화면
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public ModelAndView signup(ModelAndView mv) {
@@ -64,7 +93,7 @@ public class HomeController {
 	public ModelAndView signupPost(ModelAndView mv, MemberVo member) {
 		if(memberService.signup(member)) {//실패
 			mv.setViewName("redirect:/signup");
-	}else {//성공
+		}else {//성공
 			mv.setViewName("redirect:/");
 			mv.addObject("member", member);
 		}
@@ -72,7 +101,7 @@ public class HomeController {
 	}
 	
 	//아이디 중복 확인
-	@RequestMapping(value ="/idCheck", method = RequestMethod.POST)
+	@RequestMapping(value ="/idCheck")
 	@ResponseBody
 	public Map<Object, Object> idcheck(@RequestBody String id){
 	    Map<Object, Object> map = new HashMap<Object, Object>();
@@ -80,11 +109,12 @@ public class HomeController {
 	    return map;
 	}
 	//이름 중복 확인
-	@RequestMapping(value ="/nameCheck", method = RequestMethod.POST)
+	@RequestMapping(value ="/nameCheck")
 	@ResponseBody
 	public Map<Object, Object> namecheck(@RequestBody String name){
 	    Map<Object, Object> map = new HashMap<Object, Object>();
 	    map.put("res",memberService.getMember(name)==null);
 	    return map;
-		}
+	}
+	
 }

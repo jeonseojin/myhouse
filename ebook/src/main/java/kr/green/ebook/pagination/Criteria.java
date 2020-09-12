@@ -4,7 +4,7 @@ public class Criteria {
 	private int page;//한 페이지 당 컨텐츠 갯수
 	private int perPageNum;
 	private int type;
-	private int week;
+	private int cweek;
 	private String search;
 	
 	//Criteria 디폴트 생성자 : 현재 페이지를 1페이지로, 한 페이지에 10개의 컨텐츠
@@ -12,6 +12,8 @@ public class Criteria {
 		page = 1;
 		perPageNum = 10;
 		search="";
+		type=1;
+		cweek=1;
 	}
 	//getter and setter
 	public int getPage() {
@@ -46,21 +48,23 @@ public class Criteria {
 	public void setSearch(String sech) {
 		this.search = sech;
 	}	
-	public int getWeek() {
-		return type;
+	
+	public int getCweek() {
+		return cweek;
 	}
-	public void setWeek(int type) {
-		this.type=(type < 0 || type > 8) ? 1 : type;
-	}
-	// toString
-	@Override
-	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", type=" + type + ", week=" + week +", search=" + search
-				+ "]";
+	public void setCweek(int cweek) {
+		this.cweek=(type < 0 || type > 8) ? 1 : cweek;
 	}
 	
+
+	@Override
+	public String toString() {
+		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", type=" + type + ", cweek=" + cweek
+				+ ", search=" + search + "]";
+	}
 	/* 쿼리문에서 limit에 사용되는 인덱스를 계산하는 getter */
 	public int getStartPage() {
 		return (page -1) * perPageNum;
 	}
+
 }

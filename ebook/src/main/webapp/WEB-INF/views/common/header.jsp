@@ -11,16 +11,16 @@
                     <a class="gnb-link" href="<%=request.getContextPath()%>/toon">연재</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/kanking">랭킹</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/kanking">랭킹</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/free">무료</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/free">무료</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/event">이벤트</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/event">이벤트</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/end">완결</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/theend">완결</a>
                 </li>
             </ul>
         </nav>
@@ -29,7 +29,7 @@
         <div class="search display-none">
             <fieldset class="search-field">
             	<form action="<%=request.getContextPath()%>/" target="">
-	                <input type="text" class="search-input" placeholder="작품/작가명을 검색해주세요."  name="search" value="${pm.cri.search}" autocomplete="off">
+	                <input type="text" class="search-input" placeholder="작품/작가명을 검색해주세요." name="search" value="${pm.cri.search}" autocomplete="off">
 					<button class="search-filed-btn" type="submit"></button>
 	        	</form>
 				<div class="search-list" style="display: none;">
@@ -185,5 +185,14 @@
         	$('.search-list').attr('style','display: block;');
         })
 	})
+	$(document).ready(function(){
+	  $(".search-input").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $(".search-item").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
+	
 		
 </script>

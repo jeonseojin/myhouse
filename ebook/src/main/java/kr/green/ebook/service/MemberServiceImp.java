@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import kr.green.ebook.dao.MemberDao;
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
@@ -15,13 +14,18 @@ import kr.green.ebook.vo.MemberVo;
 
 @Service
 public class MemberServiceImp implements MemberService {
-
-	@Autowired
+    @Autowired
     MemberDao memberDao;
-	@Autowired
+    @Autowired
     BCryptPasswordEncoder passwordEncoder;
-	
-	//비밀번호 암호화한 로그인
+    
+    //회원정보
+    @Override
+    public MemberVo getMember(String id) {
+    	return memberDao.getMember(id);
+    }
+
+    //로그인 시도 회원
 	@Override
 	public MemberVo isMember(MemberVo member) {
 		MemberVo dbMember = memberDao.getMember(member.getId());
@@ -30,19 +34,8 @@ public class MemberServiceImp implements MemberService {
 		}
 		return null;
 	}
-	//모든멤버
-	@Override
-	public MemberVo getMember(String id) {
-		return memberDao.getMember(id);
-	}
-	
-	//전부
-	@Override
-	public MemberVo getMember(HttpServletRequest r) {
-		return (MemberVo)r.getSession().getAttribute("member");
-	}
-	
-	//회원가입
+
+	//회원가입정보
 	@Override
 	public boolean signup(MemberVo member) {
 		if(member==null) return false;
@@ -60,6 +53,12 @@ public class MemberServiceImp implements MemberService {
 		memberDao.insertMember(member);
 		return false;
 	}
+
+	@Override
+	public MemberVo getMember(HttpServletRequest r) {
+		return (MemberVo)r.getSession().getAttribute("member");
+	}
+
 	@Override
 	public ArrayList<MemberVo> memberList(Criteria cri) {
 		return memberDao.memberList(cri);
@@ -72,5 +71,4 @@ public class MemberServiceImp implements MemberService {
 		pm.setTotalCount(memberDao.getTotalCountByMember(cri));
 		return pm;
 	}
-
 }
