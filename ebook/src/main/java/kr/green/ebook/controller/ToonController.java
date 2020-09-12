@@ -40,26 +40,44 @@ public class ToonController {
 		return mv;
 	}
 	@RequestMapping(value = "/toon/ep", method = RequestMethod.GET)
-	public ModelAndView toonEp(ModelAndView mv,String Title,String title, Criteria cri) {
+	public ModelAndView toonEp(ModelAndView mv,String Title, Criteria cri) {
 		mv.setViewName("/toon/ep");
 		ToonVo toon = toonService.view(Title);
 		mv.addObject("toon", toon);
-		title = toon.getTitle();
-		ArrayList<EpisodeVo> epcov = toonService.getEpcover(title);
+		ArrayList<EpisodeVo> epcov = toonService.getEpcoverlist(Title);
 		mv.addObject("epcov", epcov);
 		PageMaker pm = adminService.getPageMakerByToon(cri);
 		mv.addObject("pm", pm);
 		return mv;
 	}
 	@RequestMapping(value = "/toon/comic", method = RequestMethod.GET)
-	public ModelAndView toonComic(ModelAndView mv, String Title,String edition) {
+	public ModelAndView toonComic(ModelAndView mv, String Title, String edition) {
 		mv.setViewName("/toon/comic");
+		//웹툰불러오기
 		ArrayList<EpisodeVo> eplist = toonService.getEpList(Title,edition);
 		mv.addObject("eplist", eplist);
+		//댓글전체보기
 		ArrayList<EpcommentVo> cmtlist = toonService.getCmtList(Title,edition);
 		mv.addObject("cmtlist", cmtlist);
+		//전체댓글수
 		int cmtnum = cmtlist.size();
 		mv.addObject("cmtnum", cmtnum);
+		//제목불러오기용
+		EpisodeVo epcov = toonService.getEp(Title,edition);
+		mv.addObject("epcov", epcov);
+		System.out.println(epcov);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/toon/comic", method = RequestMethod.POST)
+	public ModelAndView tooncomicPost(ModelAndView mv, EpcommentVo epcmt) {
+		mv.setViewName("redirect:/toon/week");
+		toonService.insertEpcmt(epcmt);
+		return mv;
+	}
+	@RequestMapping(value = "/comment", method = RequestMethod.GET)
+	public ModelAndView comm(ModelAndView mv, Criteria cri) {
+		mv.setViewName("/toon/comment");
 		return mv;
 	}
 }

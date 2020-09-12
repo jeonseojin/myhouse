@@ -32,15 +32,19 @@ public interface AdminDao {
 	WeekVo getWeek(@Param("t_week")int t_week);
 
 	GenreVo getGr(@Param("t_code")String t_code);
-	
-	ArrayList<ToonVo> weekList(@Param("cri")Criteria cri);
 
 	ToonVo getToont(@Param("Title")String Title);
 
-	ArrayList<EpisodeVo> getEpcover(@Param("title")String title);
+	ArrayList<ToonVo> weekList(@Param("cri")Criteria cri);
 
-	ArrayList<EpisodeVo> getEpList(@Param("title")String title,@Param("edition")String edition);
+	EpisodeVo getEp(@Param("Title")String Title, @Param("edition")String edition);
 
-	ArrayList<EpcommentVo> getCmtList(@Param("title")String title,@Param("edition")String edition);
+	ArrayList<EpisodeVo> getEpList(@Param("Title")String Title, @Param("edition")String edition);
 
+	ArrayList<EpcommentVo> getCmtList(@Param("Title")String Title, @Param("edition")String edition);
+
+	void insertEpcmt(@Param("epcmt")EpcommentVo epcmt);
+
+	ArrayList<EpisodeVo> getEpcoverlist(@Param("Title")String title);
+	
 }

@@ -34,26 +34,32 @@ public class ToonServiceImp implements ToonService {
 
 	//만화내용 전 보여지는내용
 	@Override
-	public ArrayList<EpisodeVo> getEpcover(String title) {
-		return adminDao.getEpcover(title);
+	public EpisodeVo getEp(String Title,String edition) {
+		return adminDao.getEp(Title,edition);
+	}
+	//회차 모든 내용
+	@Override
+	public ArrayList<EpisodeVo> getEpcoverlist(String Title) {
+		return adminDao.getEpcoverlist(Title);
 	}
 
 	//만화내용
 	@Override
-	public ArrayList<EpisodeVo> getEpList(String title, String edition) {
-		ArrayList<EpisodeVo> eplist = adminDao.getEpList(title,edition);
-		return eplist;
+	public ArrayList<EpisodeVo> getEpList(String Title, String edition) {
+		return adminDao.getEpList(Title,edition);
 	}
 
-	@Override
-	public void insertCmt(String title, String edition) {
-				
-	}
 	//각화의 댓글
 	@Override
 	public ArrayList<EpcommentVo> getCmtList(String title, String edition) {
 		ArrayList<EpcommentVo> cmtlist = adminDao.getCmtList(title,edition);
 		return cmtlist;
+	}
+
+	@Override
+	public void insertEpcmt(EpcommentVo epcmt) {
+		adminDao.insertEpcmt(epcmt);
+		
 	}
   
 }

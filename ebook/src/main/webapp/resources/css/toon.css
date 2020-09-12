@@ -250,3 +250,16 @@
 .epcmt-text{
 	width: 720px;
 }
+.cmtmo-btn{
+	background-color: transparent;
+	border: none;
+	position: absolute;
+	right: 100px;
+}
+.cmtdel-btn{
+	color: red;
+	background-color: transparent;
+	border: none;
+	position: absolute;
+	right: 70px;
+}

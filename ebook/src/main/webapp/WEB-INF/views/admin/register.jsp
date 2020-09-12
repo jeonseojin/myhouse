@@ -8,7 +8,7 @@
 				<th>웹툰 제목</th>
 				<th>
 					<span>${toon.title}</span>
-					<input type="hidden" class="toon-text-box toon-text-title e_t_title" name="e_t_title" value="${toon.title}">
+					<input type="hidden" class="toon-text-box toon-text-title e_t_title" name="e_t_title" value="${toon.t_title}">
 				</th>
 				<th>제목</th>
 				<th><input type="text" class="toon-text-box toon-text-title" name="e_title" placeholder="부제목을 입력하세요"></th>

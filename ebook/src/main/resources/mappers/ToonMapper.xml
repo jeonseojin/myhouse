@@ -102,23 +102,36 @@
 	<!-- 연재불러오기 -->
 	<select id="getEpList" resultType="kr.green.ebook.vo.EpisodeVo"> 
 		SELECT * FROM episode 
-			join (SELECT * FROM toon where t_title like #{title}) as at
-			on e_t_title = title
+			join (SELECT * FROM toon where t_title like #{Title}) as at
+			on e_t_title = t_title
 			where e_img like concat('%',#{edition},'%');
 	</select>
 	<!-- 연재 대표이미지 -->
-	<select id="getEpcover" resultType="kr.green.ebook.vo.EpisodeVo">
+	<select id="getEp" resultType="kr.green.ebook.vo.EpisodeVo">
 		select * from episode
-			join (SELECT * FROM toon where title like #{title}) as t
-			on e_t_title = title
+			join (SELECT * FROM toon where t_title like #{Title}) as t
+			on e_t_title = t_title
+			where e_img like '%cover%' and e_edition = #{edition}
+	</select>
+		<select id="getEpcoverlist" resultType="kr.green.ebook.vo.EpisodeVo">
+		select * from episode
+			join (SELECT * FROM toon where t_title like #{Title}) as t
+			on e_t_title = t_title
 			where e_img like '%cover%'
 	</select>
 	
 <!-- 연재댓글 가져오기 -->
 	<select id="getCmtList" resultType="kr.green.ebook.vo.EpcommentVo">
 		select * from epcomment
-			join (SELECT * FROM toon where t_title like #{title}) as st
-			on co_epTitle = title
+			join (SELECT * FROM toon where t_title like #{Title}) as st
+			on co_epTitle = t_title
 			where co_epEdition like #{edition}
 	</select>
+	
+<!-- 댓글 등록 -->
+		<insert id="insertEpcmt">
+		insert into
+			epcomment(co_content,co_member,co_epTitle,co_epEdition)
+			values(#{epcmt.co_content},#{epcmt.co_member},#{epcmt.co_epTitle},#{epcmt.co_epEdition})
+	</insert>
 </mapper>

@@ -68,9 +68,9 @@ public class AdminController {
 	@RequestMapping(value = "/admin/toon", method = RequestMethod.POST)
 	public ModelAndView adminToonPost(ModelAndView mv, ToonVo toon, MultipartFile file2,MultipartFile file1) throws IOException, Exception {
 		mv.setViewName("redirect:/admin/toon");
-		String t_img = UploadFileUtils.uploadFile(uploadPath,"\\"+toon.getTitle(), file2.getOriginalFilename(), file2.getBytes());
+		String t_img = UploadFileUtils.uploadFile(uploadPath,"\\"+toon.getT_title(), file2.getOriginalFilename(), file2.getBytes());
 		toon.setT_img(t_img);
-		String t_typify = UploadFileUtils.uploadFile(uploadPath,"\\"+toon.getTitle(), file1.getOriginalFilename(), file1.getBytes());
+		String t_typify = UploadFileUtils.uploadFile(uploadPath,"\\"+toon.getT_title(), file1.getOriginalFilename(), file1.getBytes());
 		toon.setT_typify(t_typify);
 		adminService.insertToon(toon);
 		return mv;
