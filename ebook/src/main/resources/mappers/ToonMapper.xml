@@ -3,10 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.ebook.dao.AdminDao">
-<!-- 전체작품 -->
-<select id="getToon" resultType="kr.green.ebook.vo.ToonVo">
-		select * from toon
-  </select>
+
 <!-- 작품내용을 저장해 놓음 -->
   <select id="toonList" resultType="kr.green.ebook.vo.ToonVo">
 		select * from toon
@@ -65,12 +62,11 @@
 <!-- 장르 선택  -->
 	<select id="toonType">
 		select * from toon where g_code
-		
 	</select>
+	
 <!-- 요일 -->
 	<select id="weekList" resultType="kr.green.ebook.vo.ToonVo">
 		select * from toon where t_week
-	<!-- 요일별 -->
 			<if test="cri.week==0">
 				and t_week like '1' 
 			</if>
@@ -96,4 +92,24 @@
 				and t_week like '8' 
 			</if>
 	</select>
+	
+<!-- 연재연결 -->
+	<select id="getToon" resultType="kr.green.ebook.vo.ToonVo">
+			select * from toon where t_title = #{t_title}
+	</select>
+<!-- 조회수 / 수정 -->
+	<update id="updateToon">
+		update toon
+			set
+				title = #{toon.title},
+				artist = #{toon.artist},
+				plot = #{toon.plot},
+				choice = #{toon.choice},
+				like = #{toon.like},
+				t_img = #{toon.t_img},
+				lastEpisode = #{toon.lastEpisode},
+				views = #{toon.views}
+			where
+				t_title = #{toon.t_title}
+	</update>
 </mapper>

@@ -18,4 +18,5 @@ public interface AdminService {
 	ArrayList<ToonVo> weekList(Criteria cri);
 
 	void insertEp(EpisodeVo ep);
+
 }

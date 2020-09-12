@@ -20,7 +20,6 @@ public class AdminServiceImp implements AdminService {
 	@Override
 	public ArrayList<ToonVo> toonList(Criteria cri) {
 		return adminDao.toonList(cri);
-
 	}
 	
 	// 작품페이지네이션

@@ -11,16 +11,16 @@
                     <a class="gnb-link" href="<%=request.getContextPath()%>/toon">연재</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/kanking">랭킹</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/kanking">랭킹</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/free">무료</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/free">무료</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/event">이벤트</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/event">이벤트</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/theend">완결</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/end">완결</a>
                 </li>
             </ul>
         </nav>
