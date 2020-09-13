@@ -3,6 +3,7 @@ package kr.green.ebook.service;
 import java.util.ArrayList;
 
 import kr.green.ebook.pagination.Criteria;
+import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.ToonVo;
@@ -22,6 +23,13 @@ public interface ToonService {
 	void insertEpcmt(EpcommentVo epcmt);
 
 	ArrayList<EpisodeVo> getEpcoverlist(String Title);
+
+	int updateChoice(String Title, String id);
+	
+	ArrayList<ChoiceVo> getChoice(String Title);
+
+	int deleteChoice(String Title, String id);
+
 
 
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
+import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.GenreVo;
@@ -46,5 +47,15 @@ public interface AdminDao {
 	void insertEpcmt(@Param("epcmt")EpcommentVo epcmt);
 
 	ArrayList<EpisodeVo> getEpcoverlist(@Param("Title")String title);
+
+	int selectChoice(@Param("Title")String Title, @Param("id")String id);
+
+	void insertChoice(@Param("Title")String Title, @Param("id")String id);
+
+	void updateToonByChoice(@Param("Title")String Title);
+
+	ArrayList<ChoiceVo> getChoice(@Param("Title")String Title);
+
+	void deleteChoice(@Param("Title")String Title, @Param("id")String id);
 	
 }

@@ -134,4 +134,25 @@
 			epcomment(co_content,co_member,co_epTitle,co_epEdition)
 			values(#{epcmt.co_content},#{epcmt.co_member},#{epcmt.co_epTitle},#{epcmt.co_epEdition})
 	</insert>
+<!-- 찜하기 기능 -->
+	<select id="getChoice" resultType="kr.green.ebook.vo.ChoiceVo">
+		SELECT * FROM choice where ch_title = #{Title}
+	</select>
+	<select id="selectChoice" resultType="int">
+		select count(*) from choice where ch_title =#{Title} and ch_id = #{id}
+	</select>
+	<insert id="insertChoice">
+		insert into
+			choice(ch_title,ch_id)
+			values(#{Title},#{id})
+	</insert>
+	<update id="updateToonByChoice">
+		update toon
+		set
+			choice = (select count(*) from choice where ch_title = #{Title})
+		where t_title = #{Title}
+	</update>
+	<delete id="deleteChoice">
+	DELETE FROM choice where ch_title =#{Title} and ch_id = #{id}
+	</delete>
 </mapper>

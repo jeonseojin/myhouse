@@ -24,6 +24,7 @@ import kr.green.ebook.pagination.PageMaker;
 import kr.green.ebook.service.AdminService;
 import kr.green.ebook.service.MemberService;
 import kr.green.ebook.service.ToonService;
+import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.MemberVo;
@@ -59,6 +60,8 @@ public class ToonController {
 		mv.addObject("epcov", epcov);
 		PageMaker pm = adminService.getPageMakerByToon(cri);
 		mv.addObject("pm", pm);
+		ArrayList<ChoiceVo> chlist = toonService.getChoice(Title);
+		mv.addObject("chlist", chlist);
 		return mv;
 	}
 	@RequestMapping(value = "/toon/comic", method = RequestMethod.GET)
@@ -88,4 +91,35 @@ public class ToonController {
 		return map;
 	}
 
+	@RequestMapping(value = "/toon/choice", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> toonChoice(@RequestBody String Title, HttpServletRequest r) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		//현재 로그인 중인 유저 정보
+		MemberVo member =memberService.getMember(r);
+		if(member==null)
+			map.put("isMember",false);
+		else {
+			map.put("isMember",true);
+			int choice = toonService.updateChoice(Title,member.getId());
+			map.put("choice",choice);
+		}
+		return map;
+	}
+	
+	@RequestMapping(value = "/toon/nochoice", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> toonChoiceno(@RequestBody String Title, HttpServletRequest r) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		//현재 로그인 중인 유저 정보
+		MemberVo member =memberService.getMember(r);
+		if(member==null)
+			map.put("isMember",false);
+		else {
+			map.put("isMember",true);
+			int choice = toonService.deleteChoice(Title,member.getId());
+			map.put("choice",choice);
+		}
+		return map;
+	}
 }

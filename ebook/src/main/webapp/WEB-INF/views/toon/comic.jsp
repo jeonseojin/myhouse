@@ -11,9 +11,5 @@
 </div>
 <%@ include file="../toon/comment.jsp" %>
 <script>
-	$(function(){
-		$('.notmem-reg').click(function(){
-			alert("댓글 작성은 로그인 후에 사용하실 수 있습니다.");
-		})
-	})
+
 </script>

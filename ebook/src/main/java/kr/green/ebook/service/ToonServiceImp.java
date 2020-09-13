@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.green.ebook.dao.AdminDao;
 import kr.green.ebook.pagination.Criteria;
+import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.ToonVo;
@@ -49,17 +50,50 @@ public class ToonServiceImp implements ToonService {
 		return adminDao.getEpList(Title,edition);
 	}
 
-	//각화의 댓글
+	//각 화의 댓글 전체
 	@Override
 	public ArrayList<EpcommentVo> getCmtList(String title, String edition) {
 		ArrayList<EpcommentVo> cmtlist = adminDao.getCmtList(title,edition);
 		return cmtlist;
 	}
-
+	
+	//댓글저장
 	@Override
 	public void insertEpcmt(EpcommentVo epcmt) {
 		adminDao.insertEpcmt(epcmt);
 		
 	}
+	
+	//찜하기
+	@Override
+	public int updateChoice(String Title, String id) {
+		if(adminDao.selectChoice(Title,id)!=0) return -1;
+		//찜 등록
+		adminDao.insertChoice(Title,id);
+		adminDao.updateToonByChoice(Title);
+		ToonVo toon = adminDao.getToont(Title);
+		return toon.getChoice();
+	}
+
+	@Override
+	public ArrayList<ChoiceVo> getChoice(String Title) {
+		ArrayList<ChoiceVo> ch =adminDao.getChoice(Title);
+		System.out.println(ch);
+		return ch;
+	}
+
+	@Override
+	public int deleteChoice(String Title, String id) {
+		ToonVo toon = adminDao.getToont(Title);
+		if(adminDao.selectChoice(Title, id)==1) {
+			adminDao.deleteChoice(Title,id);
+			adminDao.updateToonByChoice(Title);
+			return toon.getChoice();
+		}
+		return toon.getChoice();
+	}
+
+
+
   
 }

@@ -9,9 +9,11 @@
 	    <div class="comicInfo-genre"><a class="link-comic-genre">${toon.t_type}</a></div>
 	    <div class="comicInfo-plot">${toon.plot}</div>
 	    <div class="comicInfo-Ulike">
-	    	<button class="comicInfo-btn-choice">찜하기<i class="far fa-heart"></i></button>
-	    	<button class="comicInfo-btn-updown"><i class="far fa-hand-point-up"></i></button>
-	    	<button class="comicInfo-btn-updown"><i class="far fa-hand-point-down"></i></button>
+	    	<input type="hidden" name="engtitle" value="${toon.t_title}">
+			<button class="comicInfo-btn-choice">찜하기<i class="far fa-heart"></i></button>
+			
+	    	<button class="comicInfo-btn-up"><i class="far fa-hand-point-up"></i></button>
+	    	<button class="comicInfo-btn-nochoice">찜하기<i class="fas fa-heart"></i></button>
 	    </div>
     </div>
 </div>
@@ -37,3 +39,54 @@
 	<div class="cont-recommend"></div>
 	
 </div>
+<script>
+	$(function(){
+		$('.comicInfo-btn-choice').click(function(){
+			var Title = $('input[name=engtitle]').val();
+			var id = $('input[name=id]').val();
+			$.ajax({
+				async:true,
+		        type:'POST',
+		        data:Title,
+		        url:"<%=request.getContextPath()%>/toon/choice",
+		        dataType:"json",
+		        contentType:"application/json; charset=UTF-8",
+		        success : function(data){
+			        //로그인한 회원
+			        if(data['isMember']){
+				        //게시글의 추천수가 0보다 크면 => 추천수를 증가시켜야하면
+				        //=> 처음 추천을 누른다면
+				        if(data['choice'] > 0){
+				        	alert('찜하셨습니다.')
+					    }
+				    }
+				    //로그인하지 않은 경우
+				    else{
+					    alert('찜은 로그인을 해야 가능합니다.');
+					}
+		        }
+			});
+		})
+		$('.comicInfo-btn-nochoice').click(function(){
+			var Title = $('input[name=engtitle]').val();
+			$.ajax({
+				async:true,
+		        type:'POST',
+		        data:Title,
+		        url:"<%=request.getContextPath()%>/toon/nochoice",
+		        dataType:"json",
+		        contentType:"application/json; charset=UTF-8",
+		        success : function(data){
+			        //로그인한 회원
+			        if(data['isMember']){
+				        //게시글의 추천수가 0보다 크면 => 추천수를 증가시켜야하면
+				        //=> 처음 추천을 누른다면
+				        if(data['choice'] > 0){
+				        	alert('찜을 해제하셨습니다.')
+					    }
+				    }
+		        }
+			});
+		})
+	})
+</script>

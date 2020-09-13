@@ -54,6 +54,9 @@
 
 <script>
 	$(function(){
+		$('.notmem-reg').click(function(){
+			alert("댓글 작성은 로그인 후에 사용하실 수 있습니다.");
+		})
 		$(".epcomment-btn-submit").click(function(){
 			var member = $('input[name=co_member]').val();
 			var title = $('input[name=co_epTitle]').val();

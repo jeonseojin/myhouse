@@ -1,31 +1,32 @@
 package kr.green.ebook.vo;
 
 public class ArtistVo {
-	private String name;
-	private String intro;
-	private String toon_title;
-	public String getName() {
-		return name;
+	private int ch_num;
+	private String ch_title;
+	private String ch_member;
+	public int getCh_num() {
+		return ch_num;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCh_num(int ch_num) {
+		this.ch_num = ch_num;
 	}
-	public String getIntro() {
-		return intro;
+	public String getCh_title() {
+		return ch_title;
 	}
-	public void setIntro(String intro) {
-		this.intro = intro;
+	public void setCh_title(String ch_title) {
+		this.ch_title = ch_title;
 	}
-	public String getToon_title() {
-		return toon_title;
+	public String getCh_member() {
+		return ch_member;
 	}
-	public void setToon_title(String toon_title) {
-		this.toon_title = toon_title;
+	public void setCh_member(String ch_member) {
+		this.ch_member = ch_member;
 	}
 	@Override
 	public String toString() {
-		return "artist [name=" + name + ", intro=" + intro + ", toon_title=" + toon_title + "]";
+		return "ArtistVo [ch_num=" + ch_num + ", ch_title=" + ch_title + ", ch_member=" + ch_member + "]";
 	}
+	
 	
 	
 }
