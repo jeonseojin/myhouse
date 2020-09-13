@@ -1,11 +1,21 @@
 package kr.green.ebook.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.ebook.dao.AdminDao;
@@ -16,6 +26,7 @@ import kr.green.ebook.service.MemberService;
 import kr.green.ebook.service.ToonService;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
+import kr.green.ebook.vo.MemberVo;
 import kr.green.ebook.vo.ToonVo;
 
 @Controller
@@ -65,19 +76,16 @@ public class ToonController {
 		//제목불러오기용
 		EpisodeVo epcov = toonService.getEp(Title,edition);
 		mv.addObject("epcov", epcov);
-		System.out.println(epcov);
 		return mv;
 	}
-	
-	@RequestMapping(value = "/toon/comic", method = RequestMethod.POST)
-	public ModelAndView tooncomicPost(ModelAndView mv, EpcommentVo epcmt) {
-		mv.setViewName("redirect:/toon/week");
+
+	@RequestMapping(value = "/toon/addcomment")
+	@ResponseBody
+	public Map<Object, Object> addComment(@RequestBody EpcommentVo epcmt) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("res","댓글이 등록되었습니다.");
 		toonService.insertEpcmt(epcmt);
-		return mv;
+		return map;
 	}
-	@RequestMapping(value = "/comment", method = RequestMethod.GET)
-	public ModelAndView comm(ModelAndView mv, Criteria cri) {
-		mv.setViewName("/toon/comment");
-		return mv;
-	}
+
 }

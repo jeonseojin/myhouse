@@ -191,7 +191,7 @@
 	border: 0;
 }
 
-.epcomment-btn-submit{
+.epcomment-btn-submit,.epcomment-btn{
 	position: absolute;
 	bottom: 0;
 	right:0;

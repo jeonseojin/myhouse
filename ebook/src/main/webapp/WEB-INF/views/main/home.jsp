@@ -44,6 +44,7 @@
                 </button>
             </div>
         </div>
+        
         <div class="main-ranking">
             <div class="main-left"></div>
             <div class="main-right"></div>
@@ -52,7 +53,7 @@
             <div class="main-new"></div>
             <div class="main-update"></div>
         </div>
-	<script>
+<script>
         function bannerRolling(){
            return setInterval(function(){
                 $('.banner-item').first().animate({'margin-left':'-1180px'},300,function(){
