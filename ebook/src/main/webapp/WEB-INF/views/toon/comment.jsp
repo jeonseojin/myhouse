@@ -29,8 +29,8 @@
 		</c:if>
 	</div>
 
-
-	<div class="epcmt-box" id >
+	<div class="epcmt-box2"></div>
+	<div class="epcmt-box">
 		<c:forEach var="cmtlist" items="${cmtlist}">
 		<div class="epcmt-list">
 			<span class="epcmt-name">${cmtlist.co_member}</span>
@@ -73,19 +73,18 @@
 					$('textarea[name=co_content]').val('');
 					alert(data['res']);
 					var str='';
-					cmtlist = data.epcmtlist;
-					for(i=0;i<=cmtlist.length;i++){
-						str=
+					for(var i in data.cmtlist){
+						str+=
 							'<div class="epcmt-list">'+
-						'<span class="epcmt-name">'+ co_member +'</span>'+
-						'<div class="epcmt-text">'+co_content+'</div>'+
-						'<div class="epcmt-end">'+
-							'<span class="epcmt-date">'+co_date+'</span>'+
-								'<a href="<%=request.getContextPath()%>/toon/cmtmo?&Title=${toon.t_title}"><button type="button" class="cmtmo-btn">수정</button></a>'+
-								'<a href="<%=request.getContextPath()%>/toon/cmtdel?Title=${toon.t_title}"><button type="button" class="cmtdel-btn">삭제</button></a>'+
-									'<div class="epcmt-btnbox">'+
-								'<button class="epcmt-up"><i class="far fa-hand-point-up"></i>'+co_up+'</button>'+
-								'<button class="epcmt-down"><i class="far fa-hand-point-down "></i>'+co_down+'</button>'+
+							'<span class="epcmt-name">'+ data.cmtlist[i].co_member +'</span>'+
+							'<div class="epcmt-text">'+ data.cmtlist[i].co_content+'</div>'+
+							'<div class="epcmt-end">'+
+							'<span class="epcmt-date">'+ data.cmtlist[i].co_date+'</span>'+
+							'<a href="<%=request.getContextPath()%>/toon/cmtmo?&Title=${toon.t_title}"><button type="button" class="cmtmo-btn">수정</button></a>'+
+							'<a href="<%=request.getContextPath()%>/toon/cmtdel?Title=${toon.t_title}"><button type="button" class="cmtdel-btn">삭제</button></a>'+
+							'<div class="epcmt-btnbox">'+
+							'<button class="epcmt-up"><i class="far fa-hand-point-up"></i>'+ data.cmtlist[i].co_up+'</button>'+
+							'<button class="epcmt-down"><i class="far fa-hand-point-down "></i>'+ data.cmtlist[i].co_down+'</button>'+
 							'</div></div></div>';
 					}
 					$('.epcmt-box').html(str);
@@ -93,36 +92,6 @@
 			});
 		})
 	})
-	function getCommentList(){
-		$.ajax({
-			async: true,
-			type:'GET',
-			url:"<%=request.getContextPath()%>/toon/epcomment",
-			data:JSON.stringify({"co_member":member,"co_epTitle":title,"co_epEdition":edition,"co_content":content}),
-			dataType:"json",
-			contentType:"application/json; charset=UTF-8",
-			success:function(data){
-				$('textarea[name=co_content]').val('');
-				alert(data['res']);
-				var str='';
-				cmtlist = data.epcmtlist;
-				for(i=0;i<=cmtlist.length;i++){
-					str=
-						'<div class="epcmt-list">'+
-					'<span class="epcmt-name">'+ co_member +'</span>'+
-					'<div class="epcmt-text">'+co_content+'</div>'+
-					'<div class="epcmt-end">'+
-						'<span class="epcmt-date">'+co_date+'</span>'+
-							'<a href="<%=request.getContextPath()%>/toon/cmtmo?&Title=${toon.t_title}"><button type="button" class="cmtmo-btn">수정</button></a>'+
-							'<a href="<%=request.getContextPath()%>/toon/cmtdel?Title=${toon.t_title}"><button type="button" class="cmtdel-btn">삭제</button></a>'+
-								'<div class="epcmt-btnbox">'+
-							'<button class="epcmt-up"><i class="far fa-hand-point-up"></i>'+co_up+'</button>'+
-							'<button class="epcmt-down"><i class="far fa-hand-point-down "></i>'+co_down+'</button>'+
-						'</div></div></div>';
-				}
-				$('.epcmt-box').html(str);
-			}
-		});
-	}
+
 	
 </script>

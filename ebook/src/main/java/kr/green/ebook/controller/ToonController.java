@@ -88,22 +88,14 @@ public class ToonController {
 		return mv;
 	}
 	//웹툰 댓글 등록
-	@RequestMapping(value = "/toon/comment")
+	@RequestMapping(value = "/toon/comment", produces="application/json; charset=utf8")
 	@ResponseBody
 	public Map<Object, Object> addComment(@RequestBody EpcommentVo epcmt) {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("res","댓글이 등록되었습니다.");
 		toonService.insertEpcmt(epcmt);
-		return map;
-	}
-	//웹툰 댓글 불러오기
-	@RequestMapping(value = "/toon/epcomment")
-	@ResponseBody
-	public Map<Object, Object> EpComment(@RequestBody EpcommentVo epcmt) {
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		ArrayList<EpcommentVo> epcmtlist = toonService.getCmtList(epcmt.getCo_epTitle(), epcmt.getCo_epEdition());
-		map.put("epcmtlist",epcmtlist);
-		System.out.println(epcmtlist);
+		ArrayList<EpcommentVo> cmtlist = toonService.getCmtList(epcmt.getCo_epTitle(), epcmt.getCo_epEdition());
+		map.put("cmtlist",cmtlist);
+		System.out.println(cmtlist);
 		return map;
 	}
 	//찜등록
