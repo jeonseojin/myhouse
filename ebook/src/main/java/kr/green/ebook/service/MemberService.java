@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
+import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.MemberVo;
 
 public interface MemberService {
@@ -21,4 +22,6 @@ public interface MemberService {
 	ArrayList<MemberVo> memberList(Criteria cri);
 
 	PageMaker getPageMakerByMember(Criteria cri);
+	
+	ArrayList<ChoiceVo> getChoiceList(String id);
 }

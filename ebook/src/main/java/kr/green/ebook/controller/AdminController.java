@@ -20,6 +20,7 @@ import kr.green.ebook.service.AdminService;
 import kr.green.ebook.service.MemberService;
 import kr.green.ebook.service.ToonService;
 import kr.green.ebook.utils.UploadFileUtils;
+import kr.green.ebook.vo.BookeventVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.MemberVo;
 import kr.green.ebook.vo.ToonVo;
@@ -128,7 +129,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	
+	//수정기능
 	@RequestMapping(value ="/admin/modify", method= RequestMethod.POST)
 	public ModelAndView ToonEpMPost(ModelAndView mv,ToonVo toon,Integer num,MultipartFile file1,MultipartFile file2) throws IOException, Exception  {
 		mv.setViewName("redirect:/admin/toon");
@@ -145,6 +146,31 @@ public class AdminController {
 			toon.setT_img(null);
 		}		
 		adminService.updateToon(toon);
+		return mv;
+	}
+	//이벤트관리
+	@RequestMapping(value = "/admin/event", method = RequestMethod.GET)
+	public ModelAndView adminEvent(ModelAndView mv, Criteria cri) {
+		mv.setViewName("/admin/event");
+		ArrayList<ToonVo> tlist = adminService.toonList(cri);
+		mv.addObject("tlist", tlist);
+		ArrayList<BookeventVo> evlist = adminService.eventList(cri);
+		mv.addObject("evlist", evlist);
+		PageMaker pm = memberService.getPageMakerByMember(cri);
+		mv.addObject("pm", pm);
+		return mv;
+	}
+	//이벤트등록
+	@RequestMapping(value = "/admin/event", method = RequestMethod.POST)
+	public ModelAndView adminEventPost(ModelAndView mv,BookeventVo event,MultipartFile file1,MultipartFile file2,MultipartFile file3) throws IOException, Exception {
+		mv.setViewName("redirect:/admin/event");
+		String ev_img = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file2.getOriginalFilename(), file1.getBytes());
+		event.setEv_img(ev_img);
+		String ev_banner = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file2.getOriginalFilename(), file2.getBytes());
+		event.setEv_banner(ev_banner);
+		String ev_page = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file3.getOriginalFilename(), file3.getBytes());
+		event.setEv_page(ev_page);
+		adminService.insertEvent(event);
 		return mv;
 	}
 }

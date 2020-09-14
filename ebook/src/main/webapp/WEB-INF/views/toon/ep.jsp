@@ -10,10 +10,19 @@
 	    <div class="comicInfo-plot">${toon.plot}</div>
 	    <div class="comicInfo-Ulike">
 	    	<input type="hidden" name="engtitle" value="${toon.t_title}">
-			<button class="comicInfo-btn-choice">찜하기<i class="far fa-heart"></i></button>
-			
-	    	<button class="comicInfo-btn-up"><i class="far fa-hand-point-up"></i></button>
-	    	<button class="comicInfo-btn-nochoice">찜하기<i class="fas fa-heart"></i></button>
+	    	<c:if test="${member.id==null}">
+				<button class="comicInfo-btn-choice">찜하기<i class="far fa-star"></i></button>
+			</c:if>
+			<c:if test="${member.id!=null}">
+				<c:if test="${member.id!=ch.ch_id}">
+					<button class="comicInfo-btn-choice">찜하기<i class="far fa-star"></i></button>
+				</c:if>
+				<c:if test="${ch.ch_id==member.id}">
+					<button class="comicInfo-btn-nochoice">찜하기<i class="fas fa-star"></i></button>
+				</c:if>
+			</c:if>
+	    	<button class="comicInfo-btn-up"><i class="far fa-heart"></i></button>
+	    	
 	    </div>
     </div>
 </div>
@@ -57,6 +66,9 @@
 				        //게시글의 추천수가 0보다 크면 => 추천수를 증가시켜야하면
 				        //=> 처음 추천을 누른다면
 				        if(data['choice'] > 0){
+					        $.each(data,function(key,rec){
+					        	"<c:set var ="ch" value="+rec.ch+"  />" ;
+						    })
 				        	alert('찜하셨습니다.')
 					    }
 				    }
@@ -82,6 +94,9 @@
 				        //게시글의 추천수가 0보다 크면 => 추천수를 증가시켜야하면
 				        //=> 처음 추천을 누른다면
 				        if(data['choice'] > 0){
+				        	$.each(data,function(key,rec){
+					        	"<c:set var ="ch" value="+rec.ch+"  />" ;
+						    })
 				        	alert('찜을 해제하셨습니다.')
 					    }
 				    }

@@ -6,6 +6,7 @@ public class Criteria {
 	private int type;
 	private int cweek;
 	private String search;
+	private int event;
 	
 	//Criteria 디폴트 생성자 : 현재 페이지를 1페이지로, 한 페이지에 10개의 컨텐츠
 	public Criteria() {
@@ -57,10 +58,17 @@ public class Criteria {
 	}
 	
 
+	public int getEvent() {
+		return event;
+	}
+	public void setEvent(int event) {
+		this.event = (event < 0 || event > 2) ? 0 : event;
+	}
+
 	@Override
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", type=" + type + ", cweek=" + cweek
-				+ ", search=" + search + "]";
+				+ ", search=" + search + ", event=" + event + "]";
 	}
 	/* 쿼리문에서 limit에 사용되는 인덱스를 계산하는 getter */
 	public int getStartPage() {

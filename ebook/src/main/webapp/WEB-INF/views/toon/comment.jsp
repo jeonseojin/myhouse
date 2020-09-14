@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="epcomment-box">
+<div class="epcomment-box" id="epcomment-box">
 	<div class="eptit-cmt">댓글
 		<span class="eptit-cmt-count">(<span>${cmtnum}</span>)</span>
 		<a class="eptit-i-btn"><i class="fas fa-exclamation-circle"></i></a>
@@ -30,7 +30,7 @@
 	</div>
 
 
-	<div class="epcmt-box">
+	<div class="epcmt-box" id >
 		<c:forEach var="cmtlist" items="${cmtlist}">
 		<div class="epcmt-list">
 			<span class="epcmt-name">${cmtlist.co_member}</span>
@@ -41,12 +41,12 @@
 					<a href="<%=request.getContextPath()%>/toon/cmtmo?&Title=${toon.t_title}"><button type="button" class="cmtmo-btn">수정</button></a>
 					<a href="<%=request.getContextPath()%>/toon/cmtdel?Title=${toon.t_title}"><button type="button" class="cmtdel-btn">삭제</button></a>
 				</c:if>
-					<div class="epcmt-btnbox">
-						<button class="epcmt-up"><i class="far fa-hand-point-up"></i>${cmtlist.co_up}</button>
-						<button class="epcmt-down"><i class="far fa-hand-point-down "></i>${cmtlist.co_down}</button>
-					</div>
-					</div>
+				<div class="epcmt-btnbox">
+					<button class="epcmt-up"><i class="far fa-hand-point-up"></i>${cmtlist.co_up}</button>
+					<button class="epcmt-down"><i class="far fa-hand-point-down "></i>${cmtlist.co_down}</button>
+				</div>
 			</div>
+		</div>
 		</c:forEach>
 	</div>
 </div>
@@ -65,27 +65,64 @@
 			$.ajax({
 				async: true,
 				type:'POST',
-				url:"<%=request.getContextPath()%>/toon/addcomment",
+				url:"<%=request.getContextPath()%>/toon/comment",
 				data:JSON.stringify({"co_member":member,"co_epTitle":title,"co_epEdition":edition,"co_content":content}),
 				dataType:"json",
 				contentType:"application/json; charset=UTF-8",
 				success:function(data){
-					getCommentList()
+					$('textarea[name=co_content]').val('');
 					alert(data['res']);
+					var str='';
+					cmtlist = data.epcmtlist;
+					for(i=0;i<=cmtlist.length;i++){
+						str=
+							'<div class="epcmt-list">'+
+						'<span class="epcmt-name">'+ co_member +'</span>'+
+						'<div class="epcmt-text">'+co_content+'</div>'+
+						'<div class="epcmt-end">'+
+							'<span class="epcmt-date">'+co_date+'</span>'+
+								'<a href="<%=request.getContextPath()%>/toon/cmtmo?&Title=${toon.t_title}"><button type="button" class="cmtmo-btn">수정</button></a>'+
+								'<a href="<%=request.getContextPath()%>/toon/cmtdel?Title=${toon.t_title}"><button type="button" class="cmtdel-btn">삭제</button></a>'+
+									'<div class="epcmt-btnbox">'+
+								'<button class="epcmt-up"><i class="far fa-hand-point-up"></i>'+co_up+'</button>'+
+								'<button class="epcmt-down"><i class="far fa-hand-point-down "></i>'+co_down+'</button>'+
+							'</div></div></div>';
+					}
+					$('.epcmt-box').html(str);
 				}
 			});
 		})
 	})
-
 	function getCommentList(){
 		$.ajax({
+			async: true,
 			type:'GET',
-			url:"<%=request.getContextPath()%>/toon/addcomment",
-			dataType:'json',
-			data:$('#Ep-commentList').serialize(),
-			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-			success: function(data){
+			url:"<%=request.getContextPath()%>/toon/epcomment",
+			data:JSON.stringify({"co_member":member,"co_epTitle":title,"co_epEdition":edition,"co_content":content}),
+			dataType:"json",
+			contentType:"application/json; charset=UTF-8",
+			success:function(data){
+				$('textarea[name=co_content]').val('');
+				alert(data['res']);
+				var str='';
+				cmtlist = data.epcmtlist;
+				for(i=0;i<=cmtlist.length;i++){
+					str=
+						'<div class="epcmt-list">'+
+					'<span class="epcmt-name">'+ co_member +'</span>'+
+					'<div class="epcmt-text">'+co_content+'</div>'+
+					'<div class="epcmt-end">'+
+						'<span class="epcmt-date">'+co_date+'</span>'+
+							'<a href="<%=request.getContextPath()%>/toon/cmtmo?&Title=${toon.t_title}"><button type="button" class="cmtmo-btn">수정</button></a>'+
+							'<a href="<%=request.getContextPath()%>/toon/cmtdel?Title=${toon.t_title}"><button type="button" class="cmtdel-btn">삭제</button></a>'+
+								'<div class="epcmt-btnbox">'+
+							'<button class="epcmt-up"><i class="far fa-hand-point-up"></i>'+co_up+'</button>'+
+							'<button class="epcmt-down"><i class="far fa-hand-point-down "></i>'+co_down+'</button>'+
+						'</div></div></div>';
+				}
+				$('.epcmt-box').html(str);
 			}
 		});
 	}
+	
 </script>

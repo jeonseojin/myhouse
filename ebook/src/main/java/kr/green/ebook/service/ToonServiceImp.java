@@ -76,10 +76,8 @@ public class ToonServiceImp implements ToonService {
 	}
 
 	@Override
-	public ArrayList<ChoiceVo> getChoice(String Title) {
-		ArrayList<ChoiceVo> ch =adminDao.getChoice(Title);
-		System.out.println(ch);
-		return ch;
+	public ChoiceVo getChoice(String Title,String id) {
+		return adminDao.getChoice(Title,id);
 	}
 
 	@Override

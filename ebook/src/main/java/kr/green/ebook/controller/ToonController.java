@@ -42,6 +42,7 @@ public class ToonController {
 	@Autowired
 	AdminDao adminDao;
 	
+	//연재 페이지
 	@RequestMapping(value = "/toon", method = RequestMethod.GET)
 	public ModelAndView toon(ModelAndView mv, Criteria cri) {
 		mv.setViewName("/toon/week");
@@ -51,8 +52,9 @@ public class ToonController {
 		mv.addObject("pm", pm);
 		return mv;
 	}
+	//작품+연재페이지
 	@RequestMapping(value = "/toon/ep", method = RequestMethod.GET)
-	public ModelAndView toonEp(ModelAndView mv,String Title, Criteria cri) {
+	public ModelAndView toonEp(ModelAndView mv,String Title, Criteria cri,HttpServletRequest r,ChoiceVo ch) {
 		mv.setViewName("/toon/ep");
 		ToonVo toon = toonService.view(Title);
 		mv.addObject("toon", toon);
@@ -60,10 +62,14 @@ public class ToonController {
 		mv.addObject("epcov", epcov);
 		PageMaker pm = adminService.getPageMakerByToon(cri);
 		mv.addObject("pm", pm);
-		ArrayList<ChoiceVo> chlist = toonService.getChoice(Title);
-		mv.addObject("chlist", chlist);
+		MemberVo member = memberService.getMember(r);
+		if(member!=null) {
+			ch = toonService.getChoice(Title,member.getId());
+		}
+		mv.addObject("ch", ch);
 		return mv;
 	}
+	//웹툰페이지
 	@RequestMapping(value = "/toon/comic", method = RequestMethod.GET)
 	public ModelAndView toonComic(ModelAndView mv, String Title, String edition) {
 		mv.setViewName("/toon/comic");
@@ -81,8 +87,8 @@ public class ToonController {
 		mv.addObject("epcov", epcov);
 		return mv;
 	}
-
-	@RequestMapping(value = "/toon/addcomment")
+	//웹툰 댓글 등록
+	@RequestMapping(value = "/toon/comment")
 	@ResponseBody
 	public Map<Object, Object> addComment(@RequestBody EpcommentVo epcmt) {
 		Map<Object, Object> map = new HashMap<Object, Object>();
@@ -90,7 +96,17 @@ public class ToonController {
 		toonService.insertEpcmt(epcmt);
 		return map;
 	}
-
+	//웹툰 댓글 불러오기
+	@RequestMapping(value = "/toon/epcomment")
+	@ResponseBody
+	public Map<Object, Object> EpComment(@RequestBody EpcommentVo epcmt) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		ArrayList<EpcommentVo> epcmtlist = toonService.getCmtList(epcmt.getCo_epTitle(), epcmt.getCo_epEdition());
+		map.put("epcmtlist",epcmtlist);
+		System.out.println(epcmtlist);
+		return map;
+	}
+	//찜등록
 	@RequestMapping(value = "/toon/choice", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<Object, Object> toonChoice(@RequestBody String Title, HttpServletRequest r) {
@@ -106,7 +122,7 @@ public class ToonController {
 		}
 		return map;
 	}
-	
+	//찜해제
 	@RequestMapping(value = "/toon/nochoice", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<Object, Object> toonChoiceno(@RequestBody String Title, HttpServletRequest r) {

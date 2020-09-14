@@ -26,7 +26,7 @@ public interface ToonService {
 
 	int updateChoice(String Title, String id);
 	
-	ArrayList<ChoiceVo> getChoice(String Title);
+	ChoiceVo getChoice(String Title, String id);
 
 	int deleteChoice(String Title, String id);
 

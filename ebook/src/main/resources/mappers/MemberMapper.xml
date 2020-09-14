@@ -53,4 +53,10 @@
   				and email like concat('%',#{cri.search},'%')
   			</if>
   </select>
+  <!-- 찜목록 -->
+  	<select id="getChoiceList" resultType="kr.green.ebook.vo.ToonVo">
+  		select * from toon
+			join (SELECT * FROM choice where ch_id = #{id}) as t
+			on t_title = ch_title;
+	</select>
 </mapper>

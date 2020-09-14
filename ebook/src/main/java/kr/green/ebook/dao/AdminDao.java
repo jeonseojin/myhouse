@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
+import kr.green.ebook.vo.BookeventVo;
 import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
@@ -54,8 +55,11 @@ public interface AdminDao {
 
 	void updateToonByChoice(@Param("Title")String Title);
 
-	ArrayList<ChoiceVo> getChoice(@Param("Title")String Title);
+	ChoiceVo getChoice(@Param("Title")String Title, @Param("id")String id);
 
 	void deleteChoice(@Param("Title")String Title, @Param("id")String id);
-	
+
+	ArrayList<BookeventVo> eventList(@Param("cri")Criteria cri);
+
+	void insertEvent(@Param("event")BookeventVo event);
 }
