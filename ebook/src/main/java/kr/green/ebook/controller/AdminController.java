@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.ebook.dao.AdminDao;
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
 import kr.green.ebook.service.AdminService;
@@ -21,6 +22,7 @@ import kr.green.ebook.service.MemberService;
 import kr.green.ebook.service.ToonService;
 import kr.green.ebook.utils.UploadFileUtils;
 import kr.green.ebook.vo.BookeventVo;
+import kr.green.ebook.vo.ClaimVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.MemberVo;
 import kr.green.ebook.vo.ToonVo;
@@ -171,6 +173,15 @@ public class AdminController {
 		String ev_page = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file3.getOriginalFilename(), file3.getBytes());
 		event.setEv_page(ev_page);
 		adminService.insertEvent(event);
+		return mv;
+	}
+	
+	//관리자 문의페이지
+	@RequestMapping(value = "/admin/claim", method = RequestMethod.GET)
+	public ModelAndView adminclaim(ModelAndView mv, Criteria cri){
+		mv.setViewName("/admin/claim");
+		ArrayList<ClaimVo> cl =adminService.getClaim(cri);
+		mv.addObject("cl", cl);
 		return mv;
 	}
 }

@@ -25,6 +25,7 @@ import kr.green.ebook.service.AdminService;
 import kr.green.ebook.service.MemberService;
 import kr.green.ebook.service.ToonService;
 import kr.green.ebook.vo.ChoiceVo;
+import kr.green.ebook.vo.ClaimVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.MemberVo;
@@ -129,5 +130,14 @@ public class ToonController {
 			map.put("choice",choice);
 		}
 		return map;
+	}
+	
+	//문의 페이지
+	@RequestMapping(value = "/toon/help", method = RequestMethod.GET)
+	public ModelAndView toomclaim(ModelAndView mv, Criteria cri){
+		mv.setViewName("/toon/claim");
+		ArrayList<ClaimVo> cl =adminService.getClaim(cri);
+		mv.addObject("cl", cl);
+		return mv;
 	}
 }

@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <ul class="nav nav-tabs">
-        <li class="nav-item ad-toon-l">
-          <a class="nav-link active" data-toggle="tab" aria-selected="true" href="#" data-target="ad-toon-all">전체작품조회</a>
-        </li>
-        <li class="nav-item ad-toon-l">
-          <a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-record">작품등록</a>
-        </li>
-        <li class="nav-item ad-toon-l">
-          <a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-episode">작품연재등록</a>
-        </li>
-      </ul>
+<ul class="nav nav-tabs">
+	<li class="nav-item ad-toon-l">
+		<a class="nav-link active" data-toggle="tab" aria-selected="true" href="#" data-target="ad-toon-all">전체작품조회</a>
+	</li>
+	<li class="nav-item ad-toon-l">
+		<a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-record">작품등록</a>
+	</li>
+	<li class="nav-item ad-toon-l">
+		<a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-episode">작품연재등록</a>
+	</li>
+</ul>
 <div class="ad-toon">
 	<div class="ad-toon-list ad-toon-all">
 		<table class="table table-borderless">

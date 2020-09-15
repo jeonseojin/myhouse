@@ -8,6 +8,7 @@ import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
 import kr.green.ebook.vo.BookeventVo;
 import kr.green.ebook.vo.ChoiceVo;
+import kr.green.ebook.vo.ClaimVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.GenreVo;
@@ -62,4 +63,6 @@ public interface AdminDao {
 	ArrayList<BookeventVo> eventList(@Param("cri")Criteria cri);
 
 	void insertEvent(@Param("event")BookeventVo event);
+
+	ArrayList<ClaimVo> getClaim(@Param("cri")Criteria cri);
 }

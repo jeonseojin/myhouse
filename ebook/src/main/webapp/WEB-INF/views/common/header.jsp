@@ -64,7 +64,7 @@
 							<button type="submit" class="login-btn">Login</button>	
 							<br>	
 							<div class="s-bb"><a href="<%=request.getContextPath()%>/signup" class="s-btn">회원가입</a></div>
-                    		<p class="c-help">이용 중 도움이 필요하시면 [<a href="#">고객지원</a>] 페이지로 문의해주세요</p>
+                    		<p class="c-help">이용 중 도움이 필요하시면 [<a href="<%=request.getContextPath()%>/toon/help">고객지원</a>] 페이지로 문의해주세요</p>
 							<input type="hidden" value="${isLogin}" id="isLogin">
 							<input type="hidden" value="${id}" id="id">
 							
@@ -102,7 +102,7 @@
 				                    </div>  
 				                    <a class="logNav-link" href="#">내서재</a>
 				                    <a class="logNav-link" href="#">내정보</a>
-				                    <a class="logNav-link" href="#">고객지원</a>
+				                    <a class="logNav-link" href="<%=request.getContextPath()%>/toon/help">고객지원</a>
 				                    <a class="logNav-link logNav-link-last" href="<%=request.getContextPath()%>/signout">로그아웃</a>
 				                </div>
 				                <div class="log-list look">

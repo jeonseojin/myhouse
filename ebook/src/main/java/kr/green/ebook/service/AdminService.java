@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
 import kr.green.ebook.vo.BookeventVo;
+import kr.green.ebook.vo.ClaimVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.GenreVo;
 import kr.green.ebook.vo.ToonVo;
@@ -38,5 +39,7 @@ public interface AdminService {
 	ArrayList<BookeventVo> eventList(Criteria cri);
 	
 	void insertEvent(BookeventVo event);
+
+	ArrayList<ClaimVo> getClaim(Criteria cri);
 
 }

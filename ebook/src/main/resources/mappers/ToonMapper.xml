@@ -167,4 +167,10 @@
 			bookevent(ev_title,ev_engtitle,ev_img,ev_t_title,ev_member,ev_banner)
 			values(#{event.ev_title},#{event.ev_engtitle},#{event.ev_img},#{event.ev_t_title},#{event.ev_member},#{event.ev_banner})
 	</insert>
+	
+	
+<!-- 전체문의내역 -->
+	<select id="getClaim" resultType="kr.green.ebook.vo.ClaimVo">
+		select * from claim
+	</select>
 </mapper>

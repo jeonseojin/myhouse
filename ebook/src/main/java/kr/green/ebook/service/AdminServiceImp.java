@@ -13,6 +13,7 @@ import kr.green.ebook.dao.MemberDao;
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
 import kr.green.ebook.vo.BookeventVo;
+import kr.green.ebook.vo.ClaimVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.GenreVo;
 import kr.green.ebook.vo.ToonVo;
@@ -99,6 +100,12 @@ public class AdminServiceImp implements AdminService {
 		@Override
 		public void insertEvent(BookeventVo event) {
 			adminDao.insertEvent(event);		
+		}
+		
+//문의내역
+		@Override
+		public ArrayList<ClaimVo> getClaim(Criteria cri) {
+			return adminDao.getClaim(cri);
 		}
 
 
