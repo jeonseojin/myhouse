@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import kr.green.ebook.vo.MemberVo;
+import kr.green.ebook.vo.PayVo;
+import kr.green.ebook.vo.ToonVo;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override

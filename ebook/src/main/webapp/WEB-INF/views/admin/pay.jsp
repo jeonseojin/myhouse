@@ -30,7 +30,7 @@
 							<td>${paylist.p_price}</td>
 							<td>${paylist.p_coin}</td>
 							<td>${paylist.p_point}</td>
-							<td>${paylist.p_epititle}/${paylist.p_epnum}</td>
+							<td>${paylist.p_title}/${paylist.p_edition}</td>
 							<td>${paylist.p_usedate}</td>
 						</tr>
 					</c:forEach>

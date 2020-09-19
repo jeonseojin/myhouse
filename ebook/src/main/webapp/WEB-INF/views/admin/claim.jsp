@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${member.id==null || member.auth=='USER'}">
+	<h1>접근할 수 없는 경로입니다.</h1>
+</c:if>
+<c:if test="${member.id!=null || member.auth=='ADMIN'}">
 <ul class="nav nav-tabs">
 	<li class="nav-item ad-claim-l">
-		<a class="nav-link active" data-toggle="tab" href="#" data-target="ad-claim-all">전체</a>
+		<a class="nav-link active" data-toggle="tab" href="#" aria-selected="true" data-target="ad-claim-all">전체</a>
 	</li>
 	<li class="nav-item ad-claim-l">
 		<a class="nav-link" data-toggle="tab" href="#" data-target="ad-claim-answer">미답변</a>
@@ -12,7 +16,7 @@
 		<a class="nav-link" data-toggle="tab" href="#" data-target="ad-claim-end">답변완료</a>
 	</li>
 	<li class="nav-item ad-claim-l">
-		<a class="nav-link" data-toggle="tab" href="#" aria-selected="true" data-target="ad-claim-notice">공지사항</a>
+		<a class="nav-link" data-toggle="tab" href="#" data-target="ad-claim-notice">공지사항</a>
 	</li>
 	<li class="ad-cl-not">
 		<a  href="<%=request.getContextPath()%>/admin/notice">공지사항 등록</a>
@@ -37,18 +41,10 @@
 							<tr>
 								<td>${cl.cl_num}</td>
 								<td>${cl.cl_member}</td>
-					        	<td><a href="<%=request.getContextPath()%>/toon/help?num=${cl.cl_num}">${cl.cl_title}</a></td>
-					        	<td>${cl.cl_date}</td>
+						       	<td><a href="<%=request.getContextPath()%>/admin/cldetail?num=${cl.cl_num}">${cl.cl_title}</a></td>
+						       	<td>${cl.cl_date}</td>
 							</tr>
-						</c:if>
-						<c:if test="${cl.cl_auth=='ADMIN'}">
-							<tr>
-								<td>${cl.cl_num}</td>
-								<td>${cl.cl_member}</td>
-					        	<td><a href="<%=request.getContextPath()%>/admin/cldetail?num=${cl.cl_num}">${cl.cl_title}</a></td>
-					        	<td>${cl.cl_date}</td>
-							</tr>
-						</c:if>							
+						</c:if>				
 					</c:forEach>
 				</c:if>
 			</tbody>
@@ -75,7 +71,7 @@
 							<tr>
 								<td>${cl.cl_num}</td>
 								<td>${cl.cl_member}</td>
-					        	<td>${cl.cl_title}</td>
+					        	<td><a href="<%=request.getContextPath()%>/admin/cldetail?num=${cl.cl_num}">${cl.cl_title}</a></td>
 					        	<td>${cl.cl_date}</td>
 							</tr>
 						</c:if>
@@ -101,11 +97,11 @@
 			<tbody>
 				<c:if test="${cl.size()!=0}">
 					<c:forEach var="cl" items="${cl}">
-						<c:if test="${cl.cl_auth!='ADMIN' && cl.cl_answer!=0}">
+						<c:if test="${cl.cl_answer!=0}">
 							<tr>
 								<td>${cl.cl_num}</td>
 								<td>${cl.cl_member}</td>
-					        	<td>${cl.cl_title}</td>
+					        	<td><a href="<%=request.getContextPath()%>/admin/cldetail?num=${cl.cl_num}">${cl.cl_title}</a></td>
 					        	<td>${cl.cl_date}</td>
 							</tr>
 						</c:if>
@@ -129,7 +125,7 @@
 			<tbody>
 				<c:if test="${cl.size()!=0}">
 					<c:forEach var="cl" items="${cl}">
-						<c:if test="${cl.cl_auth=='ADMIN'}">
+						<c:if test="${cl.cl_auth=='ADMIN'&&cl.cl_answer==0}">
 							<tr>
 								<td>${cl.cl_member}</td>
 					        	<td><a href="<%=request.getContextPath()%>/admin/cldetail?num=${cl.cl_num}&page=${pm.cri.page}&type=${pm.cri.type}&search=${pm.cri.search}">${cl.cl_title}</a></td>
@@ -167,6 +163,7 @@
 				</div>
 			</div>
 		</form>
+</c:if>
 <script>
 $(function(){
     $('.nav .nav-link').click(function(e){

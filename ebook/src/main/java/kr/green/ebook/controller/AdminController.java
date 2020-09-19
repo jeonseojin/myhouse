@@ -169,7 +169,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/event", method = RequestMethod.POST)
 	public ModelAndView adminEventPost(ModelAndView mv,BookeventVo event,MultipartFile file1,MultipartFile file2,MultipartFile file3) throws IOException, Exception {
 		mv.setViewName("redirect:/admin/event");
-		String ev_img = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file2.getOriginalFilename(), file1.getBytes());
+		String ev_img = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file1.getOriginalFilename(), file1.getBytes());
 		event.setEv_img(ev_img);
 		String ev_banner = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file2.getOriginalFilename(), file2.getBytes());
 		event.setEv_banner(ev_banner);
@@ -248,7 +248,7 @@ public class AdminController {
 		mv.addObject("cri", cri);
 		return mv;
 	}
-	//관리자 공지사항 등록페이지
+	//관리자 공지사항 수정페이지
 	@RequestMapping(value = "/admin/clmodify", method = RequestMethod.GET)
 	public ModelAndView adminclmodify(ModelAndView mv, Criteria cri,Integer num){
 		mv.setViewName("/admin/clmodify");
@@ -257,11 +257,32 @@ public class AdminController {
 		mv.addObject("cri", cri);
 		return mv;
 	}
+	//관리자 공지사항 수정기능
 	@RequestMapping(value = "/admin/clmodify", method = RequestMethod.POST)
 	public ModelAndView adminclmodifyP(ModelAndView mv, Criteria cri,ClaimVo cl){
-		mv.setViewName("redirect:/admin/cldetail");
+		mv.setViewName("redirect:/admin/cldetail?num="+cl.getCl_num());
+		cl.setCl_content(cl.getCl_content().replaceAll("\n", "<br>"));
 		adminService.updateClaim(cl);
+		return mv;
+	}
+	//관리자 공지사항 등록페이지
+	@RequestMapping(value = "/admin/answer", method = RequestMethod.GET)
+	public ModelAndView adminanswer(ModelAndView mv, Criteria cri,Integer num){
+		mv.setViewName("/admin/answer");
+		ClaimVo cl = adminService.getClaimT(num);
+		mv.addObject("cl", cl);
 		mv.addObject("cri", cri);
+		return mv;
+	}
+	//관리자 공지사항 등록페이지
+	@RequestMapping(value = "/admin/answer", method = RequestMethod.POST)
+	public ModelAndView adminanswerP(ModelAndView mv, ClaimVo cl){
+		mv.setViewName("redirect:/admin/claim");
+		ClaimVo claim = adminService.getClaimT(cl.getCl_answer());
+		claim.setCl_answer(cl.getCl_answer());
+		adminService.updateClaim(claim);
+		cl.setCl_content(cl.getCl_content().replaceAll("\n", "<br>"));
+		adminService.insertclaim(cl);
 		return mv;
 	}
 }

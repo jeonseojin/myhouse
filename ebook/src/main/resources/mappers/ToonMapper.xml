@@ -236,10 +236,11 @@
 	<update id="updateClaim">
 		update claim
 		set
-			cl_title = #{cl.cl_title}
-			cl_content=#{cl.cl_content}
-			cl_file=#{cl.cl_file}
-			cl_type=#{cl.cl_type}
+			cl_title = #{cl.cl_title},
+			cl_content=#{cl.cl_content},
+			cl_file=#{cl.cl_file},
+			cl_type=#{cl.cl_type},
+			cl_answer=#{cl.cl_answer}
 			
 		where cl_num = #{cl.cl_num}
 	</update>

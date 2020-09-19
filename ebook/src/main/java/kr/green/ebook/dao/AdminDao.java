@@ -83,6 +83,6 @@ public interface AdminDao {
 	
 	int getTotalCountByClaim(@Param("cri")Criteria cri);
 
-	void updateClaim(@Param("cri")ClaimVo cl);
+	void updateClaim(@Param("cl")ClaimVo cl);
 
 }

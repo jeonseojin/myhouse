@@ -8,16 +8,21 @@
 	   		<th>${cl.cl_title}</th>
 	   		<th>등록일</th>
 	   		<th>${cl.cl_date}</th>
-	   		<th>관리자</th>
+	   		<th>등록자</th>
 	   		<th>${cl.cl_member}</th>
 		</tr>
 	</thead>
 </table>
-<textrea class="table table-hover">
+<textrea class="clcontent-box">
 	${cl.cl_content}
 </textrea>
 <a href="<%=request.getContextPath() %>/admin/claim?page=${cri.page}&type=${cri.type}&search=${cri.search}" class="float-left"><button type="button" class="btn btn-outline-secondary">목록</button></a>
 <div class="float-right">
-	<a href="<%=request.getContextPath()%>/admin/clmodify?num=${cl.cl_num}"><button type="button" class="btn btn-primary">수정</button></a>
-	<a href="<%=request.getContextPath()%>/admin/cldelete?Title=${cl.cl_title}"><button type="button" class="btn btn-danger">삭제</button></a>
+	<c:if test="${cl.cl_auth=='ADMIN'}">
+		<a href="<%=request.getContextPath()%>/admin/clmodify?num=${cl.cl_num}"><button type="button" class="btn btn-primary">수정</button></a>
+		<a href="<%=request.getContextPath()%>/admin/cldelete?Title=${cl.cl_title}"><button type="button" class="btn btn-danger">삭제</button></a>
+	</c:if>
+	<c:if test="${cl.cl_auth=='USER'}">
+		<a href="<%=request.getContextPath()%>/admin/answer?num=${cl.cl_num}"><button type="button" class="btn btn-link">답변등록</button></a>
+	</c:if>
 </div>

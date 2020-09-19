@@ -129,8 +129,17 @@
 	font-weight: bold;
 	color: blue;
 }
-
-
+.clcontent-box{
+	width: 100%;
+	height: 500px;
+	display: block;
+	overflow-y: scroll;
+}
+.clcon-box{
+	height: 300px;
+	overflow-y: scroll;
+	width: 100%;
+}
 
 
 /*미디어 시작*/

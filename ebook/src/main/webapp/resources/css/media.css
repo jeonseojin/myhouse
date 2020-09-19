@@ -19,6 +19,38 @@
 	.help-box-text{
 		padding: 0 24px 20px;
 	}
+	.clmylist{
+		padding: 16px;
+	}
+	.clmylist-header{
+		display: table;
+	}
+	.clmylist-headerT,.clmylist-headerD,.clmylist-headerS{
+		display: table-cell;
+	}
+	.clmylist-link{
+		display: table;
+		table-layout: fixed;
+		padding: 24px;
+	}
+	.clmylist-itemT{
+		display: table-cell;
+		padding-left: 16px
+	}
+	.clmylist-itemD{
+		display: table-cell;
+		width: 148px;
+		text-align: center;
+	}
+	.clmylist-itemS{
+		display: table-cell;
+		width: 140px;
+		text-align: center;
+	}
+	.clmyregist-left,.clmyregist-right{
+		padding: 16px;
+	}
+	
 	
 }
 @media(min-width:1281px){
@@ -55,6 +87,21 @@
 	}
 	.hbox-right-tap{
 		padding: 0 16px;
+	}
+	.clmylist-header{
+		display: none;
+	}
+	.clmylist-itemT{
+		width: 100%;
+	}
+	.clmylist-itemD{
+		text-align: left;
+	}
+	.clmylist-itemS{
+		position: absolute;
+		right: 16px;
+		bottom: 16px;
+		text-align: right;
 	}
 }
 @media(max-height: 960px) and (min-width:640px){

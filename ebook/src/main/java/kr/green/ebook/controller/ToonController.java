@@ -1,5 +1,6 @@
 package kr.green.ebook.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
@@ -23,6 +25,7 @@ import kr.green.ebook.pagination.PageMaker;
 import kr.green.ebook.service.AdminService;
 import kr.green.ebook.service.MemberService;
 import kr.green.ebook.service.ToonService;
+import kr.green.ebook.utils.UploadFileUtils;
 import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.ClaimVo;
 import kr.green.ebook.vo.EpcommentVo;
@@ -42,6 +45,9 @@ public class ToonController {
 	ToonService toonService;
 	@Autowired
 	AdminDao adminDao;
+	
+	private String uploadPath = "D:\\JAVA\\spring\\myhouse\\ebook\\src\\main\\webapp\\resources\\img";
+	
 	
 	@RequestMapping(value = "/toon", method = RequestMethod.GET)
 	public ModelAndView toon(ModelAndView mv, Criteria cri) {
@@ -171,6 +177,20 @@ public class ToonController {
 		mv.setViewName("/toon/claim");
 		ArrayList<ClaimVo> cl =adminService.getClaim(cri);
 		mv.addObject("cl", cl);
+		System.out.println(cl);
+		return mv;
+	}
+	//문의 등록
+	@RequestMapping(value = "/toon/help", method = RequestMethod.POST)
+	public ModelAndView toomclaimP(ModelAndView mv, Criteria cri,ClaimVo cl,MultipartFile file2) throws IOException, Exception{
+		mv.setViewName("redirect:/toon/help");
+		cl.setCl_content(cl.getCl_content().replaceAll("\n", "<br>"));
+		String cl_file="";
+		if(file2!=null) {
+			cl_file = UploadFileUtils.uploadFile(uploadPath,"\\"+cl.getCl_type(), file2.getOriginalFilename(), file2.getBytes());
+			cl.setCl_file(cl_file);
+		}
+		adminService.insertclaim(cl);
 		return mv;
 	}
 }

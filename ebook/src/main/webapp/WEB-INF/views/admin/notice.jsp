@@ -26,8 +26,6 @@
 			<option value="etc">기타문의 / 제안</option>
 		</select>
 		<div class="ad-notice-content-box">
-
-			
 		 	<textarea name="cl_content"></textarea>
 		</div>
 		<input type="hidden" name="cl_member" value="${member.name}">
