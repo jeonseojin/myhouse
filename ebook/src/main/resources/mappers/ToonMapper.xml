@@ -43,7 +43,6 @@
   			<if test="cri.type==4">
   				and lastEpisode like concat('%',#{cri.search},'%')
   			</if>
-  			
   </select>
 
  <!-- 번호작품 -->
@@ -126,6 +125,7 @@
 			join (SELECT * FROM toon where t_title like #{Title}) as st
 			on co_epTitle = t_title
 			where co_epEdition like #{edition}
+			order by co_num desc
 	</select>
 	
 <!-- 댓글 등록 -->
@@ -167,10 +167,80 @@
 			bookevent(ev_title,ev_engtitle,ev_img,ev_t_title,ev_member,ev_banner)
 			values(#{event.ev_title},#{event.ev_engtitle},#{event.ev_img},#{event.ev_t_title},#{event.ev_member},#{event.ev_banner})
 	</insert>
-	
-	
-<!-- 전체문의내역 -->
-	<select id="getClaim" resultType="kr.green.ebook.vo.ClaimVo">
-		select * from claim
+<!-- 전체 충전 리스트 -->
+	<select id="payList" resultType="kr.green.ebook.vo.PayVo">
+		select * from pay
 	</select>
+<!-- 충전용 배너 -->
+	<select id="paybanner" resultType="kr.green.ebook.vo.BookeventVo">
+		select * from bookevent where ev_engtitle = 'pay'
+	</select>
+<!-- 충전하기/사용하기 -->
+	<insert id="insertPay">
+		insert into
+		pay(p_member,p_price,p_coin,p_point,p_title,p_edition,p_usedate,p_charging,p_one)
+		values(#{pay.p_member},#{pay.p_price},#{pay.p_coin},#{pay.p_point},#{pay.p_title},#{pay.p_edition},#{pay.p_usedate},#{pay.p_charging},#{pay.p_one})
+	</insert>
+<!-- 결제내역 -->
+	<select id="getPayList" resultType="kr.green.ebook.vo.PayVo">
+		select * from pay where p_member =#{name}
+	</select>
+<!-- 소장웹툰 -->
+	<select id="getPayToon" resultType="kr.green.ebook.vo.ToonVo">
+		select * from toon
+			join (SELECT * FROM pay where p_member like #{name} and p_one = 'Y' ) as st
+			on p_title = t_title
+	</select>
+<!-- 전체문의내역 --> 
+	<select id="getClaim" resultType="kr.green.ebook.vo.ClaimVo"> 
+		select * from claim where 1=1
+		  	<if test="cri.type==1">
+  				and (cl_title like concat('%',#{cri.search},'%')
+  				or cl_member like concat('%',#{cri.search},'%'))
+  			</if>
+  			<if test="cri.type==2">
+  				and cl_title like concat('%',#{cri.search},'%')
+  			</if>
+  			<if test="cri.type==3">
+  				and cl_member like concat('%',#{cri.search},'%')
+  			</if>
+  			order by cl_num desc
+  			limit #{cri.startPage},#{cri.perPageNum}
+	</select>
+<!-- 공지사항 찾아가기 -->
+	<select id="getClaimT" resultType="kr.green.ebook.vo.ClaimVo"> 
+		select * from claim where cl_num = #{num}
+	</select>
+<!-- 문의&공지 등록 -->
+	<insert id="insertclaim">
+		insert into 
+		claim(cl_title, cl_content, cl_member, cl_auth, cl_file, cl_type, cl_answer)
+		values(#{cl.cl_title},#{cl.cl_content},#{cl.cl_member},#{cl.cl_auth},#{cl.cl_file},#{cl.cl_type},#{cl.cl_answer})
+	</insert>
+<!-- 문의페이지네이션 -->
+    <select id="getTotalCountByClaim" resultType="int">
+		select count(*) from claim
+			where 1=1
+  			<if test="cri.type==1">
+  				and (cl_title like concat('%',#{cri.search},'%')
+  					or cl_member like concat('%',#{cri.search},'%'))
+  			</if>
+  			<if test="cri.type==2">
+  				and cl_title like concat('%',#{cri.search},'%')
+  			</if>
+  			<if test="cri.type==3">
+  				and cl_member like concat('%',#{cri.search},'%')
+  			</if>
+  </select>
+<!-- 문의 수정 -->
+	<update id="updateClaim">
+		update claim
+		set
+			cl_title = #{cl.cl_title}
+			cl_content=#{cl.cl_content}
+			cl_file=#{cl.cl_file}
+			cl_type=#{cl.cl_type}
+			
+		where cl_num = #{cl.cl_num}
+	</update>
 </mapper>

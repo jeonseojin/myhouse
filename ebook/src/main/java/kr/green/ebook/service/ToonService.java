@@ -6,6 +6,7 @@ import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
+import kr.green.ebook.vo.PayVo;
 import kr.green.ebook.vo.ToonVo;
 
 public interface ToonService {
@@ -30,6 +31,8 @@ public interface ToonService {
 
 	int deleteChoice(String Title, String id);
 
+	ArrayList<PayVo> getPayList(String name);
 
+	ArrayList<PayVo> getPayToon(String name);
 
 }

@@ -94,8 +94,47 @@
 #img-holder{
 	height: 500px;
 }
+.adm-evTitle{
+	width: 80px;
+}
+.adm-ev-title{
+	width: 100%;
+	border: none;
+}
+.adm-ev-t_title{
+	max-width: 80px;
+}
+.ad-not-t{
+	width: 120px;
+}
+.ad-notice-title{
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+.ad-notice-content-box{
+	width: 100%;
+	height: 500px;
+	border: 1px solid #eff1f4;
+	overflow: hidden;
+}
+.ad-notice-content-box>textarea{
+	width: 100%;
+	height:100%;
+	border: none;
+	overflow-y: scroll;
+}
+.ad-cl-not{
+	padding: 8px 16px;
+	font-weight: bold;
+	color: blue;
+}
 
-@media (min-width: 961px){
+
+
+
+/*미디어 시작*/
+@media (min-width: 961px)
 	.toon-week-box{
 		padding:  8px 0;
 	}
@@ -137,6 +176,16 @@
 	background-color: transparent;
 	font-size: 18px;
 	line-height: 38px;
+}
+.adm-ev-imgbox{
+	width: 100%;
+}
+.adm-evimg-box{
+	width: 450px;
+}
+.adm-ev-content{
+	width: 100%;
+	min-height: 80px;
 }
 @media (max-width: 960px) and (min-width: 640px){
 	.toon-week-box{

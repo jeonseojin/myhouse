@@ -79,4 +79,3 @@
         }
         adtoonView();
     </script>
-

@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% response.setHeader("Pragma", "no-cache"); response.setHeader("Cache-Control", "no-cache"); response.setHeader("Cache-Control", "no-store"); response.setDateHeader("Expires", 0L); %>
+
     <!-- 상단 header -->
     <header id="main-header" class="com com-menu">
         <a class="gnb-logo" href="<%=request.getContextPath()%>/"></a>
@@ -97,7 +99,7 @@
 				                        </h3>
 				                        <div class="log-coinList">
 				                            <span class="">${member.coin}</span>코인
-				                            <a href="#" class="log-coin">코인 충전</a>
+				                            <a href="<%=request.getContextPath()%>/toon/payment" class="log-coin">코인 충전</a>
 				                        </div>
 				                    </div>  
 				                    <a class="logNav-link" href="#">내서재</a>
@@ -110,11 +112,10 @@
 				                		<span class="log-look-span">최근</span>
 				                    <div class="log-look-box">
 				                        <div class="log-look-item">
-				                        	
-				                        	<c:if test="${tlist.size()!=0}">
-				                        	<c:forEach var="toon" items="${tlist}">
+				                        	<c:if test="${chlist.size()!=0}">
+				                        	<c:forEach var="chlist" items="${chlist}">
 					                            <a class="log-look" href="#">
-					                                <img class="search-img" src="/ebook/resources/img${toon.t_img}" style="height: 53px;" alt="">
+					                                <img class="search-img" src="/ebook/resources/img${chlist.t_img}" style="height: 53px;" alt="">
 					                            </a>
 					                        </c:forEach>
 				                            </c:if> 
@@ -124,22 +125,24 @@
 				                    <span class="log-look-span">찜</span>
 				                    <div class="log-look-box">
 				                        <div class="log-look-item">
-				                            <c:forEach var="toon" items="${tlist}">
-					                            <a class="log-look" href="#">
-					                                <img class="search-img" src="/ebook/resources/img${toon.t_img}" style="height: 53px;" alt="">
-					                            </a>
-					                        </c:forEach>
+				                        	<c:if test="${chlist.size()!=0}">
+					                        	<c:forEach var="chlist" items="${chlist}">
+						                            <a class="log-look" href="#">
+						                                <img class="search-img" src="/ebook/resources/img${chlist.t_img}" style="height: 53px;" alt="">
+						                            </a>
+						                        </c:forEach>
+					                        </c:if>
 				                            <a href="#" class="log-look-the">더보기</a> 
 				                        </div>
 				                    </div>
 				                    <span class="log-look-span">소장</span>
 				                    <div class="log-look-box">
 				                        <div class="log-look-item">
-				                            <c:forEach var="toon" items="${tlist}">
-					                            <a class="log-look" href="#">
-					                                <img class="search-img" src="/ebook/resources/img${toon.t_img}" style="height: 53px;" alt="">
-					                            </a>
-					                        </c:forEach>
+					                       <c:forEach var="pay" items="${plist}">
+							              		<a class="log-look" href="#">
+							                       	<img class="search-img" src="/ebook/resources/img${pay.t_img}" style="height: 53px;" alt="">
+							                    </a>
+						                    </c:forEach>
 				                            <a href="#" class="log-look-the">더보기</a> 
 				                        </div>
 				                    </div>

@@ -12,10 +12,12 @@ import kr.green.ebook.dao.AdminDao;
 import kr.green.ebook.dao.MemberDao;
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
+import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.BookeventVo;
 import kr.green.ebook.vo.ClaimVo;
-import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.GenreVo;
+import kr.green.ebook.vo.MemberVo;
+import kr.green.ebook.vo.PayVo;
 import kr.green.ebook.vo.ToonVo;
 import kr.green.ebook.vo.WeekVo;
 
@@ -23,21 +25,14 @@ import kr.green.ebook.vo.WeekVo;
 public class AdminServiceImp implements AdminService {
 	@Autowired
     AdminDao adminDao;
+	@Autowired
+    MemberDao memberDao;
 	
 //작품 + 정렬
 	@Override
 	public ArrayList<ToonVo> toonList(Criteria cri) {
 		return adminDao.toonList(cri);
 
-	}
-	
-// 작품페이지네이션
-	@Override
-	public PageMaker getPageMakerByToon(Criteria cri) {
-		PageMaker pm = new PageMaker();
-		pm.setCri(cri);
-		pm.setTotalCount(adminDao.getTotalCountByToon(cri));
-		return pm;
 	}
 
 //작품등록
@@ -89,25 +84,70 @@ public class AdminServiceImp implements AdminService {
 		if(t_type==null|| t_type.length()==0) return null;
 		return adminDao.getGr(t_type);
 	}
+//이벤트 전체
+	@Override
+	public ArrayList<BookeventVo> eventList(Criteria cri) {
+		return adminDao.eventList(cri);
+	}
+//이벤트 등록
+	@Override
+	public void insertEvent(BookeventVo event) {
+		adminDao.insertEvent(event);		
+	}
+//충전 전체 리스트
+	@Override
+	public ArrayList<PayVo> payList(Criteria cri) {
+		return adminDao.payList(cri);
+	}
+//충전화면배너
+	@Override
+	public BookeventVo paybanner(Criteria cri) {
+		return adminDao.paybanner(cri);
+	}
+//충전기능
+	@Override
+	public void insertPay(PayVo pay) {
+		adminDao.insertPay(pay);
+	}
 
-	//이벤트 전체
-		@Override
-		public ArrayList<BookeventVo> eventList(Criteria cri) {
-			return adminDao.eventList(cri);
-		}
-
-		//이벤트 등록
-		@Override
-		public void insertEvent(BookeventVo event) {
-			adminDao.insertEvent(event);		
-		}
+//문의내역 
+	@Override 
+	public ArrayList<ClaimVo> getClaim(Criteria cri) { 
+		return adminDao.getClaim(cri); 
+	}
+//문의등록&공지사항 등록
+	@Override
+	public void insertclaim(ClaimVo cl) {
+		adminDao.insertclaim(cl);
 		
-//문의내역
+	}
+//공지사항 자세히보기
+	@Override
+	public ClaimVo getClaimT(Integer num) {
+		return adminDao.getClaimT(num);
+	}
+// 문의페이지네이션
+	@Override
+	public PageMaker getPageMakerByClaim(Criteria cri) {
+			PageMaker pm = new PageMaker();
+			pm.setCri(cri);
+			pm.setTotalCount(adminDao.getTotalCountByClaim(cri));
+		return pm;
+	} 
+// 작품페이지네이션
 		@Override
-		public ArrayList<ClaimVo> getClaim(Criteria cri) {
-			return adminDao.getClaim(cri);
+		public PageMaker getPageMakerByToon(Criteria cri) {
+			PageMaker pm = new PageMaker();
+			pm.setCri(cri);
+			pm.setTotalCount(adminDao.getTotalCountByToon(cri));
+			return pm;
 		}
-
+//문의수정
+		@Override
+		public void updateClaim(ClaimVo cl) {
+			adminDao.updateClaim(cl);
+			
+		}
 
 
 

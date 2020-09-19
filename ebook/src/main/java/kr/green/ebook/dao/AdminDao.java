@@ -6,12 +6,13 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
-import kr.green.ebook.vo.BookeventVo;
 import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.ClaimVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
+import kr.green.ebook.vo.BookeventVo;
 import kr.green.ebook.vo.GenreVo;
+import kr.green.ebook.vo.PayVo;
 import kr.green.ebook.vo.ToonVo;
 import kr.green.ebook.vo.WeekVo;
 
@@ -20,14 +21,11 @@ public interface AdminDao {
 //	작품리스트 정렬
 	ArrayList<ToonVo> toonList(@Param("cri")Criteria cri);
 
-	public int getTotalCountByToon(@Param("cri")Criteria cri);
-
 	void insertToon(@Param("toon")ToonVo toon);
 
 	void insertEp(@Param("ep")EpisodeVo ep);
 
 // 연재
-	
 	ToonVo getToon(@Param("num")Integer num);
 
 	void updateToon(@Param("toon")ToonVo toon);
@@ -64,5 +62,27 @@ public interface AdminDao {
 
 	void insertEvent(@Param("event")BookeventVo event);
 
+	ArrayList<PayVo> payList(@Param("cri")Criteria cri);
+
+	BookeventVo paybanner(@Param("cri")Criteria cri);
+
+	void insertPay(@Param("pay")PayVo pay);
+
+	ArrayList<PayVo> getPayList(@Param("name")String name);
+
 	ArrayList<ClaimVo> getClaim(@Param("cri")Criteria cri);
+
+	ArrayList<PayVo> getPayToon(@Param("name")String name);
+
+	void insertclaim(@Param("cl")ClaimVo cl);
+
+	ClaimVo getClaimT(@Param("num")Integer num);
+
+//페이지네이션
+	public int getTotalCountByToon(@Param("cri")Criteria cri);
+	
+	int getTotalCountByClaim(@Param("cri")Criteria cri);
+
+	void updateClaim(@Param("cri")ClaimVo cl);
+
 }

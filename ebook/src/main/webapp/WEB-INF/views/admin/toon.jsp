@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<ul class="nav nav-tabs">
-	<li class="nav-item ad-toon-l">
-		<a class="nav-link active" data-toggle="tab" aria-selected="true" href="#" data-target="ad-toon-all">전체작품조회</a>
-	</li>
-	<li class="nav-item ad-toon-l">
-		<a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-record">작품등록</a>
-	</li>
-	<li class="nav-item ad-toon-l">
-		<a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-episode">작품연재등록</a>
-	</li>
-</ul>
+    <ul class="nav nav-tabs">
+        <li class="nav-item ad-toon-l">
+          <a class="nav-link active" data-toggle="tab" aria-selected="true" href="#" data-target="ad-toon-all">전체작품조회</a>
+        </li>
+        <li class="nav-item ad-toon-l">
+          <a class="nav-link" data-toggle="tab" href="#" data-target="ad-toon-record">작품등록</a>
+        </li>
+    </ul>
 <div class="ad-toon">
 	<div class="ad-toon-list ad-toon-all">
 		<table class="table table-borderless">
@@ -125,8 +122,6 @@
 			<input type="hidden" id="t_week" name="t_week">
 		</form>
 	</div>
-	
-	<div class="ad-toon-list ad-toon-mo_del"></div>
 </div>
 
     <script>
@@ -136,8 +131,6 @@
 	}
 	var value = $(".t_week-box").val(); 
 	$('#t_week').val(value);
-
-
 	
     var sel_files=[];
 	$(document).ready(function(){
@@ -146,11 +139,9 @@
 	$(document).ready(function(){
 		$('.input-s-img').on("change",handleSFilesSelect);
 	})
-
 	function handleBFilesSelect(e){
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
-
 		filesArr.forEach(function(f){
 			$('.input-imgb-box').empty();
 			if(!f.type.match("image.*")){
@@ -158,7 +149,6 @@
 				return;
 			}
 			sel_files.push(f);
-
 			var reader = new FileReader();
 			reader.onload = function(e){
 				var img_html = "<img src=\"" + e.target.result + "\"/>";
@@ -170,7 +160,6 @@
 	function handleSFilesSelect(e){
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
-
 		filesArr.forEach(function(f){
 			$('.input-imgs-box').empty();
 			if(!f.type.match("image.*")){
@@ -178,7 +167,6 @@
 				return;
 			}
 			sel_files.push(f);
-
 			var reader = new FileReader();
 			reader.onload = function(e){
 				var img_html = "<img src=\"" + e.target.result + "\"/>";

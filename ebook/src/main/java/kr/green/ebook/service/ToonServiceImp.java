@@ -10,6 +10,7 @@ import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.vo.ChoiceVo;
 import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
+import kr.green.ebook.vo.PayVo;
 import kr.green.ebook.vo.ToonVo;
 
 @Service
@@ -34,20 +35,21 @@ public class ToonServiceImp implements ToonService {
 	}
 
 	//만화내용 전 보여지는내용
-	@Override
-	public EpisodeVo getEp(String Title,String edition) {
-		return adminDao.getEp(Title,edition);
-	}
+		@Override
+		public EpisodeVo getEp(String Title,String edition) {
+			return adminDao.getEp(Title,edition);
+		}
 	//회차 모든 내용
-	@Override
-	public ArrayList<EpisodeVo> getEpcoverlist(String Title) {
-		return adminDao.getEpcoverlist(Title);
-	}
+		@Override
+		public ArrayList<EpisodeVo> getEpcoverlist(String Title) {
+			return adminDao.getEpcoverlist(Title);
+		}
 
 	//만화내용
 	@Override
-	public ArrayList<EpisodeVo> getEpList(String Title, String edition) {
-		return adminDao.getEpList(Title,edition);
+	public ArrayList<EpisodeVo> getEpList(String title, String edition) {
+		ArrayList<EpisodeVo> eplist = adminDao.getEpList(title,edition);
+		return eplist;
 	}
 
 	//각 화의 댓글 전체
@@ -56,15 +58,15 @@ public class ToonServiceImp implements ToonService {
 		ArrayList<EpcommentVo> cmtlist = adminDao.getCmtList(title,edition);
 		return cmtlist;
 	}
-	
+		
 	//댓글저장
 	@Override
 	public void insertEpcmt(EpcommentVo epcmt) {
 		adminDao.insertEpcmt(epcmt);
 		
 	}
-	
-	//찜하기
+		
+//작품을 찜한 수
 	@Override
 	public int updateChoice(String Title, String id) {
 		if(adminDao.selectChoice(Title,id)!=0) return -1;
@@ -74,12 +76,12 @@ public class ToonServiceImp implements ToonService {
 		ToonVo toon = adminDao.getToont(Title);
 		return toon.getChoice();
 	}
-
+//찜하기 기능
 	@Override
 	public ChoiceVo getChoice(String Title,String id) {
 		return adminDao.getChoice(Title,id);
 	}
-
+//찜하기 취소
 	@Override
 	public int deleteChoice(String Title, String id) {
 		ToonVo toon = adminDao.getToont(Title);
@@ -90,8 +92,15 @@ public class ToonServiceImp implements ToonService {
 		}
 		return toon.getChoice();
 	}
-
-
-
+//해당 회원의 결제내역 불러오기
+	@Override
+	public ArrayList<PayVo> getPayList(String name) {
+		return adminDao.getPayList(name);
+	}
+//해당 회원의 소장웹툰
+	@Override
+	public ArrayList<PayVo> getPayToon(String name) {
+		return adminDao.getPayToon(name);
+	}
   
 }

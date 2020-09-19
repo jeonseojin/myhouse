@@ -3,10 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <ul class="nav nav-tabs ad-event-nav">
     <li class="nav-item ad-event-l">
-          <a class="nav-link ad-event-btn active" data-toggle="tab" data-target="ad-event-all">전체이벤트조회</a>
+          <a class="nav-link ad-event-btn active" data-toggle="tab" aria-selected="true" data-target="ad-event-all">전체이벤트조회</a>
     </li>
     <li class="nav-item ad-event-l">
-          <a class="nav-link ad-event-btn" data-toggle="tab" aria-selected="true" data-target="ad-event-record">이벤트등록</a>
+          <a class="nav-link ad-event-btn" data-toggle="tab" data-target="ad-event-record">이벤트등록</a>
     </li>
 </ul>
 <div class="ad-event">
@@ -33,11 +33,11 @@
 						</tr>
 					</c:forEach>
 				</c:if>
+				<c:if test="${evlist.size()==0}">
+					<h2 style="text-align: center;">검색하신 결과가 없습니다.</h2>
+				</c:if>
 			</tbody>
 		</table>
-		<c:if test="${evlist.size()==0}">
-			<h2 style="text-align: center;">검색하신 결과가 없습니다.</h2>
-		</c:if>
 		<div>
 			<!-- 페이지네이션 -->
 			<ul class="pagination justify-content-center" style="margin:20px 0">
@@ -48,7 +48,7 @@
 				<li class="page-item <c:if test="${!pm.next}">disabled</c:if>"><a class="page-link" href="<%=request.getContextPath()%>/admin/toon?page=${pm.endPage+1}&type=${pm.cri.type}&search=${pm.cri.search}"><i class="fas fa-chevron-right"></i></a></li>
 			</ul>
 			<!-- 검색창 -->
-			<form action="<%=request.getContextPath()%>/admin/event">
+			<form action="<%=request.getContextPath()%>/admin/toon">
 				<div class="input-group mb-3">
 					<select class="form-control " id="sell" name="type">
 						<option value="0" <c:if test="${pm.cri.event==1}">selected</c:if>>전체</option>
@@ -63,10 +63,8 @@
 			</form>
 		</div>
 	</div>
-	
-	
-	<div class="ad-event-list ad-event-record">
 	<form action="<%=request.getContextPath()%>/admin/event" method="post" enctype="multipart/form-data">
+	<div class="ad-event-list ad-event-record">
 		<table class="table">
 			<thead>
 				<tr class="textline-center">
@@ -109,8 +107,8 @@
 			<div class="adm-bp-evimg-box"></div>
 			<input type="file" class="adm-bp-evimg" name="file3">
 		<button class="btn btn-primary float-right">등록</button>
-		</form>
 	</div>
+	</form>
 </div>
 
 <script>
@@ -178,6 +176,7 @@
 			reader.readAsDataURL(f);
 		})
 	}
+
 	$(function(){
 	    $('.ad-event-nav .ad-event-btn').click(function(e){
 	        e.preventDefault();
@@ -186,6 +185,7 @@
 	        adeventView();
 	    })
 	})
+
 	function adeventView(){
 	    var target = $('.ad-event-l .ad-event-btn[aria-selected=true]').attr('data-target');
 	    $('.ad-event>.ad-event-list').addClass('display-none');

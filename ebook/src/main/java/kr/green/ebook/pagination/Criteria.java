@@ -7,6 +7,7 @@ public class Criteria {
 	private int cweek;
 	private String search;
 	private int event;
+	private String notice;//고객센터의 조건
 	
 	//Criteria 디폴트 생성자 : 현재 페이지를 1페이지로, 한 페이지에 10개의 컨텐츠
 	public Criteria() {
@@ -15,6 +16,7 @@ public class Criteria {
 		search="";
 		type=1;
 		cweek=1;
+		notice="service";
 	}
 	//getter and setter
 	public int getPage() {
@@ -48,8 +50,7 @@ public class Criteria {
 	}
 	public void setSearch(String sech) {
 		this.search = sech;
-	}	
-	
+	}
 	public int getCweek() {
 		return cweek;
 	}
@@ -65,6 +66,12 @@ public class Criteria {
 		this.event = (event < 0 || event > 2) ? 0 : event;
 	}
 
+	public String getNotice() {
+		return notice;
+	}
+	public void setNotice(String notice) {
+		this.notice = notice;
+	}
 	@Override
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", type=" + type + ", cweek=" + cweek

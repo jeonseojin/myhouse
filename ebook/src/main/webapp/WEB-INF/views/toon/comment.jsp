@@ -29,7 +29,6 @@
 		</c:if>
 	</div>
 
-	<div class="epcmt-box2"></div>
 	<div class="epcmt-box">
 		<c:forEach var="cmtlist" items="${cmtlist}">
 		<div class="epcmt-list">
@@ -70,28 +69,42 @@
 				dataType:"json",
 				contentType:"application/json; charset=UTF-8",
 				success:function(data){
+					alert("댓글이 등록하였습니다.");
 					$('textarea[name=co_content]').val('');
-					alert(data['res']);
 					var str='';
 					for(var i in data.cmtlist){
-						str+=
-							'<div class="epcmt-list">'+
-							'<span class="epcmt-name">'+ data.cmtlist[i].co_member +'</span>'+
-							'<div class="epcmt-text">'+ data.cmtlist[i].co_content+'</div>'+
-							'<div class="epcmt-end">'+
-							'<span class="epcmt-date">'+ data.cmtlist[i].co_date+'</span>'+
-							'<a href="<%=request.getContextPath()%>/toon/cmtmo?&Title=${toon.t_title}"><button type="button" class="cmtmo-btn">수정</button></a>'+
-							'<a href="<%=request.getContextPath()%>/toon/cmtdel?Title=${toon.t_title}"><button type="button" class="cmtdel-btn">삭제</button></a>'+
-							'<div class="epcmt-btnbox">'+
-							'<button class="epcmt-up"><i class="far fa-hand-point-up"></i>'+ data.cmtlist[i].co_up+'</button>'+
-							'<button class="epcmt-down"><i class="far fa-hand-point-down "></i>'+ data.cmtlist[i].co_down+'</button>'+
-							'</div></div></div>';
+						if(data.member==data.cmtlist[i].co_member){
+							str+=
+								'<div class="epcmt-list">'+
+								'<span class="epcmt-name">'+ data.cmtlist[i].co_member +'</span>'+
+								'<div class="epcmt-text">'+ data.cmtlist[i].co_content+'</div>'+
+								'<div class="epcmt-end">'+
+								'<span class="epcmt-date">'+ data.cmtlist[i].co_date+'</span>'+
+								'<a href="<%=request.getContextPath()%>/toon/cmtmo?&Title=${toon.t_title}"><button type="button" class="cmtmo-btn">수정</button></a>'+
+								'<a href="<%=request.getContextPath()%>/toon/cmtdel?Title=${toon.t_title}"><button type="button" class="cmtdel-btn">삭제</button></a>'+
+								'<div class="epcmt-btnbox">'+
+								'<button class="epcmt-up"><i class="far fa-hand-point-up"></i>'+ data.cmtlist[i].co_up+'</button>'+
+								'<button class="epcmt-down"><i class="far fa-hand-point-down "></i>'+ data.cmtlist[i].co_down+'</button>'+
+								'</div></div></div>';
+						}else{
+							str+=
+								'<div class="epcmt-list">'+
+								'<span class="epcmt-name">'+ data.cmtlist[i].co_member +'</span>'+
+								'<div class="epcmt-text">'+ data.cmtlist[i].co_content+'</div>'+
+								'<div class="epcmt-end">'+
+								'<span class="epcmt-date">'+ data.cmtlist[i].co_date+'</span>'+
+								'<div class="epcmt-btnbox">'+
+								'<button class="epcmt-up"><i class="far fa-hand-point-up"></i>'+ data.cmtlist[i].co_up+'</button>'+
+								'<button class="epcmt-down"><i class="far fa-hand-point-down "></i>'+ data.cmtlist[i].co_down+'</button>'+
+								'</div></div></div>';
+						}
+						
 					}
 					$('.epcmt-box').html(str);
 				}
 			});
 		})
+		
 	})
-
 	
 </script>

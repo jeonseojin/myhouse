@@ -19,9 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.service.AdminService;
 import kr.green.ebook.service.MemberService;
-import kr.green.ebook.vo.BookeventVo;
+import kr.green.ebook.service.ToonService;
 import kr.green.ebook.vo.ChoiceVo;
+import kr.green.ebook.vo.BookeventVo;
 import kr.green.ebook.vo.MemberVo;
+import kr.green.ebook.vo.PayVo;
 import kr.green.ebook.vo.ToonVo;
 
 /**
@@ -36,6 +38,8 @@ public class HomeController {
 	MemberService memberService;
 	@Autowired
 	AdminService adminService;
+	@Autowired
+	ToonService toonService;
 	
 	//기본홈
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -47,6 +51,8 @@ public class HomeController {
 		if(member!=null) {
 			ArrayList<ChoiceVo> chlist = memberService.getChoiceList(member.getId());
 			mv.addObject("chlist", chlist);
+			ArrayList<PayVo> plist = toonService.getPayToon(member.getName());
+			mv.addObject("plist", plist);
 		}
 		ArrayList<BookeventVo> evlist = adminService.eventList(cri);
 		mv.addObject("evlist", evlist);
@@ -68,7 +74,6 @@ public class HomeController {
 		}else {//실패
 			mv.setViewName("redirect:/signup");
 		}
-		System.out.println(member);
 		return mv;
 	}
 	@RequestMapping(value = "/common/signin", method = RequestMethod.POST)

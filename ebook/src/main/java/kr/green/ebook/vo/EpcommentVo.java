@@ -5,15 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EpcommentVo {
-	private int co_num;//댓글번호
-	private String co_member;//작성자
-	private String co_content;//댓글내용
-	private Date co_date;//댓글등록날짜
-	private int co_up;//댓글 추천
-	private int co_down;//댓글 비추
-	private String co_epTitle;//웹툰연결
-	private String co_epEdition;//웹툰화
-	private String co_isDel;//삭제여부 추가
+	private int co_num;
+	private String co_member;
+	private String co_content;
+	private Date co_date;
+	private int co_up;
+	private int co_down;
+	private String co_epTitle;
+	private String co_epEdition;
 	
 	public int getCo_num() {
 		return co_num;
@@ -34,11 +33,11 @@ public class EpcommentVo {
 		this.co_content = co_content;
 	}
 	public String getCo_date() {
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return transFormat.format(co_date);
 	}
 	public void setCo_date(String co_date) {
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
 			this.co_date =transFormat.parse(co_date);
 		} catch (ParseException e) {
@@ -67,26 +66,18 @@ public class EpcommentVo {
 	public void setCo_epTitle(String co_epTitle) {
 		this.co_epTitle = co_epTitle;
 	}
-	
 	public String getCo_epEdition() {
 		return co_epEdition;
 	}
 	public void setCo_epEdition(String co_epEdition) {
 		this.co_epEdition = co_epEdition;
 	}
-	public String getCo_isDel() {
-		return co_isDel;
-	}
-	public void setCo_isDel(String co_isDel) {
-		this.co_isDel = co_isDel;
-	}
 	@Override
 	public String toString() {
 		return "EpcommentVo [co_num=" + co_num + ", co_member=" + co_member + ", co_content=" + co_content
 				+ ", co_date=" + co_date + ", co_up=" + co_up + ", co_down=" + co_down + ", co_epTitle=" + co_epTitle
-				+ ", co_epEdition=" + co_epEdition + ", co_isDel=" + co_isDel + "]";
+				+ ", co_epEdition=" + co_epEdition + "]";
 	}
+
 	
-
-
 }

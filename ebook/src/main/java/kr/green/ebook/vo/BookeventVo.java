@@ -93,4 +93,5 @@ public class BookeventVo {
 				+ ", ev_banner=" + ev_banner + ", ev_page=" + ev_page + ", ev_engtitle=" + ev_engtitle + "]";
 	}
 
+	
 }

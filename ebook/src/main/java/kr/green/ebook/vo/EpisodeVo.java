@@ -2,6 +2,7 @@ package kr.green.ebook.vo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class EpisodeVo {
@@ -75,5 +76,13 @@ public class EpisodeVo {
 	
 	// tostring (찍어보는역할)
 
-	
+	public boolean iscontain(ArrayList<PayVo> list) {
+		if(list == null || list.size() == 0)
+			return false;
+		for(PayVo tmp : list) {
+			if(tmp.getP_title()!=null && tmp.getP_edition() !=null && tmp.getP_title().equals(e_t_title) && tmp.getP_edition().equals(e_edition) )
+				return true;
+		}
+		return false;
+	}
 }

@@ -56,4 +56,3 @@
 			</div>
 			<input type="hidden" id="num" value="${toon.t_num}">
 		</form>
-		

@@ -35,12 +35,17 @@
 </form>
 <a href="<%=request.getContextPath() %>/admin/toon?page=${cri.page}&type=${cri.type}&search=${cri.search}" class="float-left"><button type="button" class="btn btn-outline-secondary">목록</button></a>
 <script>
+	
 	var value = $(".ep-coin").val();
-	$('#e_coin').val('00'+value);
+	$('#e_coin').val();
 	
 	function Edinput(input){
 		var value = $("#ep-edition").val(); 
 		$('#e_edition').val('00'+value); 
+	}
+	function Coinput(input){
+		var value = $(".ep-coin").val();
+		$('#e_coin').val(value); 
 	}
 	 var sel_files=[];
 	$(document).ready(function(){
@@ -49,7 +54,6 @@
 	function handleEpFilesSelect(e){
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
-
 		filesArr.forEach(function(f){
 			$('.ad-ep-preview').empty();
 			if(!f.type.match("image.*")){
@@ -57,7 +61,6 @@
 				return;
 			}
 			sel_files.push(f);
-
 			var reader = new FileReader();
 			reader.onload = function(e){
 				var img_html = "<img src=\"" + e.target.result + "\"/>";
@@ -66,5 +69,4 @@
 			reader.readAsDataURL(f);
 		})
     }    
-
 </script>

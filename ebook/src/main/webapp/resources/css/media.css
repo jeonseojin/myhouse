@@ -2,7 +2,60 @@
 @media(min-width:640px){
 
 }
+@media(min-width:961px){
+	.payment-box{
+		padding: 40px 0;	
+	}
+	.help-box-right{
+		border: 1px solid #dbdee3;
+		margin-top: 28px;
+		margin-left:20px;
+		width: 73%;
+		float: right;
+	}
+	.hbox-right-tap{
+		padding: 0 20px;
+	}
+	.help-box-text{
+		padding: 0 24px 20px;
+	}
+	
+}
 @media(min-width:1281px){
+	.hbox-right-tap-a{
+		font-size: 16px;
+	}
+	.hbox-right-tap-a:nth-of-type(n+2){
+		margin-left: 24px;
+	}
+}
+@media(max-width:1281px) and (min-width:961px){
+	.hbox-right-tap-a{
+		font-size: 14px;
+	}
+	.hbox-right-tap-a:nth-of-type(n+2){
+		margin-left: 20px;
+	}
+}
+@media(max-width:960px){
+	.help-box-right{
+		border-top: 1px solid #dbdee3;
+	}
+	.hbox-right-tap-a{
+		font-size: 14px;
+	}
+	.hbox-right-tap-a:nth-of-type(n+2){
+		margin-left: 16px;
+	}
+	.help-box-left{
+		display: none;
+	}
+	.help-box-text{
+		padding: 0;
+	}
+	.hbox-right-tap{
+		padding: 0 16px;
+	}
 }
 @media(max-height: 960px) and (min-width:640px){
     .comicInfo{

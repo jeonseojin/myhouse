@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/*ep페이지css*/
 .comicInfo{
     position: relative;
     color: rgb(75, 75, 75);
@@ -22,7 +23,7 @@
 .comicInfo-title{
 	padding-top: 43px;
 	padding-right: 120px;
-	text-align: center;
+	text-align: left;
     line-height: 47px;
     font-size: 38px;
     font-weight: bold;
@@ -31,14 +32,15 @@
 .comicInfo-genre{
 	display: block;
 	padding-left: ;
-	padding: 17px 0 13px 130px;
-	font-weight: 600;
+	padding: 17px 0;
+	font-weight: bold;
 	font-size: 16px;
 	line-height: 18px;
 	vertical-align: top;
 	color:#fff;
 }
 .comicInfo-plot{
+	color: #fff;
 	font-size: 14px;
 	line-height: 19px;
 }
@@ -57,21 +59,24 @@
 	font-weight: 500;
 	text-align: center;
 	vertical-align: middle;
-	border: 1px solid rgb(75,75,75); 
+	border: 1px solid #fff; 
 	border-radius: 24px;
+	color:#fff;
 	background-color: transparent;
 }
 .comicInfo-btn-nochoice>i{
-	color: red;
+	color: yellow;
+	margin-left: 10px;
 }
 .comicInfo-btn-up{
 	width: 48px;
 	height: 48px;
 	border-radius: 24px;
 	margin-left: 8px;
-	border: 1px solid rgb(75, 75, 75); 
+	border: 1px solid #fff; 
 	background-color: transparent;
 	font-size: 20px;
+	color:#fff;
 }
 .comic-Content{
 	width:100%;
@@ -86,24 +91,37 @@
 	padding-bottom: 40px;
 }
 .comiclist-update{
-	width: 990px;
+	width: 100%;
 	margin-bottom: 15px;
+	box-sizing: border-box;
 }
 .comiclist-item{
 	display: flex;
 	float: left;
-	width: 380px;
-	margin-right: 20px;
+	width: 383px;
+	margin-right: 10px;
+	margin-bottom: 15px;
 }
-.comic-itemlink{
-	margin-right: 20px;
+.comic-items-epcoin{
+	position: absolute;
+	bottom: 25px;
+	color: black;
+}
+.comic-itemlink,.comic-itemlink-payment,.nologin-payment{
+	margin-right: 10px;
+	z-index: 1;
+}
+.comic-itemlink-payment,.nologin-payment{
+	border: none;
+	background-color: transparent;
 }
 .comic-items-box{
 	position: relative;
-	width:120px;
+	width:110px;
 	font-size: 15px;
 	font-weight: bold;
 	color: rgb(112,112,112);
+	border-bottom: 1px solid #e5e5e5;
 }
 .comic-items-eptitle{
 	position: absolute;
@@ -204,6 +222,9 @@
 	color: #e83d3d;
 	background-color: black;
 }
+.epcmt-box2{
+	
+}
 .epcmt-box{
 	width: 100%;
 	margin-top: 30px;
@@ -265,4 +286,370 @@
 	border: none;
 	position: absolute;
 	right: 70px;
+}
+/*충전css*/
+.toon-pay-box{
+	position: relative;
+	margin-top: 30px;
+	width: 680px;
+}
+.toon-pay-tbox{
+	position: relative;
+	margin-bottom: 25px;
+}
+.toon-pay-t{
+	font-weight: bold;
+	font-size: 28px;
+}
+.toon-pay-free-t{
+	position: absolute;
+	top: 10px;
+	left: 130px;
+	color: #5A719A !important;
+}
+.toon-pay-free-t>i{
+	color: black !important;
+}
+.toon-pay-coinbox{
+	position: relative;
+	margin-bottom: 48px;
+}
+.toon-coin-icon{
+	margin-left: 7px;
+	color: #65717f;
+	font-size: 14px;
+	white-space: nowrap;
+}
+.toon-coin-icon>i{
+	font-size: 18px;
+	color:gray;
+}
+.coin-icon-p{
+	position: absolute;
+	left: 60px;
+	height: 18px;
+	border: 2px solid gray;
+	border-radius: 100%;
+	opacity: 0.87;
+	font-size: 12px;
+	padding: 0 2px 3px 3.5px;
+	font-weight: bold;
+	line-height: 17px;
+}
+.coin-icon-help{
+	position: absolute;
+	left: 130px;
+	opacity: .55;
+}
+.coin-icon-pt{
+	position: absolute;
+	left: 80px;
+	color: #65717f;
+	font-size: 14px;
+	white-space: nowrap;
+}
+.toon-pay-banner{
+	margin: 48px 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+.toon-pay-blink{
+	width: 100%;
+	height: 100%;
+}
+.toon-pay-blink>img{
+	width: 100%;
+	height: 100%;
+}
+.toon-pay-btn{
+	width: 100%;
+	border: 1px solid #dbdee3;
+	background-color: transparent;
+	height: 80px;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 0 20px;
+	margin-bottom: 15px;
+}
+.toon-paycoin-icon{
+	font-size: 16px;
+	color: rgb(255, 182, 45);
+}
+.payment-box,.comic-payment-box{
+	position: fixed;
+	z-index: 500;
+	top:0;
+	right:0;
+	bottom:0;
+	right:0;
+	left:0;	
+	width: 100%;
+	height: 100%;
+	padding: 30px;
+	background-color: rgba(0,0,0,0.4);
+	overflow-y: scroll;
+	overflow-x:hidden;
+}
+.comic-item-payment{
+	position: fixed;
+	top:32%;
+	left: 40%;
+	margin: 0 auto;
+	width: 350px;
+	height: 270px;
+	background-color: #fff;
+	padding: 27px 22px 22px 22px;
+}
+.comic-item-payment>p{
+	font-size: 12px;
+}
+.comic-payment-btn{
+	text-align: right;
+	position: absolute;
+	bottom: 22px;
+	right: 22px;
+	height: 30px;
+}
+.comic-btn-pay{
+	background: #eb0026;
+	color: #fff;
+	border: none;
+	font-weight: bold;
+	height: 100%;
+}
+.comic-btn-cancel{
+	border: none;
+	background: transparent;
+}
+.comic-payment-content{
+	padding: 15px 15px 15px 0;
+	height: 100px;
+	box-sizing: border-box;
+	position: relative;
+}
+.comic-payment-content>img{
+	height: 70px;
+	float:left;
+}
+.comic-paycontent-span{
+	height: 100%;
+	line-height: 70px;
+}
+.comic-payitem-coin{
+	float:right;
+	text-align: right;
+	font-weight: bold;
+	font-size: 16px;
+}
+.comic-payitem-edtion{
+	margin-left: 10px;
+}
+
+.payment-item{
+	position: relative;
+	z-index: 3;
+	margin: 0 auto;
+	width: 600px;
+	border: 1px solid #dbdee3;
+	background-color: #fff;
+	padding: 30px 60px;
+}
+.payment-item>.toon-pay-btn{
+	margin-top:10px;
+	border: 0;
+	border-bottom: 1px solid #acb4bf;
+	border-top: 1px solid #acb4bf;
+}
+.payment-tool{
+	position: relative;
+	width: 100%;
+}
+.payment-tool-choice{
+	border: 1px solid black;
+	background-color: transparent;
+	width: 100%;
+	margin: 15px 0;
+	font-size: 20px;
+}
+.pay-choice-icon{
+	float: right;
+	font-size: 10px;
+	color: red;
+	line-height: 35px;
+}
+.choice-payment{
+	width: 430px;
+	height: 38px;
+	appearance:none;
+	border: none;
+	text-align: center;
+}
+.paymentchoice-help{
+	font-size: 12px;
+	font-weight: bold;
+}
+.help-paymentchoice{
+	margin-top: 10px;
+}
+.payment-submit-btn{
+	width: 100%;
+	height: 45px;
+	background-color: red;
+	border: none;
+	color: #fff;
+	font-size: 20px;
+	margin-top: 15px;
+}
+.payment-check-box{
+	margin-top:15px;
+}
+.payment-check-list{
+	display: block;
+	margin-right: 0;
+	margin-bottom: 12px;
+	position: relative;
+	box-sizing: border-box;
+	font-size: 14px;
+	line-height: 20px;
+	cursor:default;
+}
+.payment-check{
+	position: absolute;
+	margin-right: 10px;
+	width: 20px;
+	height: 20px;
+	vertical-align: top;
+	box-sizing: border-box;
+	border: 0;
+	appearance:none;
+	opacity:0;
+}
+.payment-check-list>.payment-check-text:before{
+	top:1px;
+	left: 1px;
+	width: 20px;
+	height: 20px;
+	border-radius: 2px;
+}
+.payment-check-text:before{
+	content: '';
+	position: absolute;
+	box-sizing: border-box;
+	border: 2px solid #ff2e4b;
+	background: #fff;
+	color: #000;
+}
+
+.payment-check:checked + .payment-check-text:before{
+	border: 0px;
+	width:13px;
+	border-left: 2px solid #ff2e4b;
+	border-bottom: 2px solid #ff2e4b;
+	-webkit-transform: rotate(-45deg);
+}
+
+.payment-check-text{
+	position: relative;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 100%;
+	color:#707070;
+	padding-left: 28px;
+	text-align: left;
+	font-style: normal;
+	vertical-align: top;
+}
+.payment-submit-helpcheck{
+	position: fixed;
+	top:280px;
+	width: 250px;
+	height: 130px;
+	border: 1px solid black;
+	padding: 15px;
+	margin: 0 auto;
+	background-color:#fff;
+	z-index: 4;
+}
+/*문의css*/
+.help-box{
+	width: 100%;
+	height: 100%;
+}
+.help-box-left{
+	width: 23%;
+	float: left;
+	border: 1px solid #dbdee3;
+	margin: 28px 0 50px 0;
+	background-color: #fff;
+}
+.hbox-left-nav{
+	width: 100%;
+	padding: 24px;
+}
+.hbox-left-nav>li{
+	padding: 12px 0;
+	font-weight: bold;
+	cursor: pointer;
+}
+.hbox-left-nav>li:first-of-type {
+	color: red;
+}
+.hbox-left-footer{
+	padding: 24px;
+	font-size: 12px;
+	line-height:2;
+	color: #333;
+	background-color: #f3f5f8;
+	box-sizing: border-box;	
+}
+.help-box-right{
+	background-color:#fff;
+}
+.hbox-right-heading{
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 24px 0 12px 16px;
+	font-size: 16px;
+	background-color: #f3f5f8;
+	border-bottom: 1px solid #dbdee3;
+	font-weight: bold;
+}
+.hbox-right-tap{
+	margin-bottom: 4px;
+	background-color: #f3f5f8;
+	vertical-align: top;
+	font-size: 0;
+	
+}
+.hbox-right-tap-a{
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	line-height: 48px;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.help-box-item{
+	position: relative;
+	width: 100%;
+	line-height: 1.4;
+	padding: 20px 48px 20px 16px;
+	color: black;
+	text-align: left;
+	box-sizing: border-box;
+}
+.help-box-list>li:nth-child(n+2) {
+	border-top: 1px solid #dee0e3;
+}
+.hbox-item-content{
+	padding: 32px 16px;
+	font-size: 14px;
+	line-height: 1.6;
+	color: #333;
+	border-top: 1px solid #dee0e3;
+	border-bottom: 1px solid #dee0e3;
+	background-color: #f3f5f8;
 }

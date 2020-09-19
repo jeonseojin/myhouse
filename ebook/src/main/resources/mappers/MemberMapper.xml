@@ -59,4 +59,12 @@
 			join (SELECT * FROM choice where ch_id = #{id}) as t
 			on t_title = ch_title;
 	</select>
+<!-- 충전 -->
+	<update id="updatecoin">
+		update  member
+			set
+				coin=#{member.coin}
+			where name=#{member.name}
+				
+	</update>
 </mapper>

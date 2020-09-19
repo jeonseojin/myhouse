@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import kr.green.ebook.dao.MemberDao;
 import kr.green.ebook.pagination.Criteria;
 import kr.green.ebook.pagination.PageMaker;
@@ -73,9 +74,14 @@ public class MemberServiceImp implements MemberService {
 		return pm;
 	}
 
-	//전체 찜
 	@Override
 	public ArrayList<ChoiceVo> getChoiceList(String id) {
 		return memberDao.getChoiceList(id);
+	}
+
+	@Override
+	public void updatecoin(MemberVo member) {
+		memberDao.updatecoin(member);
+		
 	}
 }
