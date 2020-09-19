@@ -46,7 +46,7 @@ public class AdminController {
 	@Autowired
 	ToonService toonService;
 	
-	private String uploadPath = "D:\\전서진\\포트폴리오\\port\\ebook\\src\\main\\webapp\\resources\\img";
+	private String uploadPath = "D:\\JAVA\\spring\\myhouse\\ebook\\src\\main\\webapp\\resources\\img";
 	
 	//유저관리
 	@RequestMapping(value = "/admin/user", method = RequestMethod.GET)

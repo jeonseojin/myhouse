@@ -72,7 +72,7 @@ public interface AdminDao {
 
 	ArrayList<ClaimVo> getClaim(@Param("cri")Criteria cri);
 
-	ArrayList<PayVo> getPayToon(@Param("name")String name);
+	ArrayList<ToonVo> getPayToon(@Param("name")String name);
 
 	void insertclaim(@Param("cl")ClaimVo cl);
 

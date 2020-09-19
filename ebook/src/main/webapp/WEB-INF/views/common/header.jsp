@@ -138,9 +138,9 @@
 				                    <span class="log-look-span">소장</span>
 				                    <div class="log-look-box">
 				                        <div class="log-look-item">
-					                       <c:forEach var="pay" items="${plist}">
+					                       <c:forEach var="payToon" items="${payToon}">
 							              		<a class="log-look" href="#">
-							                       	<img class="search-img" src="/ebook/resources/img${pay.t_img}" style="height: 53px;" alt="">
+							                       	<img class="search-img" src="/ebook/resources/img${payToon.t_img}" style="height: 53px;" alt="">
 							                    </a>
 						                    </c:forEach>
 				                            <a href="#" class="log-look-the">더보기</a> 

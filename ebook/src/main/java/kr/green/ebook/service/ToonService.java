@@ -33,6 +33,6 @@ public interface ToonService {
 
 	ArrayList<PayVo> getPayList(String name);
 
-	ArrayList<PayVo> getPayToon(String name);
+	ArrayList<ToonVo> getPayToon(String name);
 
 }

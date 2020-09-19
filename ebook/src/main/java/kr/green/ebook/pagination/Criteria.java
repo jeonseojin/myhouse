@@ -1,5 +1,7 @@
 package kr.green.ebook.pagination;
 
+import kr.green.ebook.vo.EpisodeVo;
+
 public class Criteria {
 	private int page;//한 페이지 당 컨텐츠 갯수
 	private int perPageNum;
@@ -8,6 +10,8 @@ public class Criteria {
 	private String search;
 	private int event;
 	private String notice;//고객센터의 조건
+	private String comic;//만화연결
+	private String edition;//화
 	
 	//Criteria 디폴트 생성자 : 현재 페이지를 1페이지로, 한 페이지에 10개의 컨텐츠
 	public Criteria() {
@@ -17,11 +21,29 @@ public class Criteria {
 		type=1;
 		cweek=1;
 		notice="service";
+		
 	}
 	//getter and setter
+	
 	public int getPage() {
 		return page;
 	}
+	public String getComic() {
+		return comic;
+	}
+
+	public void setComic(String comic) {
+		this.comic = comic;
+	}
+
+	public String getEdition() {
+		return edition;
+	}
+
+	public void setEdition(String edition) {
+		this.edition = edition;
+	}
+
 	public void setPage(int page) {//현재 페이지 번호를 음수로 설정하려 할 때
 		if(page <= 0) {
 			this.page = 1;
@@ -72,11 +94,14 @@ public class Criteria {
 	public void setNotice(String notice) {
 		this.notice = notice;
 	}
+
 	@Override
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", type=" + type + ", cweek=" + cweek
-				+ ", search=" + search + ", event=" + event + "]";
+				+ ", search=" + search + ", event=" + event + ", notice=" + notice + ", comic=" + comic + ", edition="
+				+ edition + "]";
 	}
+
 	/* 쿼리문에서 limit에 사용되는 인덱스를 계산하는 getter */
 	public int getStartPage() {
 		return (page -1) * perPageNum;
