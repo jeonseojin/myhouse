@@ -8,6 +8,7 @@ import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.PayVo;
 import kr.green.ebook.vo.ToonVo;
+import kr.green.ebook.vo.UpVo;
 
 public interface ToonService {
 
@@ -34,5 +35,9 @@ public interface ToonService {
 	ArrayList<PayVo> getPayList(String name);
 
 	ArrayList<ToonVo> getPayToon(String name);
+
+	int updateUp(String Title, String id);
+
+	UpVo getUp(String title, String id);
 
 }

@@ -57,7 +57,8 @@ public interface AdminService {
 
 	void updateClaim(ClaimVo cl);
 
+	ArrayList<ToonVo> toonRanking(Criteria cri);
 
-	
+	ArrayList<ToonVo> toonRankviews(Criteria cri);
 
 }

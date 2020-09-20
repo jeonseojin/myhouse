@@ -47,6 +47,10 @@ public class HomeController {
 		mv.setViewName("/main/home");
 		ArrayList<ToonVo> tlist = adminService.toonList(cri);
 		mv.addObject("tlist", tlist);
+		ArrayList<ToonVo> uprank = adminService.toonRanking(cri);
+		mv.addObject("uprank", uprank);
+		ArrayList<ToonVo> viewrank = adminService.toonRankviews(cri);
+		mv.addObject("viewrank", viewrank);
 		MemberVo member = memberService.getMember(r);
 		if(member!=null) {
 			ArrayList<ChoiceVo> chlist = memberService.getChoiceList(member.getId());

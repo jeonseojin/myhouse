@@ -152,7 +152,25 @@
 			choice = (select count(*) from choice where ch_title = #{Title})
 		where t_title = #{Title}
 	</update>
-	<!-- 찜 삭제 -->
+<!-- 추천 기능 -->
+	<select id="getUp" resultType="kr.green.ebook.vo.UpVo">
+		SELECT * FROM up where up_title = #{Title} and up_id = #{id}
+	</select>
+	<select id="selectUp" resultType="int">
+		select count(*) from up where up_title =#{Title} and up_id = #{id}
+	</select>
+	<insert id="insertUp">
+		insert into
+			up(up_title,up_id)
+			values(#{Title},#{id})
+	</insert>
+	<update id="updateToonByUp">
+		update toon
+		set
+			up = (select count(*) from up where up_title = #{Title})
+		where t_title = #{Title}
+	</update>
+<!-- 찜 삭제 -->
 	<delete id="deleteChoice">
 	DELETE FROM choice where ch_title =#{Title} and ch_id = #{id}
 	</delete>
@@ -244,4 +262,14 @@
 			
 		where cl_num = #{cl.cl_num}
 	</update>
+<!-- 랭킹 /up -->
+	<select id="toonRanking" resultType="kr.green.ebook.vo.ToonVo">
+		select * from toon
+		order by up desc
+	</select>
+<!-- 조회수/views -->
+	<select id="toonRankviews" resultType="kr.green.ebook.vo.ToonVo">
+		select * from toon
+		order by t_views desc
+	</select>
 </mapper>

@@ -148,8 +148,16 @@ public class AdminServiceImp implements AdminService {
 			adminDao.updateClaim(cl);
 			
 		}
+//랭킹관련/up
+		@Override
+		public ArrayList<ToonVo> toonRanking(Criteria cri) {
+			return adminDao.toonRanking(cri);
+		}
 
-
-
+//랭킹관련/view
+		@Override
+		public ArrayList<ToonVo> toonRankviews(Criteria cri) {
+			return adminDao.toonRankviews(cri);
+		}
 
 }

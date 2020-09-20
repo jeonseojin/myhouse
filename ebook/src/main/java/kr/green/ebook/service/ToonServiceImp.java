@@ -12,6 +12,7 @@ import kr.green.ebook.vo.EpcommentVo;
 import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.PayVo;
 import kr.green.ebook.vo.ToonVo;
+import kr.green.ebook.vo.UpVo;
 
 @Service
 public class ToonServiceImp implements ToonService {
@@ -92,6 +93,11 @@ public class ToonServiceImp implements ToonService {
 		}
 		return toon.getChoice();
 	}
+//찜하기 기능
+	@Override
+	public UpVo getUp(String Title,String id) {
+		return adminDao.getUp(Title,id);
+	}
 //해당 회원의 결제내역 불러오기
 	@Override
 	public ArrayList<PayVo> getPayList(String name) {
@@ -102,5 +108,16 @@ public class ToonServiceImp implements ToonService {
 	public ArrayList<ToonVo> getPayToon(String name) {
 		return adminDao.getPayToon(name);
 	}
-  
+//작품 추천
+	@Override
+	public int updateUp(String Title, String id) {
+		if(adminDao.selectUp(Title,id) != 0) return -1;
+		//추천을 등록
+		adminDao.insertUp(Title,id);
+		//추천수만 업데이트
+		adminDao.updateToonByUp(Title);
+		//정보를 가져옴
+		ToonVo toon = adminDao.getToont(Title);
+		return toon.getUp();
+	}
 }

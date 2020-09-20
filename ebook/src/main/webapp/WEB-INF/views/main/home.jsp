@@ -4,37 +4,16 @@
 <body>
 	    <div class="main-banner">
            <div class="banner-swiper">
+           		<c:forEach var="evlist" items="${evlist}">
 	               <div class="banner-item">
 	                   <a href="#" class="banner-link">
-	                   		<div class="banner-img banner-img-small display-none">
-	                   			<img src="https://cdn.lezhin.com/v2/inventory_items/4648237082935296/media/upperBannerMobile.webp?updated=1596435070000&amp;width=688">
-	                   		</div>
 	                       	<div class="banner-img banner-img-big">
-	                           	<img src="https://cdn.lezhin.com/v2/inventory_items/4648237082935296/media/upperBanner.webp?updated=1596435070000&width=1180" alt="">
+	                           	<img src="/ebook/resources/img${evlist.ev_banner}" alt="">
 	                       	</div>
 	                   </a>
 	               </div>
-	               <div class="banner-item">
-	                   <a href="#" class="banner-link">
-	                   		<div class="banner-img banner-img-small display-none">
-	                   			<img class="banner-img-small display-none" src="https://cdn.lezhin.com/v2/inventory_items/4874818982313984/media/upperBannerMobile.webp?updated=1596373734000&amp;width=688">
-	                   		</div>
-	                       	<div class="banner-img banner-img-big">
-	                          	<img clas="banner-img-big" src="https://cdn.lezhin.com/v2/inventory_items/4874818982313984/media/upperBanner.webp?updated=1596373734000&width=1180" alt="">
-	                       	</div>
-	                   </a>
-	               </div>
-	               <div class="banner-item">
-	                   <a href="#" class="banner-link">
-	                   		<div class="banner-img banner-img-small display-none">
-	                   			<img class="banner-img-small display-none" src="https://cdn.lezhin.com/v2/inventory_items/5708691536412672/media/upperBannerMobile.webp?updated=1597138018000&amp;width=688">
-	                   		</div>
-	                       	<div class="banner-img banner-img-big">
-	                            <img clas="banner-img-big" src="https://cdn.lezhin.com/v2/inventory_items/5708691536412672/media/upperBanner.webp?updated=1597138018000&width=1180" alt="">
-	                        </div>
-	                   </a>    
-	               </div>
-	            </div>
+				</c:forEach>
+	        </div>
             <div class="banner-nav">
                 <button class="banner-btn banner-prev">
                     <i class="fas fa-caret-left"></i>
@@ -44,16 +23,23 @@
                 </button>
             </div>
         </div>
-        
         <div class="main-ranking">
-            <div class="main-left"></div>
-            <div class="main-right"></div>
+            <div class="main-left">
+            	<c:forEach var="uprank" items="${uprank}">
+            		<img alt="" src="/ebook/resources/img${uprank.t_img}">
+            	</c:forEach>
+            </div>
+            <div class="main-right">
+            <c:forEach var="viewrank" items="${viewrank}">
+            		<img alt="" src="/ebook/resources/img${viewrank.t_img}">
+            	</c:forEach>
+            </div>
         </div>
         <div class="main-box">
             <div class="main-new"></div>
             <div class="main-update"></div>
         </div>
-<script>
+	<script>
         function bannerRolling(){
            return setInterval(function(){
                 $('.banner-item').first().animate({'margin-left':'-1180px'},300,function(){

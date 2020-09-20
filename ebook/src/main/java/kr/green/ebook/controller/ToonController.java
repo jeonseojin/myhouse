@@ -33,6 +33,7 @@ import kr.green.ebook.vo.EpisodeVo;
 import kr.green.ebook.vo.MemberVo;
 import kr.green.ebook.vo.PayVo;
 import kr.green.ebook.vo.ToonVo;
+import kr.green.ebook.vo.UpVo;
 
 @Controller
 public class ToonController {
@@ -49,6 +50,7 @@ public class ToonController {
 	private String uploadPath = "D:\\JAVA\\spring\\myhouse\\ebook\\src\\main\\webapp\\resources\\img";
 	
 	
+	//연재 전체 페이지
 	@RequestMapping(value = "/toon", method = RequestMethod.GET)
 	public ModelAndView toon(ModelAndView mv, Criteria cri) {
 		mv.setViewName("/toon/week");
@@ -58,8 +60,9 @@ public class ToonController {
 		mv.addObject("pm", pm);
 		return mv;
 	}
+	//작품 상세페이지
 	@RequestMapping(value = "/toon/ep", method = RequestMethod.GET)
-	public ModelAndView toonEp(ModelAndView mv,String Title, Criteria cri,HttpServletRequest r,ChoiceVo ch) {
+	public ModelAndView toonEp(ModelAndView mv,String Title, Criteria cri,HttpServletRequest r,ChoiceVo ch,UpVo up) {
 		mv.setViewName("/toon/ep");
 		//조회수 및 웹툰정보
 		ToonVo toon = toonService.view(Title);
@@ -75,13 +78,32 @@ public class ToonController {
 		ArrayList<PayVo> plist=null;
 		if(member!=null) {
 			ch = toonService.getChoice(Title,member.getId());
+			up = toonService.getUp(Title,member.getId());
 			//충전
 			plist = toonService.getPayList(member.getName());
 		}
 		mv.addObject("ch", ch);
+		mv.addObject("up", up);
 		mv.addObject("plist", plist);
 		return mv;
 	}
+	//좋아요 증가
+	@RequestMapping(value ="/toon/up", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<Object, Object> ToonUp(@RequestBody String Title, HttpServletRequest r){
+	    Map<Object, Object> map = new HashMap<Object, Object>();
+	    //현재 로그인 중인 유저 정보
+	    MemberVo member = memberService.getMember(r);
+	    if(member == null) {
+	    	map.put("isMember",false);
+	    }else {
+	    	map.put("isMember",true);
+	    	int up = toonService.updateUp(Title, member.getId());
+	    	map.put("up",up);
+	    }
+	    return map;
+	}
+	//만화페이지
 	@RequestMapping(value = "/toon/comic", method = RequestMethod.GET)
 	public ModelAndView toonComic(ModelAndView mv, String Title, String edition) {
 		mv.setViewName("/toon/comic");

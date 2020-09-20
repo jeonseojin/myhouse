@@ -14,6 +14,7 @@ import kr.green.ebook.vo.BookeventVo;
 import kr.green.ebook.vo.GenreVo;
 import kr.green.ebook.vo.PayVo;
 import kr.green.ebook.vo.ToonVo;
+import kr.green.ebook.vo.UpVo;
 import kr.green.ebook.vo.WeekVo;
 
 public interface AdminDao {
@@ -85,4 +86,15 @@ public interface AdminDao {
 
 	void updateClaim(@Param("cl")ClaimVo cl);
 
+	int selectUp(@Param("Title")String Title, @Param("id")String id);
+
+	void insertUp(@Param("Title")String Title, @Param("id")String id);
+
+	void updateToonByUp(@Param("Title")String Title);
+
+	UpVo getUp(@Param("Title")String Title, @Param("id")String id);
+
+	ArrayList<ToonVo> toonRanking(@Param("cri")Criteria cri);
+	
+	ArrayList<ToonVo> toonRankviews(@Param("cri")Criteria cri);
 }

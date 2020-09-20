@@ -11,19 +11,22 @@
 	    <div class="comicInfo-plot">${toon.plot}</div>
 	    <div class="comicInfo-Ulike">
 	    	<input type="hidden" name="engtitle" value="${toon.t_title}">
-	    	<c:if test="${member.id==null}">
-				<button class="comicInfo-btn-choice">찜하기<i class="far fa-star"></i></button>
-			</c:if>
-			<c:if test="${member.id!=null}">
-				<c:if test="${member.id!=ch.ch_id}">
+	    	<div class="comicInfo-btn float-left">
+		    	<c:if test="${member.id==null||member.id!=ch.ch_id}">
 					<button class="comicInfo-btn-choice">찜하기<i class="far fa-star"></i></button>
 				</c:if>
-				<c:if test="${ch.ch_id==member.id}">
+				<c:if test="${member.id!=null&&ch.ch_id==member.id}">
 					<button class="comicInfo-btn-nochoice">찜하기<i class="fas fa-star"></i></button>
 				</c:if>
-			</c:if>
-	    	<button class="comicInfo-btn-up"><i class="far fa-heart"></i></button>
-	    	
+			</div>
+			<div class="comicInfo-btnup float-left">
+				<c:if test="${member.id==null||member.id!=up.up_id}">
+		    		<button class="comicInfo-btn-up"><i class="far fa-heart"></i></button>
+		    	</c:if>
+		    	<c:if test="${member.id!=null&&member.id==up.up_id}">
+		    		<button class="comicInfo-btn-noup"><i class="fas fa-heart"></i></button>
+		    	</c:if>
+	    	</div>
 	    </div>
     </div>
 </div>
@@ -185,6 +188,8 @@ $(function(){
 					        	"<c:set var ="ch" value="+rec.ch+"  />" ;
 					    })
 			        	alert('찜하셨습니다.')
+			        	var str="<button class='comicInfo-btn-nochoice'>찜하기<i class='fas fa-star'></i></button>";
+				        $('.comicInfo-btn').html(str);
 					    }
 			    }
 			    //로그인하지 않은 경우
@@ -213,10 +218,45 @@ $(function(){
 				        	"<c:set var ="ch" value="+rec.ch+"  />" ;
 					    })
 			        	alert('찜을 해제하셨습니다.')
+			        	var str="<button class='comicInfo-btn-choice'>찜하기<i class='far fa-star'></i></button>";
+				        $('.comicInfo-btn').html(str);
 				    }
 			    }
 	        }
 		});
+	})
+	$('.comicInfo-btn-up').click(function(){
+		var Title = $('input[name=engtitle]').val();
+		var id = $('input[name=id]').val();
+		$.ajax({
+	        async:true,
+	        type:'POST',
+	        data:Title,
+	        url:"<%=request.getContextPath()%>/toon/up",
+	        dataType:"json",
+	        contentType:"application/json; charset=UTF-8",
+	        success : function(data){
+		        //로그인한 회원이면
+		        if(data['isMember']){
+			        //게시글의 추천수가 0보다 크면 => 추천수를 증가시켜야하면
+			        //=> 처음 추천을 누른다면
+			        if(data['up'] > 0){
+				        $('.text-like').text('추천:'+data['up'])
+				        alert('♥ 추천해 주셔서 감사합니다.');
+			        	var str="<button class='comicInfo-btn-noup'><i class='fas fa-heart'></i></button>";
+				        $('.comicInfo-btnup').html(str);
+				    }
+				    //이미 추천을 눌렀다면
+				    else{
+					    alert('이미 추천한 게시물입니다.')
+					}
+			    }
+			    //로그인하지 않았으면
+			    else{
+				    alert('추천은 로그인을 해야 가능합니다.');
+				}
+	        }
+	    });
 	})
 })
 </script>
