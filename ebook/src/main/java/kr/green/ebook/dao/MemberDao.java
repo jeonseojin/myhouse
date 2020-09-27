@@ -22,8 +22,6 @@ public interface MemberDao {
 	public ArrayList<ChoiceVo> getChoiceList(@Param("id")String id);
 
 	public void updateMember(@Param("member")MemberVo member);
-
-	public void updatecoin(@Param("member")MemberVo member);
     
 
 }

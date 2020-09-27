@@ -71,5 +71,7 @@ public interface AdminService {
 
 	void deletePay(PayVo pay);
 
+	PageMaker getEpisodepage(Criteria cri);
+
 
 }

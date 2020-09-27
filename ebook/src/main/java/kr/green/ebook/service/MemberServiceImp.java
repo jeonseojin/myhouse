@@ -85,8 +85,24 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
-	public void updatecoin(MemberVo member) {
-		memberDao.updatecoin(member);
+	public void updateMember(MemberVo member) {
+		if(member.getPw()!=null) {
+			//비밀번호 암호화
+			String encodePw = passwordEncoder.encode(member.getPw());
+			member.setPw(encodePw);
+		}
 		
+		memberDao.updateMember(member);
+	}
+	
+	// 비밀번호를 찾기
+	@Override
+	public void newPw(String id, String newPw) {
+		// 요청한 아이디에 회원 정보를 가져옴
+	    MemberVo member = getMember(id.trim()/*양끝의공백을 제거하는 것*/);
+		String encodePw = passwordEncoder.encode(newPw);
+		if(member == null) return;//유저가 없을 경우 
+		member.setPw(encodePw);
+		memberDao.updateMember(member);//dao에 회원정보를 주고 업뎃 시킴
 	}
 }

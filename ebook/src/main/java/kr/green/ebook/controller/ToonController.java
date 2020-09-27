@@ -75,7 +75,7 @@ public class ToonController {
 				ArrayList<EpisodeVo> epcov = toonService.getEpcoverlist(Title);
 				mv.addObject("epcov", epcov);
 				//페이지네이션
-				PageMaker pm = adminService.getPageMakerByToon(cri);
+				PageMaker pm = adminService.getEpisodepage(cri);
 				mv.addObject("pm", pm);
 				//찜
 				MemberVo member = memberService.getMember(r);
@@ -97,24 +97,24 @@ public class ToonController {
 				return mv;
 			}
 		//좋아요 증가
-			@RequestMapping(value ="/toon/up", method=RequestMethod.POST)
-			@ResponseBody
-			public Map<Object, Object> ToonUp(@RequestBody String Title, HttpServletRequest r){
-			    Map<Object, Object> map = new HashMap<Object, Object>();
-			    //현재 로그인 중인 유저 정보
-			    MemberVo member = memberService.getMember(r);
-			    if(member == null) {
-			    	map.put("isMember",false);
-			    }else {
-			    	map.put("isMember",true);
-			    	int up = toonService.updateUp(Title, member.getId());
-			    	map.put("up",up);
-			    }
-			    return map;
-			}
+		@RequestMapping(value ="/toon/up", method=RequestMethod.POST)
+		@ResponseBody
+		public Map<Object, Object> ToonUp(@RequestBody String Title, HttpServletRequest r){
+		    Map<Object, Object> map = new HashMap<Object, Object>();
+		    //현재 로그인 중인 유저 정보
+		    MemberVo member = memberService.getMember(r);
+		    if(member == null) {
+		    	map.put("isMember",false);
+		    }else {
+		    	map.put("isMember",true);
+		    	int up = toonService.updateUp(Title, member.getId());
+		    	map.put("up",up);
+		    }
+		    return map;
+		}
 		//만화연결
 		@RequestMapping(value = "/toon/comic", method = RequestMethod.GET)
-		public ModelAndView toonComic(ModelAndView mv, String Title, String edition) {
+		public ModelAndView toonComic(ModelAndView mv, String Title, String edition,Criteria cri) {
 			mv.setViewName("/toon/comic");
 			//웹툰불러오기
 			ArrayList<EpisodeVo> eplist = toonService.getEpList(Title,edition);
@@ -128,6 +128,9 @@ public class ToonController {
 			//제목불러오기용
 			EpisodeVo epcov = toonService.getEp(Title,edition);
 			mv.addObject("epcov", epcov);
+			PageMaker pm = adminService.getEpisodepage(cri);
+			mv.addObject("pm", pm);
+			System.out.println(pm);
 			return mv;
 		}
 		//한개 구매
@@ -151,7 +154,7 @@ public class ToonController {
 			}else {
 				adminService.insertPay(pay);
 				member.setCoin(member.getCoin()-pay.getP_coin());
-				memberService.updatecoin(member);
+				memberService.updateMember(member);
 			}
 			return map;
 		}
@@ -167,7 +170,54 @@ public class ToonController {
 			map.put("member",epcmt.getCo_member());
 			return map;
 		}
-		//찜하기
+		//댓글 좋아요
+		@RequestMapping(value ="/cmt/up", produces="application/json; charset=utf8")
+		@ResponseBody
+		public Map<Object, Object> commentUp(@RequestBody String num, HttpServletRequest r){
+		    Map<Object, Object> map = new HashMap<Object, Object>();
+		    //현재 로그인 중인 유저 정보
+		    MemberVo member = memberService.getMember(r);
+		    if(member == null) {
+		    	map.put("isMember",false);
+		    }else {
+		    	map.put("isMember",true);
+		    	int up = toonService.updatecommentUp(num, member.getId());
+		    	map.put("up",up);
+		    }
+		    return map;
+		}
+		//댓글 싫어요
+		@RequestMapping(value ="/cmt/down", produces="application/json; charset=utf8")
+		@ResponseBody
+		public Map<Object, Object> commentDown(@RequestBody String num, HttpServletRequest r){
+		    Map<Object, Object> map = new HashMap<Object, Object>();
+		   //현재 로그인 중인 유저 정보
+		    MemberVo member = memberService.getMember(r);
+		    if(member == null) {
+		    	map.put("isMember",false);
+		    }else {
+		    	map.put("isMember",true);
+		    	int down = toonService.updatecommentDown(num, member.getId());
+		    	map.put("down",down);
+		    }
+		    return map;
+		}
+		//댓글 삭제
+		@RequestMapping(value ="/toon/cmtdel", produces="application/json; charset=utf8")
+		@ResponseBody
+		public Map<Object, Object> cmtdel(@RequestBody String num, HttpServletRequest r){
+		    Map<Object, Object> map = new HashMap<Object, Object>();
+		    MemberVo member = memberService.getMember(r);
+		    if(member == null) {
+		    	map.put("isMember",false);
+		    }else {
+		    	map.put("isMember",true);
+			    toonService.deletecmt(num);
+			    map.put("res", "댓글이 삭제되었습니다.");
+		    }
+		    return map;
+		}
+		//찜하기 
 		@RequestMapping(value = "/toon/choice", method = RequestMethod.POST)
 		@ResponseBody
 		public Map<Object, Object> toonChoice(@RequestBody String Title, HttpServletRequest r) {
@@ -284,7 +334,7 @@ public class ToonController {
 					member.setCoin(member.getCoin()+pay.getP_point());
 					pay.setP_title("출석이벤트");
 					adminService.insertPay(pay);
-					memberService.updatecoin(member);
+					memberService.updateMember(member);
 				}else {
 					map.put("res", "이미 출석체크를 완료하였습니다.");
 				}
@@ -302,14 +352,14 @@ public class ToonController {
 			mv.addObject("toon", toon);
 			return mv;
 		}
-		//ajax을 통해서 랭킹 변경하기
-			@RequestMapping(value = "/end", produces="application/json; charset=utf8")
-			@ResponseBody
-			public Map<Object, Object> theendajax(@RequestBody String genre, Criteria cri) {
-				Map<Object, Object> map = new HashMap<Object, Object>();
-				cri.setGenre(genre);
-				ArrayList<ToonVo> toon = toonService.TheendGenre(cri);
-				map.put("toon", toon);
-				return map;
-			}
+		//ajax을 통해서 완결 변경하기
+		@RequestMapping(value = "/end", produces="application/json; charset=utf8")
+		@ResponseBody
+		public Map<Object, Object> theendajax(@RequestBody String genre, Criteria cri) {
+			Map<Object, Object> map = new HashMap<Object, Object>();
+			cri.setGenre(genre);
+			ArrayList<ToonVo> toon = toonService.TheendGenre(cri);
+			map.put("toon", toon);
+			return map;
+		}
 }

@@ -63,12 +63,13 @@
 			on t_title = ch_title;
 	</select>
 <!-- 충전 -->
-	<update id="updatecoin">
+	<update id="updateMember">
 		update  member
 			set
 				coin=#{member.coin},
 				email=#{member.email},
-				name=#{member.name}				
+				name=#{member.name},
+				pw=#{member.pw}		
 				
 			where id=#{member.id}
 				

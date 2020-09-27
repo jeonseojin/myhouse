@@ -271,7 +271,7 @@ public class AdminController {
 			pay.setP_member(member.getId());
 			member.setCoin(member.getCoin()+pay.getP_charging());
 			adminService.insertPay(pay);
-			memberService.updatecoin(member);
+			memberService.updateMember(member);
 		}
 		return mv;
 	}

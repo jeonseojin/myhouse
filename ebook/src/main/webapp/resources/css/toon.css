@@ -565,7 +565,7 @@
 	font-size: 12px;
 	font-weight: bold;
 }
-.help-paymentchoice{
+.help-paymentchoice,.mypass-check{
 	margin-top: 10px;
 }
 .payment-submit-btn{
@@ -1014,23 +1014,78 @@
 	border-bottom: 2px solid #333;
 	text-align: center;
 }
+.myhome-box{
+	width: 100%;
+	height: 380px;
+	display: flex;
+}
+.myhome-left{
+	float: left;
+	width: 50%;
+}
+.myhome-right{
+	float: right;
+	width: 300px;
+	height: 320px;
+	border: 1px solid #e5e5e5;
+	margin-left: 100px;
+	background-color: #F3F5F8;
+}
+.alert-success{
+	color: green;
+}
+.alert-danger{
+	color: green;
+}
+.mypass-input{
+	width: 100%;
+	height: 30px;
+	border: 1px solid #e5e5e5;
+	background-color: #fff;
+}
 .myhome-myinfo{
 	margin:30px 0;
 	font-size: 48px;
 	font-weight: bold;
 }
-.myhome-info-box{
+.mypass-pw{
 	width: 100%;
-	height: 300px;
+	height: 100%;
+	border: none;
 }
 .myhome-h{
 	margin: 30px 0;
 }
 .myhome-info-text{
-	text-align: center;
+	width: 100%;
+	padding: 15px;
+	border-bottom: 1px solid #e5e5e5;
+	height: 50px;
+}
+.myhome-info{
+	width: 300px;
+	margin-left: 80px;
+}
+.myinfo-pw{
+	line-height: 10px;
+	float: right;
+}
+.mypass-word{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 15px;
+}
+.mypass-btn{
+	margin-top: 10px;
+	margin-left: 25%;
+}
+.myhome-text{
+	float: left;
+	font-weight: bold;
 }
 .myhome-coinbox{
-	width: 650px;;
+	width: 650px;
 	height: 400px;
 	overflow-y: scroll;
 	margin: 0 auto;
@@ -1055,7 +1110,7 @@
 	color: #408080;
 }
 .myhome-coin-date{
-	width: 250px;
+	width: 330px;
 }
 .myhome-coin{
 	text-align: center;
@@ -1067,10 +1122,9 @@
 .info-myhome{
 	border: none;
 	text-align: center;
+	border-bottom: 1px solid #dee2e6 !important;
 }
-#form-myinfo{
-	margin-bottom: 20px;
-}
-.btn-myinfo{
-	margin-left: 50%;
+.myhome-coin-box{
+	width: 100%;
+	height: 400px;
 }

@@ -14,6 +14,7 @@
 				<input type="password" class="form-control" name="pw" placeholder="비밀번호">
 			</div>
 			<button type="submit" class="signin-btn">로 그 인</button>
+			<a class="btn-link" href="<%=request.getContextPath()%>/mail">비밀번호 찾기</a>
 			<p class="signin-help">이용 중 도움이 필요하시면 [<a href="#">고객지원</a>] 페이지로 문의해주세요</p>
 			<input type="hidden" value="${isLogin}" id="isLogin">
 			<input type="hidden" value="${id}" id="id">

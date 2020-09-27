@@ -25,6 +25,7 @@
   			order by t_num desc
   			limit #{cri.startPage},#{cri.perPageNum}
   </select>
+  
  <!-- 작품페이지네이션 -->
     <select id="getTotalCountByToon" resultType="int">
 		select count(*) from toon
@@ -44,7 +45,11 @@
   				and lastEpisode like concat('%',#{cri.search},'%')
   			</if>
   </select>
-
+ <!-- 작품페이지네이션 -->
+    <select id="getEpisodepage" resultType="int">
+		select count(*) from episode
+			where e_t_title = #{cri.Title} and e_edition = #{cri.edition} and e_img like '%cover%'
+  </select>
  <!-- 번호작품 -->
 <select id="getToon" resultType="kr.green.ebook.vo.ToonVo">
 		select * from toon where t_num = #{num}
@@ -341,4 +346,38 @@
 		</if>
 		order by up desc
 	</select>
+<!-- 댓글 좋아요 기능 -->
+	<select id="cmtUp" resultType="int">
+		select count(*) from cmtup where cmtup_conum = #{num} and cmtup_id = #{id}
+	</select>
+	<insert id="insertepcmtUp">
+		insert into
+			cmtup(cmtup_conum,cmtup_id)
+			values(#{num},#{id})
+	</insert>
+	<update id="updateEmt">
+		update epcomment
+		set
+			co_up = (select count(*) from cmtup where cmtup_conum = #{num}),
+			co_down = (select count(*) from cmtdown where cmtd_conum = #{num})
+		where co_num = #{num}
+	</update>
+	<select id="getCmt" resultType="kr.green.ebook.vo.EpcommentVo">
+		select * from epcomment
+			where co_num like #{num}
+	</select>
+<!-- 댓글 싫어요 기능 -->
+	<select id="cmtDown" resultType="int">
+		select count(*) from cmtdown where cmtd_conum = #{num} and cmtd_id = #{id}
+	</select>
+	<insert id="insertepcmtDown">
+		insert into
+			cmtdown(cmtd_conum,cmtd_id)
+			values(#{num},#{id})
+	</insert>
+	
+<!-- 댓글삭제 -->
+	<delete id="deletecmt">
+		DELETE FROM epcomment where co_num =#{num}
+	</delete>
 </mapper>

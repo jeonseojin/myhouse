@@ -11,7 +11,7 @@ import kr.green.ebook.vo.MemberVo;
 
 public interface MemberService {
 
-MemberVo isMember(MemberVo member);
+	MemberVo isMember(MemberVo member);
 	
 	MemberVo getMemberName(String name);
 
@@ -27,5 +27,7 @@ MemberVo isMember(MemberVo member);
 
 	ArrayList<ChoiceVo> getChoiceList(String id);
 
-	void updatecoin(MemberVo member);
+	void updateMember(MemberVo member);
+
+	void newPw(String id, String newPw);
 }

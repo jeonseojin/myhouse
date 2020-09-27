@@ -118,4 +118,20 @@ public interface AdminDao {
 		public ClaimVo getClaimAnswer(@Param("num")int num);
 
 		public void deletePay(@Param("pay")PayVo pay);
+
+		public int cmtUp(@Param("num")String num, @Param("id")String id);
+
+		public void insertepcmtUp(@Param("num")String num, @Param("id")String id);
+
+		public void updateEmt(@Param("num")String num);
+
+		public EpcommentVo getCmt(@Param("num")String num);
+		
+		public int cmtDown(@Param("num")String num, @Param("id")String id);
+
+		public void insertepcmtDown(@Param("num")String num, @Param("id")String id);
+
+		public void deletecmt(@Param("num")String num);
+
+		public int getEpisodepage(@Param("cri")Criteria cri);
 }
