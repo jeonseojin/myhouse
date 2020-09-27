@@ -1,9 +1,100 @@
 @charset "UTF-8";
 /*ep페이지css*/
+.toon-week-box,.toon-genre-box{
+	position: sticky;
+	z-index: 6;
+	top: 0;
+	text-align: center;
+	background: #fff;
+}
+.toon-text-box{
+	border: none;
+}
+.toon-text-title{
+	width: 250px;
+}
+.toon-text-edition{
+	width: 50px;
+	text-align: center;
+}
+.toon-plot-box{
+	position: absolute;
+	width: 100%;
+	border: 1px solid #dee2e6;
+	height: 500px;
+}
+.toon-week,.toon-genre{
+	background-color: #eff1f4;
+	font-weight: bold;
+	display: inline-block;
+	text-align: center;
+	border: none;
+	cursor: context-menu !important;
+}
+.toon-week:hover,.toon-genre:hover{
+	background-color: #dbdee3;
+}
+.toon-week[aria-selected='true'],.toon-genre[aria-selected='true']{
+	background-color: #eb0026 !important;
+	color: #fff;
+}
+.toon-box,.ranking-box{
+	position: relative;
+	line-height: 0;
+	overflow: hidden;
+	margin-top: 40px; 
+}
+.toon-list{
+	position:relative;
+	list-style: none;
+	overflow: hidden;
+	float: left;
+	width: 225px;
+	height: 190px;
+}
+.toon-item{
+   
+    float: left;
+    width: 200px;
+    height: 170px;
+    margin-right: 18px;
+}
+.img_thumb{
+    display: block;
+    vertical-align: top;
+}
+.toon-link{
+	position: relative;
+    height: 170px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+.toon-title{
+	position:absolute;
+	bottom: 0;
+    height: 17px;
+    overflow: hidden;
+    line-height: 17px;
+    width: 100%;
+    font-size: 14px;
+    vertical-align: top;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.toon-artist{
+	position:absolute;
+	bottom: -15px;
+    overflow: hidden;
+    display: block;
+    font-size: 12px;
+    color: #777;
+    height: 15px;
+    line-height: 15px;
+}
 .comicInfo{
     position: relative;
     color: rgb(75, 75, 75);
-    background: rgb(255, 193, 164);
     transform: translateZ(0);
     width: 100%;
     height: 390px;
@@ -11,14 +102,6 @@
 .comicInfo-Epdetail{
 	position: absolute;
 	left: 50%;
-	width: 700px;
-	margin-left: -489px;
-}
-.comicInfo-img{
-	position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
 }
 .comicInfo-title{
 	padding-top: 43px;
@@ -27,7 +110,6 @@
     line-height: 47px;
     font-size: 38px;
     font-weight: bold;
-    color: #fff;
 }
 .comicInfo-genre{
 	display: block;
@@ -37,10 +119,8 @@
 	font-size: 16px;
 	line-height: 18px;
 	vertical-align: top;
-	color:#fff;
 }
 .comicInfo-plot{
-	color: #fff;
 	font-size: 14px;
 	line-height: 19px;
 }
@@ -59,9 +139,7 @@
 	font-weight: 500;
 	text-align: center;
 	vertical-align: middle;
-	border: 1px solid #fff; 
 	border-radius: 24px;
-	color:#fff;
 	background-color: transparent;
 }
 .comicInfo-btn-nochoice>i{
@@ -73,10 +151,8 @@
 	height: 48px;
 	border-radius: 24px;
 	margin-left: 8px;
-	border: 1px solid #fff; 
 	background-color: transparent;
 	font-size: 20px;
-	color:#fff;
 }
 .comic-Content{
 	width:100%;
@@ -110,6 +186,7 @@
 .comic-itemlink,.comic-itemlink-payment,.nologin-payment{
 	margin-right: 10px;
 	z-index: 1;
+	padding: 0;
 }
 .comic-itemlink-payment,.nologin-payment{
 	border: none;
@@ -615,14 +692,14 @@
 	border-bottom: 1px solid #dbdee3;
 	font-weight: bold;
 }
-.hbox-right-tap{
+.hbox-right-tap,.hbox-help-tap{
 	margin-bottom: 4px;
 	background-color: #f3f5f8;
 	vertical-align: top;
 	font-size: 0;
 	
 }
-.hbox-right-tap-a{
+.hbox-right-tap-a,.hbox-help-tap-a{
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
@@ -641,7 +718,7 @@
 	text-align: left;
 	box-sizing: border-box;
 }
-.help-box-list>li:nth-child(n+2) {
+.help-box-list>li:nth-child(n+2),.helpbox-list>li:nth-child(n+2) {
 	border-top: 1px solid #dee0e3;
 }
 .hbox-item-content{
@@ -762,4 +839,238 @@
 }
 .comicInfo-btn-noup>i{
 	color:red;
+}
+.hbox-mycontent{
+	width: 100%;
+	padding: 20px;
+	border-bottom: 1px solid #e5e5e5;
+}
+.answer-content{
+	padding: 20px;
+	background-color: #e5e5e5;
+}
+.noanswer-content{
+	padding: 20px;
+	text-align: center;
+}
+.answer-itemT{
+	font-weight: bold;
+}
+/*랭킹css*/
+.ranking-box{
+	width: 100%;
+}
+.ranking-heading{
+	margin-top: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-align: left;
+	font-weight: 500;
+	color:#000;
+}
+.ranking-list,.genre-list{
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	padding-top: 8px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-size: 0;
+	line-height: 0;
+	vertical-align: top;
+}
+
+.ranking-item{
+	width: 100%;
+	margin-bottom: 16px;
+	display: inline-block;
+	vertical-align: top;
+	padding-right: 20px;
+}
+.ranking-link{
+	display: flex;
+	border-bottom: 1px solid #e5e5e5;
+}
+.ranking-link>img{
+	border-radius: 2px;
+	height: 84px;
+}
+.ranking-count{
+	max-height: 72px;
+	flex-shrink: 0;
+	text-align: center;
+	white-space: nowrap;
+}
+.ranking-rank{
+	display: block;
+	color: #000;
+	font: bold 16px/24px Roboto, Sans-serif;
+}
+.ranking-info{
+	white-space: nowrap;
+	position: relative;
+}
+.ranking-info-title{
+	color:#000;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: bold;
+	display: block;
+	width: 100%;
+}
+.ranking-info-artist,.ranking-info-genre{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	line-height: 16px;
+	color:#707070;
+}
+.ranking-info-artist{
+	position: absolute;
+	bottom: 28px;
+}
+.ranking-info-genre{
+	display: block;
+	position: absolute;
+	bottom: 10px;
+}
+.event-list{
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+.event-item{
+	padding: 0 16px 16px 0;
+}
+.event-link{
+	display: block;
+	background-color: #e9e9e9;
+}
+.event-link>img{
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.eventpage-box{
+	position: relative;
+	width: 100%;
+}
+.eventpage-box>img{
+	width: 100%;
+}
+.attend-btn{
+	width: 200px;
+	height: 80px;
+	font-size: 25px;
+	border: 2px solid black;
+	background-color: #ffff6a;
+	border-radius: 55px;
+	text-align: center;
+	color:#008000;
+}
+.mybook-box{
+	width: 100%;
+	height: 400px;
+	margin-bottom: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	overflow-x: scroll;
+	padding: 16px;
+}
+.mybook-box-list{
+	width: calc(100%/3);
+	height: 120px;
+}
+.mybook-info{
+	margin-left: 20px;
+}
+.mybook-img{
+	height: 130px !important;
+}
+.theend-genre-box{
+	width: 100%;
+	position: relative;
+}
+.theend-genre-btn{
+	position:absolute;
+	right:0;
+	width: 120px;
+	float: right;
+	text-align: center;
+	height: 50px;
+	border: 1px solid #e5e5e5;
+	appearance: none;
+	padding: 0 31px;
+}
+.genre-heading{
+	margin-top:50px;
+	width: 150px;
+	font-weight: bold;
+	height: 50px;
+	border-bottom: 2px solid #333;
+	text-align: center;
+}
+.myhome-myinfo{
+	margin:30px 0;
+	font-size: 48px;
+	font-weight: bold;
+}
+.myhome-info-box{
+	width: 100%;
+	height: 300px;
+}
+.myhome-h{
+	margin: 30px 0;
+}
+.myhome-info-text{
+	text-align: center;
+}
+.myhome-coinbox{
+	width: 650px;;
+	height: 400px;
+	overflow-y: scroll;
+	margin: 0 auto;
+}
+.myhome-coin-item{
+	display: inline-block;
+	height: 55px;
+	padding: 8px;
+}
+.myhome-coin-i{
+	color:yellow;
+	font-size: 25px;
+	margin-right: 15px;
+}
+.myhome-coin-item>span{
+	margin-right: 20px;
+	font-size: 20px;
+}
+.myhome-coin-m{
+	font-size: 25px;
+	margin-right: 15px;
+	color: #408080;
+}
+.myhome-coin-date{
+	width: 250px;
+}
+.myhome-coin{
+	text-align: center;
+}
+.myinfo-btn{
+	width: 100%;
+	padding: 15px;
+}
+.info-myhome{
+	border: none;
+	text-align: center;
+}
+#form-myinfo{
+	margin-bottom: 20px;
+}
+.btn-myinfo{
+	margin-left: 50%;
 }

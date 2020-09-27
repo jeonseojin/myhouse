@@ -48,6 +48,7 @@ public class AdminController {
 	
 	private String uploadPath = "D:\\JAVA\\spring\\myhouse\\ebook\\src\\main\\webapp\\resources\\img";
 	
+
 	//유저관리
 	@RequestMapping(value = "/admin/user", method = RequestMethod.GET)
 	public ModelAndView user(ModelAndView mv, Criteria cri) {
@@ -94,13 +95,18 @@ public class AdminController {
 		return mv;
 	}
 	
-	//연재등록
+	//연재등록기능
 	@RequestMapping(value = "/admin/ep", method = RequestMethod.POST)
-	public ModelAndView adminEpPost(ModelAndView mv, EpisodeVo ep, MultipartHttpServletRequest mr) throws IOException, Exception {
+	public ModelAndView adminEpPost(ModelAndView mv, EpisodeVo ep,String title,String last, String lastdate, MultipartHttpServletRequest mr) throws IOException, Exception {
 		mv.setViewName("redirect:/admin/toon");
 		String filename = "";
 		byte[] fileby;
 		List<MultipartFile> fileList = mr.getFiles("file2");
+		if(last.equals("Y")) {
+			ToonVo toon = adminService.getToonT(title);
+			toon.setT_lastEpdate(lastdate);
+			adminService.updateToon(toon);
+		}
 		for(MultipartFile filePart : fileList) {
 			filename = filePart.getOriginalFilename();
 			fileby = filePart.getBytes();
@@ -138,13 +144,13 @@ public class AdminController {
 	public ModelAndView ToonEpMPost(ModelAndView mv,ToonVo toon,Integer num,MultipartFile file1,MultipartFile file2) throws IOException, Exception  {
 		mv.setViewName("redirect:/admin/toon");
 		if(!file1.getOriginalFilename().equals("")) {
-			String fileName = UploadFileUtils.uploadFile(uploadPath,"\\"+toon.getTitle(), file1.getOriginalFilename(), file1.getBytes());
+			String fileName = UploadFileUtils.uploadFile(uploadPath,"\\"+toon.getT_title(), file1.getOriginalFilename(), file1.getBytes());
 			toon.setT_typify(fileName);
 		}else if(toon.getT_typify()==null || toon.getT_typify().equals("")) {
 			toon.setT_typify(null);
 		}
 		if(!file2.getOriginalFilename().equals("")) {
-			String fileName = UploadFileUtils.uploadFile(uploadPath,"\\"+toon.getTitle(), file2.getOriginalFilename(), file2.getBytes());
+			String fileName = UploadFileUtils.uploadFile(uploadPath,"\\"+toon.getT_title(), file2.getOriginalFilename(), file2.getBytes());
 			toon.setT_img(fileName);
 		}else if(toon.getT_img()==null || toon.getT_img().equals("")) {
 			toon.setT_img(null);
@@ -169,15 +175,71 @@ public class AdminController {
 	@RequestMapping(value = "/admin/event", method = RequestMethod.POST)
 	public ModelAndView adminEventPost(ModelAndView mv,BookeventVo event,MultipartFile file1,MultipartFile file2,MultipartFile file3) throws IOException, Exception {
 		mv.setViewName("redirect:/admin/event");
-		String ev_img = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file1.getOriginalFilename(), file1.getBytes());
-		event.setEv_img(ev_img);
-		String ev_banner = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file2.getOriginalFilename(), file2.getBytes());
-		event.setEv_banner(ev_banner);
-		String ev_page = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file3.getOriginalFilename(), file3.getBytes());
-		event.setEv_page(ev_page);
+		if(file1.getSize() !=0) {
+			String ev_img = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file1.getOriginalFilename(), file1.getBytes());
+			event.setEv_img(ev_img);
+		}
+		if(file2.getSize() !=0) {
+			String ev_banner = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file2.getOriginalFilename(), file2.getBytes());
+			event.setEv_banner(ev_banner);
+		}
+		if(file3.getSize() !=0) {
+			String ev_page = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file3.getOriginalFilename(), file3.getBytes());
+			event.setEv_page(ev_page);
+		}
 		adminService.insertEvent(event);
 		return mv;
 	}
+	//이벤트상세
+	@RequestMapping(value = "/admin/evdetail", method = RequestMethod.GET)
+	public ModelAndView adminEventdetail(ModelAndView mv,String title, Criteria cri) {
+		mv.setViewName("/admin/evdetail");
+		BookeventVo event = adminService.getEvent(title);
+		mv.addObject("event", event);
+		mv.addObject("cri", cri);
+		return mv;
+	}
+	
+	//이벤트수정
+	@RequestMapping(value = "/admin/evmodify", method = RequestMethod.GET)
+	public ModelAndView adminEventModify(ModelAndView mv,String title, Criteria cri) {
+		mv.setViewName("/admin/evmodify");
+		ArrayList<ToonVo> tlist = adminService.toonList(cri);
+		mv.addObject("tlist", tlist);
+		BookeventVo event = adminService.getEvent(title);
+		mv.addObject("event", event);
+		mv.addObject("cri", cri);
+		return mv;
+	}
+	//이벤트업데이트
+		@RequestMapping(value = "/admin/evmodify", method = RequestMethod.POST)
+		public ModelAndView adminevmodifytPost(ModelAndView mv,BookeventVo event,MultipartFile file1,MultipartFile file2,MultipartFile file3) throws IOException, Exception {
+			mv.setViewName("redirect:/admin/event");
+			if(!file1.getOriginalFilename().equals("")) {
+				String ev_img = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file1.getOriginalFilename(), file1.getBytes());
+				event.setEv_img(ev_img);
+			}else if(event.getEv_img()==null || event.getEv_img().equals("")) {
+				event.setEv_img(null);
+			}
+			if(!file2.getOriginalFilename().equals("")) {
+				String ev_banner = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file2.getOriginalFilename(), file2.getBytes());
+				event.setEv_banner(ev_banner);
+			}else if(event.getEv_banner()==null || event.getEv_banner().equals("")) {
+				event.setEv_banner(null);
+			}
+			if(!file3.getOriginalFilename().equals("")) {
+				String ev_page = UploadFileUtils.uploadFile(uploadPath,"\\"+event.getEv_engtitle(), file3.getOriginalFilename(), file3.getBytes());
+				event.setEv_page(ev_page);
+			}else if(event.getEv_page()==null || event.getEv_page().equals("")) {
+				event.setEv_page(null);
+			}
+			event.setEv_url(event.getEv_url());
+			adminService.updateEvent(event);
+			return mv;
+		}
+	
+	
+	
 	//관리자 충전관리페이지
 	@RequestMapping(value = "/admin/pay", method = RequestMethod.GET)
 	public ModelAndView adminPay(ModelAndView mv, Criteria cri) {
@@ -206,7 +268,7 @@ public class AdminController {
 		mv.setViewName("redirect:/");
 		MemberVo member = memberService.getMember(r);
 		if(member!=null) {
-			pay.setP_member(member.getName());
+			pay.setP_member(member.getId());
 			member.setCoin(member.getCoin()+pay.getP_charging());
 			adminService.insertPay(pay);
 			memberService.updatecoin(member);
@@ -274,7 +336,7 @@ public class AdminController {
 		mv.addObject("cri", cri);
 		return mv;
 	}
-	//관리자 공지사항 등록페이지
+	//관리자 공지사항 등록 기능
 	@RequestMapping(value = "/admin/answer", method = RequestMethod.POST)
 	public ModelAndView adminanswerP(ModelAndView mv, ClaimVo cl){
 		mv.setViewName("redirect:/admin/claim");

@@ -8,7 +8,6 @@ public class PayVo {
 	private int p_num;//총 충전번호
 	private String p_member;//사용/충전 회원
 	private Date p_date;//충전날짜
-	private Date p_usedate;//사용날짜
 	private String p_title;//충전한 웹툰제목
 	private String p_edition;//충전한 연재 번호
 	private int p_price;//충전 금액
@@ -16,6 +15,7 @@ public class PayVo {
 	private int p_coin;//사용한 코인
 	private int p_point;//덤으로 주는 충전 포인트
 	private String p_one;//첫구매작품
+	private String p_usedate;//사용(기한)날짜
 	
 	
 	public String getP_one() {
@@ -57,12 +57,6 @@ public class PayVo {
 	public void setP_date(Date p_date) {
 		this.p_date = p_date;
 	}
-	public Date getP_usedate() {
-		return p_usedate;
-	}
-	public void setP_usedate(Date p_usedate) {
-		this.p_usedate = p_usedate;
-	}
 	public String getP_title() {
 		return p_title;
 	}
@@ -93,12 +87,18 @@ public class PayVo {
 	public void setP_point(int p_point) {
 		this.p_point = p_point;
 	}
+	
+	public String getP_usedate() {
+		return p_usedate;
+	}
+	public void setP_usedate(String p_usedate) {
+		this.p_usedate = p_usedate;
+	}
 	@Override
 	public String toString() {
-		return "PayVo [p_num=" + p_num + ", p_member=" + p_member + ", p_date=" + p_date + ", p_usedate=" + p_usedate
-				+ ", p_title=" + p_title + ", p_edition=" + p_edition + ", p_price=" + p_price + ", p_charging="
-				+ p_charging + ", p_coin=" + p_coin + ", p_point=" + p_point + ", p_one=" + p_one + "]";
+		return "PayVo [p_num=" + p_num + ", p_member=" + p_member + ", p_date=" + p_date + ", p_title=" + p_title
+				+ ", p_edition=" + p_edition + ", p_price=" + p_price + ", p_charging=" + p_charging + ", p_coin="
+				+ p_coin + ", p_point=" + p_point + ", p_one=" + p_one + ", p_usedate=" + p_usedate + "]";
 	}
-
 	
 }

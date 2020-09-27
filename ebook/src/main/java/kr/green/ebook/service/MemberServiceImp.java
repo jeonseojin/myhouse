@@ -21,10 +21,15 @@ public class MemberServiceImp implements MemberService {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
     
-    //회원정보
+  //회원정보
     @Override
     public MemberVo getMember(String id) {
     	return memberDao.getMember(id);
+    }
+  //회원정보이름
+    @Override
+    public MemberVo getMemberName(String name) {
+    	return memberDao.getMemberName(name);
     }
 
     //로그인 시도 회원

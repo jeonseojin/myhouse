@@ -1,8 +1,14 @@
 @charset "UTF-8";
 @media(min-width:640px){
-
+	.event-item{
+		display: inline-block;
+		width: 50%;
+	}
 }
 @media(min-width:961px){
+	.com-home{
+		min-height: 1500px;
+	}
 	.payment-box{
 		padding: 40px 0;	
 	}
@@ -13,7 +19,7 @@
 		width: 73%;
 		float: right;
 	}
-	.hbox-right-tap{
+	.hbox-right-tap,.hbox-help-tap{
 		padding: 0 20px;
 	}
 	.help-box-text{
@@ -50,33 +56,109 @@
 	.clmyregist-left,.clmyregist-right{
 		padding: 16px;
 	}
-	
-	
+	.toon-box,.ranking-box{		
+		margin-top: 40px; 
+		padding: 24px;
+	}
+	.ranking-heading{
+		margin-bottom: 12px;
+		font-size: 24px;
+		line-height: 32px;
+	}
+	.ranking-list{
+		min-height: 308px;
+	}
+	.ranking-link{
+		margin-left: 8px;
+	}
+	.ranking-count{
+		width: 48px;
+		padding: 10px 8px 0;
+	}
+	.ranking-rank{
+		margin-bottom: 6px;
+	}
+	.ranking-item{
+		width: calc((100%-64px)/3);
+	}
+	.ranking-info{
+		width: 100%;
+		padding-top: 8px;
+	}
+	.ranking-info-title{
+		font-size: 16px;
+		line-height: 27px;
+	}
+	.event-item{
+		width: 33.33%;
+	}
+	.attend-btn{
+		position: absolute;
+		bottom:15px;
+		right: 0;
+	}
+	.comicInfo-img{
+		position: absolute;
+	    z-index: 1;
+	    top: 0;
+	    right: 0;
+	}
+	.comicInfo-Epdetail{
+		margin-left: -45%;
+	}
 }
 @media(min-width:1281px){
-	.hbox-right-tap-a{
+	.hbox-right-tap-a,.hbox-help-tap-a{
 		font-size: 16px;
 	}
-	.hbox-right-tap-a:nth-of-type(n+2){
+	.hbox-right-tap-a:nth-of-type(n+2),.hbox-help-tap-a:nth-of-type(n+2){
 		margin-left: 24px;
 	}
+	
+	
+	
 }
 @media(max-width:1281px) and (min-width:961px){
-	.hbox-right-tap-a{
+	.hbox-right-tap-a,.hbox-help-tap-a{
 		font-size: 14px;
 	}
-	.hbox-right-tap-a:nth-of-type(n+2){
+	.hbox-right-tap-a:nth-of-type(n+2),.hbox-help-tap-a:nth-of-type(n+2){
 		margin-left: 20px;
+	}
+}
+@media(max-width:960px) and (min-width:640px){
+	.attend-btn{
+		width: 150px;
+		height: 60px;
+		font-size: 15px;
+		font-weight:bold;
+		position: absolute;
+		bottom:15px;
+		right: 0;
+	}
+}
+@media(max-width:639px){
+	.attend-btn{
+		width: 120px;
+		height: 50px;
+		font-size: 15px;
+		font-weight:bold;
+		position: absolute;
+		bottom:0;
+		right: 0;
+	}
+	.comicInfo-plot{
+		width: 230px;
 	}
 }
 @media(max-width:960px){
 	.help-box-right{
 		border-top: 1px solid #dbdee3;
 	}
-	.hbox-right-tap-a{
+	.hbox-right-tap-a,.hbox-help-tap-a{
 		font-size: 14px;
 	}
-	.hbox-right-tap-a:nth-of-type(n+2){
+	.hbox-right-tap-a:nth-of-type(n+2),.hbox-help-tap-a:nth-of-type(n+2){
 		margin-left: 16px;
 	}
 	.help-box-left{
@@ -85,7 +167,7 @@
 	.help-box-text{
 		padding: 0;
 	}
-	.hbox-right-tap{
+	.hbox-right-tap,.hbox-help-tap{
 		padding: 0 16px;
 	}
 	.clmylist-header{
@@ -103,12 +185,43 @@
 		bottom: 16px;
 		text-align: right;
 	}
-}
-@media(max-height: 960px) and (min-width:640px){
-    .comicInfo{
-    }
-}
-@media(max-height: 767px) and (min-width:640px){
-    .comicInfo{
-    }
+	.toon-box,.ranking-box{		
+		margin-top: 40px; 
+	}
+	.ranking-list{
+		height: 272px;
+		overflow-x: auto;
+		flex-direction: column;
+		scroll-snap-type: x mandatory;
+	}
+	.ranking-item{
+		width: 310px;
+	}
+	.ranking-info-title{
+		font-size: 13px;
+		line-height: 27px;
+	}
+	.ranking-count{
+		width: 40px;
+		padding: 4px 4px 0;
+	}
+	.comic-info>img{
+		height: 330px;
+	}
+	.comicInfo-img{
+		position:absolute;
+		bottom: 0;
+		right: 0;
+		width: 450px;
+	}
+	.comicInfo-Epdetail{
+		margin-left: -50%;
+	}
+	.myhome-coin-date{
+		padding: 0 35px;
+		width: 180px;
+	}
+	.myhome-coin-item>span{
+		font-size: 15px;
+	}
 }

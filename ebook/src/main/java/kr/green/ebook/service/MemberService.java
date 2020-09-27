@@ -11,7 +11,9 @@ import kr.green.ebook.vo.MemberVo;
 
 public interface MemberService {
 
-	MemberVo isMember(MemberVo member);
+MemberVo isMember(MemberVo member);
+	
+	MemberVo getMemberName(String name);
 
 	MemberVo getMember(String id);
 	

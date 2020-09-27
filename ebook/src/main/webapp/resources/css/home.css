@@ -62,31 +62,6 @@
             width: 100%;
             height: 100%;
         }
-        .main-ranking{
-            width: 100%;
-            height: 100%;
-            display: flex;
-        }
-        .main-left{
-            width: 49%;
-            background-color: lightcoral;
-            height: 250px;
-        }
-        .main-right{
-            width: 49%;
-            background-color: thistle;
-            height: 250px;
-        }
-        .main-new{
-            width: 100%;
-            height: 150px;
-            background-color: wheat;
-        }
-        .main-update{
-            width: 100%;
-            height: 150px;
-            background-color: thistle;
-        }
         /* 배너버튼 */
         .banner-nav{
         	position: absolute;
@@ -95,6 +70,11 @@
         	right: 0;
         	margin: -25px auto 0;        	
         }
+        .main-left,.main-right{
+	        box-sizing: border-box;
+	        padding: 0 15px;
+	        margin-bottom: 25px;
+	    }
         .banner-btn{
         	position: absolute;
         	z-index: 5;
@@ -115,27 +95,98 @@
         .banner-next{
         	right: 32px;
         }
+        /* 랭킹 */
+        .main-rank-title{
+        	margin: 15px 0;
+        	border-bottom: 2px solid #333;
+        }
+        .main-rank-list{
+        	width: 90%;
+        	height: 80px;
+        	display: block;
+        	background-color: #fff;
+        	cursor: pointer;
+        	float: right;
+        }
+        .main-rank-list>img{
+        	height: 80px;
+        	box-sizing: border-box;
+        	float: right;
+        }
+        .mainrank-title{
+        	font-size: 22px;
+        	color: #333;
+        	font-weight: bold;
+        }
+        .mainrank-artist{
+        	display: block;
+        }
+        .mainrank-t_type{
+        	display: block;
+        	font-size:11px;
+        	color: #707070;
+        }
+        .mainrank-rank{
+        	width: 10%;
+        	float: left;
+        	height: 80px;
+        	line-height: 80px;
+        	text-align: center;
+        	font-weight: bold;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         /* 브라우저 min 961 */
         @media (min-width: 961px){
-            .com-home{
-                min-height: 1000px;
-            }
+            
             .main-banner{
                 margin-bottom: 44px;
             }
-            .main-left{
-                margin-right: 32px;
+             .main-rank-list,.mainrank-rank{
+             	padding: 0 15px;
+             }
+            .main-rank-list:nth-of-type(n+2),.mainrank-rank:nth-of-type(n+2){
+            	margin-top: 10px;
             }
-            
+            .main-ranking{
+	        	position: relative;
+	            width: 100%;
+	            height: 100%;
+	            display: flex;
+	        }
+	        .main-left{
+	            width: 49%;
+	            box-sizing: border-box;
+	            padding: 0 15px;
+	            margin-right: 32px;
+	        }
+	        .main-right{
+	            width: 49%;
+	            box-sizing: border-box;
+	            padding: 0 15px;
+	        }
             
         }
         
         @media (max-width: 960px){
             .com-home{
-                min-height: 800px;
+                min-height: 1800px;
             }
             .main-left,.main-right{
                 width: 50%;
+            }
+	        .main-left,.main-right{
+	            width: 100%;
+	            padding: 0 35px;
+	        }
+	        .main-rank-list{
+             	padding: 0 35px;
             }
         }
         @media (min-width: 640px){

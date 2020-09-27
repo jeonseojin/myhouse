@@ -5,7 +5,7 @@
 
     <!-- 상단 header -->
     <header id="main-header" class="com com-menu">
-        <a class="gnb-logo" href="<%=request.getContextPath()%>/"></a>
+        <a class="gnb-logo" href="<%=request.getContextPath()%>/"><i class="fas fa-child"></i></a>
         <!-- 공통메뉴 -->
         <nav id="gnb" class="gnb">
             <ul class="gnb-list">
@@ -13,16 +13,13 @@
                     <a class="gnb-link" href="<%=request.getContextPath()%>/toon">연재</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/kanking">랭킹</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/ranking">랭킹</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/free">무료</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/event">이벤트</a>
                 </li>
                 <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/event">이벤트</a>
-                </li>
-                <li class="gnb-item">
-                    <a class="gnb-link" href="<%=request.getContextPath()%>/toon/theend">완결</a>
+                    <a class="gnb-link" href="<%=request.getContextPath()%>/end">완결</a>
                 </li>
             </ul>
         </nav>
@@ -87,75 +84,20 @@
 			        <c:if test="${member.auth=='USER'}">
 						<nav class="logNav display-none" >
 				            <div class="rating">
-				                <a href="#" class="rating-link" aria-selected="true" data-target="my">MY</a>
-				                <a href="#" class="rating-link" data-target="look">최근/찜/소장</a>
-				                <a href="#" class="rating-link" data-target="signal">알림</a>
+				                <a href="#" class="rating-link">${member.name}님의 정보</a>
 				            </div>
-				            <div class="logNav-list">
-				                <div class="log-list my">
-				                    <div class="logUser">
-				                        <h3 class="log-user">
-				                            <span>${member.name}</span><span class="log-user-id">(${member.id})</span>
-				                        </h3>
-				                        <div class="log-coinList">
-				                            <span class="">${member.coin}</span>코인
-				                            <a href="<%=request.getContextPath()%>/toon/payment" class="log-coin">코인 충전</a>
-				                        </div>
-				                    </div>  
-				                    <a class="logNav-link" href="#">내서재</a>
-				                    <a class="logNav-link" href="#">내정보</a>
-				                    <a class="logNav-link" href="<%=request.getContextPath()%>/toon/help">고객지원</a>
-				                    <a class="logNav-link logNav-link-last" href="<%=request.getContextPath()%>/signout">로그아웃</a>
-				                </div>
-				                <div class="log-list look">
-				                	<div class="look-box">
-				                		<span class="log-look-span">최근</span>
-				                    <div class="log-look-box">
-				                        <div class="log-look-item">
-				                        	<c:if test="${chlist.size()!=0}">
-				                        	<c:forEach var="chlist" items="${chlist}">
-					                            <a class="log-look" href="#">
-					                                <img class="search-img" src="/ebook/resources/img${chlist.t_img}" style="height: 53px;" alt="">
-					                            </a>
-					                        </c:forEach>
-				                            </c:if> 
-				                            <a href="#" class="log-look-the">더보기</a> 
-				                        </div>
-				                    </div>
-				                    <span class="log-look-span">찜</span>
-				                    <div class="log-look-box">
-				                        <div class="log-look-item">
-				                        	<c:if test="${chlist.size()!=0}">
-					                        	<c:forEach var="chlist" items="${chlist}">
-						                            <a class="log-look" href="#">
-						                                <img class="search-img" src="/ebook/resources/img${chlist.t_img}" style="height: 53px;" alt="">
-						                            </a>
-						                        </c:forEach>
-					                        </c:if>
-				                            <a href="#" class="log-look-the">더보기</a> 
-				                        </div>
-				                    </div>
-				                    <span class="log-look-span">소장</span>
-				                    <div class="log-look-box">
-				                        <div class="log-look-item">
-					                       <c:forEach var="payToon" items="${payToon}">
-							              		<a class="log-look" href="#">
-							                       	<img class="search-img" src="/ebook/resources/img${payToon.t_img}" style="height: 53px;" alt="">
-							                    </a>
-						                    </c:forEach>
-				                            <a href="#" class="log-look-the">더보기</a> 
-				                        </div>
-				                    </div>
-			                    </div>
-			                </div>
-			                <div class="log-list signal">
-			                    <a class="logNav-link" href="#"></a>
-			                </div>
-			            </div>
-			            <div class="logNav-last">
-			                
-			            </div>
-			        </nav>
+				            <h3 class="log-user">
+				            	<span class="log-user-id">아이디: ${member.id}</span>
+				           	</h3>
+				            <div class="log-coinList">
+				            	<span class="">${member.coin}</span>코인
+				                <a href="<%=request.getContextPath()%>/toon/payment" class="log-coin">코인 충전</a>
+				            </div>  
+				            <a class="logNav-link" href="<%=request.getContextPath()%>/mybook">내서재</a>
+				            <a class="logNav-link" href="<%=request.getContextPath()%>/myhome">내정보</a>
+				            <a class="logNav-link" href="<%=request.getContextPath()%>/toon/help">고객지원</a>
+				            <a class="logNav-link logNav-link-last" href="<%=request.getContextPath()%>/signout">로그아웃</a>
+			       		</nav>
 		    		</c:if>
 		    		<!-- 관리자 -->
 		    		 <c:if test="${member.auth=='ADMIN'}">

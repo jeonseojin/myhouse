@@ -13,10 +13,18 @@ public class EpisodeVo {
 	private int e_coin;
 	private String e_img;
 	private String e_edition;
+	private String e_lastEp;
 	
 	//get&set
+	
 	public int getE_num() {
 		return e_num;
+	}
+	public String getE_lastEp() {
+		return e_lastEp;
+	}
+	public void setE_lastEp(String e_lastEp) {
+		this.e_lastEp = e_lastEp;
 	}
 	public void setE_num(int e_num) {
 		this.e_num = e_num;
@@ -68,13 +76,14 @@ public class EpisodeVo {
 	public void setE_edition(String e_edition) {
 		this.e_edition = e_edition;
 	}
+	// tostring (찍어보는역할)
 	@Override
 	public String toString() {
 		return "EpisodeVo [e_num=" + e_num + ", e_t_title=" + e_t_title + ", e_title=" + e_title + ", e_date=" + e_date
-				+ ", e_coin=" + e_coin + ", e_img=" + e_img + ", e_edition=" + e_edition + "]";
+				+ ", e_coin=" + e_coin + ", e_img=" + e_img + ", e_edition=" + e_edition + ", e_lastEp=" + e_lastEp
+				+ "]";
 	}
 	
-	// tostring (찍어보는역할)
 
 	public boolean iscontain(ArrayList<PayVo> list) {
 		if(list == null || list.size() == 0)

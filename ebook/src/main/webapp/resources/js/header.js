@@ -25,23 +25,13 @@ $(function(){
             $('.login-btn').click(function(){
             	$('.login-form').submit();
             })
-            $('.rating .rating-link').click(function(){
-                $('.rating .rating-link').attr('aria-selected','false');
-                $(this).attr('aria-selected','true');
-                logView();
-            })
         
         $(document).click(function(e){
                 $('.search').stop().slideUp(); 
                 $('.logNav').stop().slideUp(); 
         })
-        function logView(){
-            var target = $('.rating .rating-link[aria-selected=true]').attr('data-target');
-            $('.logNav-list>.log-list').addClass('display-none');
-            $('.logNav-list .'+target).removeClass('display-none');
-        }
-        logView();
-        	    $(function(){
+        
+        $(function(){
 	        $('.nav .nav-link').click(function(e){
 	            e.preventDefault();
 	            $('.nav .nav-link').attr('aria-selected','false');

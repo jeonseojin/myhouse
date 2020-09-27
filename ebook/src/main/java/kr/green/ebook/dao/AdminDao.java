@@ -19,82 +19,103 @@ import kr.green.ebook.vo.WeekVo;
 
 public interface AdminDao {
 
-//	작품리스트 정렬
-	ArrayList<ToonVo> toonList(@Param("cri")Criteria cri);
+	//페이지네이션
+		public int getTotalCountByToon(@Param("cri")Criteria cri);
+		
+		int getTotalCountByClaim(@Param("cri")Criteria cri);
 
-	void insertToon(@Param("toon")ToonVo toon);
 
-	void insertEp(@Param("ep")EpisodeVo ep);
+//		작품리스트 정렬
+		ArrayList<ToonVo> toonList(@Param("cri")Criteria cri);
 
-// 연재
-	ToonVo getToon(@Param("num")Integer num);
+		void insertToon(@Param("toon")ToonVo toon);
 
-	void updateToon(@Param("toon")ToonVo toon);
+		void insertEp(@Param("ep")EpisodeVo ep);
 
-	WeekVo getWeek(@Param("t_week")int t_week);
+	// 연재
+		ToonVo getToon(@Param("num")Integer num);
 
-	GenreVo getGr(@Param("t_code")String t_code);
+		void updateToon(@Param("toon")ToonVo toon);
 
-	ToonVo getToont(@Param("Title")String Title);
+		WeekVo getWeek(@Param("t_week")int t_week);
 
-	ArrayList<ToonVo> weekList(@Param("cri")Criteria cri);
+		ToonVo getToont(@Param("Title")String Title);
 
-	EpisodeVo getEp(@Param("Title")String Title, @Param("edition")String edition);
+		ArrayList<ToonVo> weekList(@Param("cri")Criteria cri);
 
-	ArrayList<EpisodeVo> getEpList(@Param("Title")String Title, @Param("edition")String edition);
+		EpisodeVo getEp(@Param("Title")String Title, @Param("edition")String edition);
 
-	ArrayList<EpcommentVo> getCmtList(@Param("Title")String Title, @Param("edition")String edition);
+		ArrayList<EpisodeVo> getEpList(@Param("Title")String Title, @Param("edition")String edition);
 
-	void insertEpcmt(@Param("epcmt")EpcommentVo epcmt);
+		ArrayList<EpcommentVo> getCmtList(@Param("Title")String Title, @Param("edition")String edition);
 
-	ArrayList<EpisodeVo> getEpcoverlist(@Param("Title")String title);
+		void insertEpcmt(@Param("epcmt")EpcommentVo epcmt);
 
-	int selectChoice(@Param("Title")String Title, @Param("id")String id);
+		ArrayList<EpisodeVo> getEpcoverlist(@Param("Title")String title);
 
-	void insertChoice(@Param("Title")String Title, @Param("id")String id);
+		int selectChoice(@Param("Title")String Title, @Param("id")String id);
 
-	void updateToonByChoice(@Param("Title")String Title);
+		void insertChoice(@Param("Title")String Title, @Param("id")String id);
 
-	ChoiceVo getChoice(@Param("Title")String Title, @Param("id")String id);
+		void updateToonByChoice(@Param("Title")String Title);
 
-	void deleteChoice(@Param("Title")String Title, @Param("id")String id);
+		ChoiceVo getChoice(@Param("Title")String Title, @Param("id")String id);
 
-	ArrayList<BookeventVo> eventList(@Param("cri")Criteria cri);
+		void deleteChoice(@Param("Title")String Title, @Param("id")String id);
 
-	void insertEvent(@Param("event")BookeventVo event);
+		ArrayList<BookeventVo> eventList(@Param("cri")Criteria cri);
 
-	ArrayList<PayVo> payList(@Param("cri")Criteria cri);
+		void insertEvent(@Param("event")BookeventVo event);
 
-	BookeventVo paybanner(@Param("cri")Criteria cri);
+		ArrayList<PayVo> payList(@Param("cri")Criteria cri);
 
-	void insertPay(@Param("pay")PayVo pay);
+		BookeventVo paybanner(@Param("cri")Criteria cri);
 
-	ArrayList<PayVo> getPayList(@Param("name")String name);
+		void insertPay(@Param("pay")PayVo pay);
 
-	ArrayList<ClaimVo> getClaim(@Param("cri")Criteria cri);
+		ArrayList<PayVo> getPayList(@Param("id")String id);
 
-	ArrayList<ToonVo> getPayToon(@Param("name")String name);
+		ArrayList<ClaimVo> getClaim(@Param("cri")Criteria cri);
 
-	void insertclaim(@Param("cl")ClaimVo cl);
+		ArrayList<ToonVo> getPayToon(@Param("id")String id);
 
-	ClaimVo getClaimT(@Param("num")Integer num);
+		void insertclaim(@Param("cl")ClaimVo cl);
 
-//페이지네이션
-	public int getTotalCountByToon(@Param("cri")Criteria cri);
-	
-	int getTotalCountByClaim(@Param("cri")Criteria cri);
+		ClaimVo getClaimT(@Param("num")Integer num);
+		
+		void updateClaim(@Param("cl")ClaimVo cl);
 
-	void updateClaim(@Param("cl")ClaimVo cl);
+		int selectUp(@Param("Title")String Title, @Param("id")String id);
 
-	int selectUp(@Param("Title")String Title, @Param("id")String id);
+		void insertUp(@Param("Title")String Title, @Param("id")String id);
 
-	void insertUp(@Param("Title")String Title, @Param("id")String id);
+		void updateToonByUp(@Param("Title")String Title);
 
-	void updateToonByUp(@Param("Title")String Title);
+		UpVo getUp(@Param("Title")String Title, @Param("id")String id);
 
-	UpVo getUp(@Param("Title")String Title, @Param("id")String id);
+		ArrayList<ToonVo> toonRanking(@Param("cri")Criteria cri);
+		
+		ArrayList<ToonVo> toonRankviews(@Param("cri")Criteria cri);
 
-	ArrayList<ToonVo> toonRanking(@Param("cri")Criteria cri);
-	
-	ArrayList<ToonVo> toonRankviews(@Param("cri")Criteria cri);
+		public ArrayList<ToonVo> genreRank(@Param("cri")Criteria cri);
+
+		public BookeventVo getEvent(@Param("title")String title);
+
+		public void updateEvent(@Param("event")BookeventVo event);
+
+		public ArrayList<PayVo> payattend(@Param("usedate")String usedate);
+
+		public PayVo payattend(@Param("pay")PayVo pay);
+
+		public ArrayList<PayVo> getPay(@Param("now")String now);
+
+		public ArrayList<ToonVo> toonEnd(@Param("cri")Criteria cri, @Param("now")String now);
+
+		public ArrayList<GenreVo> getGenrelist(@Param("cri")Criteria cri);
+
+		public ArrayList<ToonVo> TheendGenre(@Param("cri")Criteria cri);
+
+		public ClaimVo getClaimAnswer(@Param("num")int num);
+
+		public void deletePay(@Param("pay")PayVo pay);
 }

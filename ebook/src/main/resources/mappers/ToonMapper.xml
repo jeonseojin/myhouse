@@ -74,7 +74,8 @@
 				t_views = #{toon.t_views},
 				lastEpisode = #{toon.lastEpisode},
 				choice = #{toon.choice},
-				up = #{toon.up}
+				up = #{toon.up},
+				t_lastEpdate = #{toon.t_lastEpdate}
 			where
 				t_title = #{toon.t_title}
 	</update>
@@ -152,6 +153,10 @@
 			choice = (select count(*) from choice where ch_title = #{Title})
 		where t_title = #{Title}
 	</update>
+	<!-- 찜 삭제 -->
+	<delete id="deleteChoice">
+		DELETE FROM choice where ch_title =#{Title} and ch_id = #{id}
+	</delete>
 <!-- 추천 기능 -->
 	<select id="getUp" resultType="kr.green.ebook.vo.UpVo">
 		SELECT * FROM up where up_title = #{Title} and up_id = #{id}
@@ -170,21 +175,36 @@
 			up = (select count(*) from up where up_title = #{Title})
 		where t_title = #{Title}
 	</update>
-<!-- 찜 삭제 -->
-	<delete id="deleteChoice">
-	DELETE FROM choice where ch_title =#{Title} and ch_id = #{id}
-	</delete>
-
 <!-- 전체 이벤트 불러오기 -->
 	<select id="eventList" resultType="kr.green.ebook.vo.BookeventVo">
 		select * from bookevent
+		order by ev_num desc
 	</select>
 <!-- 이벤트 등록 -->
 	<insert id="insertEvent">
 		insert into
-			bookevent(ev_title,ev_engtitle,ev_img,ev_t_title,ev_member,ev_banner)
-			values(#{event.ev_title},#{event.ev_engtitle},#{event.ev_img},#{event.ev_t_title},#{event.ev_member},#{event.ev_banner})
+			bookevent(ev_title,ev_engtitle,ev_img,ev_t_title,ev_member,ev_banner,ev_page,ev_url)
+			values(#{event.ev_title},#{event.ev_engtitle},#{event.ev_img},#{event.ev_t_title},#{event.ev_member},#{event.ev_banner},#{event.ev_page},#{event.ev_url})
 	</insert>
+<!-- 이벤트 불러오기 -->
+	<select id="getEvent" resultType="kr.green.ebook.vo.BookeventVo">
+		select * from bookevent where ev_engtitle = #{title}
+	</select>
+<!-- 이벤트 수정 -->
+	<update id="updateEvent">
+		update bookevent
+		set
+			ev_title = #{event.ev_title},
+			ev_engtitle = #{event.ev_engtitle},
+			ev_t_title = #{event.ev_t_title},
+			ev_Deldate = #{event.ev_Deldate},
+			ev_img = #{event.ev_img},
+			ev_banner = #{event.ev_banner},
+			ev_page = #{event.ev_page},
+			ev_url = #{event.ev_url}
+			
+		where ev_num = #{event.ev_num}
+	</update>
 <!-- 전체 충전 리스트 -->
 	<select id="payList" resultType="kr.green.ebook.vo.PayVo">
 		select * from pay
@@ -201,12 +221,17 @@
 	</insert>
 <!-- 결제내역 -->
 	<select id="getPayList" resultType="kr.green.ebook.vo.PayVo">
-		select * from pay where p_member =#{name}
+		select * from pay where p_member =#{id}
+		order by p_num desc
 	</select>
+<!-- 출석 포인트 삭제 -->
+	<delete id="deletePay">
+		DELETE FROM pay where p_usedate = #{pay.p_usedate}
+	</delete>
 <!-- 소장웹툰 -->
 	<select id="getPayToon" resultType="kr.green.ebook.vo.ToonVo">
 		select * from toon
-			join (SELECT * FROM pay where p_member like #{name} and p_one = 'Y' ) as st
+			join (SELECT * FROM pay where p_member like #{id} and p_one = 'Y' ) as st
 			on p_title = t_title
 	</select>
 <!-- 전체문의내역 --> 
@@ -228,6 +253,10 @@
 <!-- 공지사항 찾아가기 -->
 	<select id="getClaimT" resultType="kr.green.ebook.vo.ClaimVo"> 
 		select * from claim where cl_num = #{num}
+	</select>
+<!-- 답변 찾아오기 -->
+	<select id="getClaimAnswer" resultType="kr.green.ebook.vo.ClaimVo"> 
+		select * from claim where cl_answer = #{num} and cl_auth = 'ADMIN'
 	</select>
 <!-- 문의&공지 등록 -->
 	<insert id="insertclaim">
@@ -258,7 +287,7 @@
 			cl_content=#{cl.cl_content},
 			cl_file=#{cl.cl_file},
 			cl_type=#{cl.cl_type},
-			cl_answer=#{cl.cl_answer}
+			cl_answer =#{cl.cl_answer}
 			
 		where cl_num = #{cl.cl_num}
 	</update>
@@ -266,10 +295,50 @@
 	<select id="toonRanking" resultType="kr.green.ebook.vo.ToonVo">
 		select * from toon
 		order by up desc
+		limit #{cri.startPage},#{cri.perPageNum}
 	</select>
 <!-- 조회수/views -->
 	<select id="toonRankviews" resultType="kr.green.ebook.vo.ToonVo">
 		select * from toon
 		order by t_views desc
+		limit #{cri.startPage},#{cri.perPageNum}
+	</select>
+<!-- 장르 랭킹 -->
+	<select id="genreRank" resultType="kr.green.ebook.vo.ToonVo">
+		select * from toon
+		where 1=1
+		<if test="cri.genre!='전체장르'">
+			and t_type like concat('%',#{cri.genre},'%')
+		</if>
+	  	order by up desc
+	  	limit #{cri.startPage},#{cri.perPageNum}
+	</select>
+<!-- 출석이벤트 확인-->
+	<select id="payattend" resultType="kr.green.ebook.vo.PayVo" >
+		select * from pay
+		where p_usedate = #{pay.p_usedate} and p_member = #{pay.p_member}
+	</select>
+<!-- 출석포인트 확인 -->
+	<select id="getPay" resultType="kr.green.ebook.vo.PayVo" >
+		select * from pay
+		where p_usedate = #{now}
+	</select>
+<!-- 완결 웹툰 기간 -->
+	<select id="toonEnd" resultType="kr.green.ebook.vo.ToonVo">
+		select * from toon
+		where t_lastEpdate = #{now}
+	</select>
+<!-- 장르 불러오기 -->
+	<select id="getGenrelist" resultType="kr.green.ebook.vo.GenreVo">
+		select * from genre
+	</select>
+<!-- 완결 장르 불러오기 -->
+	<select id="TheendGenre" resultType="kr.green.ebook.vo.ToonVo">
+		select * from toon
+			where lastEpisode='Y'
+		<if test="cri.genre">
+				and t_type like concat('%',#{cri.genre},'%')
+		</if>
+		order by up desc
 	</select>
 </mapper>

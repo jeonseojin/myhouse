@@ -65,14 +65,14 @@
 		
 		<div class="hbox-list hbox-help display-none">
 			<h2 class="hbox-right-heading">도움말(1:1문의)</h2>
-			<div class="hbox-right-tap">
-				<a class="hbox-right-tap-a" data-target="help-common" aria-selected="true">자주 묻는 질문</a>
-				<a class="hbox-right-tap-a" data-target="help-auth">로그인 / 계정</a>
-				<a class="hbox-right-tap-a" data-target="help-payment">결제 / 환불</a>
-				<a class="hbox-right-tap-a" data-target="help-etc">기타문의 / 제안</a>
+			<div class="hbox-help-tap">
+				<a class="hbox-help-tap-a" data-target="help-common" aria-selected="true">자주 묻는 질문</a>
+				<a class="hbox-help-tap-a" data-target="help-auth">로그인 / 계정</a>
+				<a class="hbox-help-tap-a" data-target="help-payment">결제 / 환불</a>
+				<a class="hbox-help-tap-a" data-target="help-etc">기타문의 / 제안</a>
 			</div>
 			<div class="help-box-text">
-				<ul class="help-box-list help-common">
+				<ul class="helpbox-list help-common">
 					<c:forEach var="claim" items="${cl}">
 						<c:if test="${claim.cl_auth=='ADMIN' && claim.cl_type=='common'}">
 							<li>
@@ -83,7 +83,7 @@
 					</c:forEach>
 				</ul>
 				
-				<div class="help-box-list help-auth display-none">
+				<div class="helpbox-list help-auth display-none">
 					<ul>
 						<c:forEach var="claim" items="${cl}">
 							<c:if test="${claim.cl_auth=='ADMIN' && claim.cl_type=='auth'}">
@@ -96,7 +96,7 @@
 						</c:forEach>
 					</ul>
 				</div>
-				<div class="help-box-list help-payment display-none">
+				<div class="helpbox-list help-payment display-none">
 				<ul>
 						<c:forEach var="claim" items="${cl}">
 							<c:if test="${claim.cl_auth=='ADMIN' && claim.cl_type=='payment'}">
@@ -109,7 +109,7 @@
 						</c:forEach>
 					</ul>
 				</div>
-				<div class="help-box-list help-etc display-none">
+				<div class="helpbox-list help-etc display-none">
 					<ul>
 						<c:forEach var="claim" items="${cl}">
 							<c:if test="${claim.cl_auth=='ADMIN' && claim.cl_type=='etc'}">
@@ -135,20 +135,36 @@
 				</div>
 				<ul class="clmylist-list">
 					<c:forEach var="cl" items="${cl}">
-						<c:if test="${cl.cl_member==member.name}">
-							<li class="clmylist-item">
-								<a class="clmylist-link" href="<%=request.getContextPath()%>/toon/help?$num=${cl.cl_num}">
-									<div class="clmylist-itemT">${cl.cl_title}</div>
-									<div class="clmylist-itemD">${cl.cl_date}</div>
-									<c:if test="${cl.cl_answer!=0}">
-										<div class="clmylist-itemS noticeY">답변완료</div>
-									</c:if>
-									<c:if test="${cl.cl_answer==0}">
-										<div class="clmylist-itemS">미답변</div>
-									</c:if>
-								</a>
-							</li>
-						</c:if>
+							<c:if test="${cl.cl_member==member.name}">
+								<li class="clmylist-item">
+									<div class="clmylist-link  help-box-item">
+										<div class="clmylist-itemT">${cl.cl_title}</div>
+										<div class="clmylist-itemD">${cl.cl_date}</div>
+										<c:if test="${cl.cl_answer!=0}">
+											<div class="clmylist-itemS noticeY">답변완료</div>
+										</c:if>
+										<c:if test="${cl.cl_answer==0}">
+											<div class="clmylist-itemS">미답변</div>
+										</c:if>
+									</div>
+									<div class="hbox-item-content display-none">
+										<div class="hbox-mycontent">${cl.cl_content}</div>
+											<c:forEach var="answer" items="${answer}">
+											<c:if test="${answer.cl_answer==cl.cl_num}">
+												<div class="answer-content">
+													<div class="answer-itemT">${answer.cl_title}</div>
+													<div>${answer.cl_content}</div>
+													<div class="answer-itemD float-right">${answer.cl_date}</div>
+												</div>
+											</c:if>
+											<c:if test="${answer.cl_answer!=cl.cl_num}">
+												<div class="noanswer-content">등록된 답변이 없습니다.</div>
+											</c:if>
+										</c:forEach>
+									</div>
+								</li>
+								
+							</c:if>
 					</c:forEach>
 				</ul>
 			</div>
@@ -192,6 +208,12 @@
 	        e.preventDefault();
 	        $('.hbox-right-tap>.hbox-right-tap-a').attr('aria-selected','false');
 	        $(this).attr('aria-selected','true');
+	        rightView();
+	    })
+	    $('.hbox-help-tap> .hbox-help-tap-a').click(function(e){
+	        e.preventDefault();
+	        $('.hbox-help-tap>.hbox-help-tap-a').attr('aria-selected','false');
+	        $(this).attr('aria-selected','true');
 	        helpView();
 	    })
 		$('.hbox-left-nav >.help-choice').click(function(e){
@@ -212,13 +234,18 @@
 		var value=$('.clmytype').val();
 		$('input[name=cl_type]').val(value);
 	}
-	function helpView(){
+	function rightView(){
 	    var target = $('.hbox-right-tap .hbox-right-tap-a[aria-selected=true]').attr('data-target');
 	    $('.help-box-text>.help-box-list').addClass('display-none');
 	    $('.help-box-list.'+target).removeClass('display-none');
 	}
+	rightView();
+	function helpView(){
+	    var target = $('.hbox-help-tap .hbox-help-tap-a[aria-selected=true]').attr('data-target');
+	    $('.help-box-text>.helpbox-list').addClass('display-none');
+	    $('.helpbox-list.'+target).removeClass('display-none');
+	}
 	helpView();
-	
 	
 	function helpboxView(){
 	    var target = $('.hbox-left-nav>.help-choice[aria-selected=true]').attr('data-target');

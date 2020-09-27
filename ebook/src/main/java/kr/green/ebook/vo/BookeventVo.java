@@ -15,8 +15,15 @@ public class BookeventVo {
 	private String ev_banner;
 	private String ev_page;
 	private String ev_engtitle;
+	private String ev_url;
 	
 	
+	public String getEv_url() {
+		return ev_url;
+	}
+	public void setEv_url(String ev_url) {
+		this.ev_url = ev_url;
+	}
 	public String getEv_engtitle() {
 		return ev_engtitle;
 	}
@@ -88,9 +95,10 @@ public class BookeventVo {
 	}
 	@Override
 	public String toString() {
-		return "EventVo [ev_num=" + ev_num + ", ev_title=" + ev_title + ", ev_img=" + ev_img + ", ev_t_title="
+		return "BookeventVo [ev_num=" + ev_num + ", ev_title=" + ev_title + ", ev_img=" + ev_img + ", ev_t_title="
 				+ ev_t_title + ", ev_member=" + ev_member + ", ev_date=" + ev_date + ", ev_Deldate=" + ev_Deldate
-				+ ", ev_banner=" + ev_banner + ", ev_page=" + ev_page + ", ev_engtitle=" + ev_engtitle + "]";
+				+ ", ev_banner=" + ev_banner + ", ev_page=" + ev_page + ", ev_engtitle=" + ev_engtitle + ", ev_url="
+				+ ev_url + "]";
 	}
 
 	

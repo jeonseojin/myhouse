@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<c:if test="${member.name!=null&&member.auth=='ADMIN'}">
 		<form action="<%=request.getContextPath()%>/admin/detail">
 			<table class="table table-hover">
 				<thead>
@@ -52,7 +53,10 @@
 			<a href="<%=request.getContextPath() %>/admin/toon?page=${cri.page}&type=${cri.type}&search=${cri.search}" class="float-left"><button type="button" class="btn btn-outline-secondary">목록</button></a>
 			<div class="float-right">
 				<a href="<%=request.getContextPath()%>/admin/modify?num=${toon.t_num}&Title=${toon.t_title}&tweek=${toon.t_week}"><button type="button" class="btn btn-primary">수정</button></a>
-				<a href="<%=request.getContextPath()%>/admin/delete?Title=${toon.t_title}"><button type="button" class="btn btn-danger">삭제</button></a>
 			</div>
 			<input type="hidden" id="num" value="${toon.t_num}">
 		</form>
+	</c:if>
+	<c:if test="${member.name==null||member.auth=='USER'}">
+		<h1>접근할 수 없는 경로 입니다.</h1>
+	</c:if>

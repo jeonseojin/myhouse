@@ -1,7 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form class="signup-box" action="<%=request.getContextPath()%>/signup" method="post">
+    
+
+<form class="signup-box" action="<%=request.getContextPath()%>/signup" method="post" id="signup-form">
 	<h1 class="login-heading">회원가입</h1>
 	<div class="signup-item">
 		<div class="sign-up">
@@ -43,11 +45,6 @@
 		</div>
 		<button type="submit" class="signup-btn">가입하기</button>
 	</div>
-	<input type="hidden" value="${id}" id="id">
-	<input type="hidden" value="${pw}" id="pw">
-	<input type="hidden" value="${name}" id="name">
-	<input type="hidden" value="${email}" id="email">
-	<input type="hidden" value="${gender}" id="gender">
 </form>
 
 <script>
@@ -83,12 +80,12 @@ $(function(){
 		}
 	})
 	$('input[name=name]').keyup(function(){
-		var id = $(this).val();
-		if(id.length >= 3){
+		var name = $(this).val();
+		if(id.length >= 2){
 			$.ajax({
 		        async:true,
 		        type:'POST',
-		        data:id,
+		        data:name,
 		        url:"<%=request.getContextPath()%>/nameCheck",
 		        dataType:"json",
 		        contentType:"application/json; charset=UTF-8",
@@ -96,10 +93,10 @@ $(function(){
 			        	var str;
 		            if(data['res']){
 			            str = 
-				        '<p style="color:green;">사용 가능한 아아디입니다.</p>'
+				        '<p style="color:green;">사용 가능한 별명입니다.</p>'
 		            }else{
 		            	str = 
-				        '<p style="color:red;">이미 가입되있거나 탈퇴한 아이디입니다.</p>'
+				        '<p style="color:red;">이미 사용중입니다.</p>'
 		            }
 		            $('#name-error').html(str);
 		           
@@ -112,10 +109,10 @@ $(function(){
 			    $('#name-error').html('이름/별명은 세글자 이상이어야 합니다.');
 		}
 	})
-	//유효성 검사
-	$(function(){
-	    $("form").validate({
-	        rules: {
+})
+$(function(){
+    $("#signup-form").validate({
+         rules: {
 	            pw: {
 	                required : true,
 	                minlength : 8,
@@ -166,16 +163,14 @@ $(function(){
 	                email : "메일규칙에 어긋납니다"
 	            }   
 	        }
-	    });
-	})
-	$.validator.addMethod(
-	    "regex",
-	    function(value, element, regexp) {
-	        var re = new RegExp(regexp);
-	        return this.optional(element) || re.test(value);
-	    },
-	    "Please check your input."
-	);
-
+    });
 })
+$.validator.addMethod(
+    "regex",
+    function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    },
+    "Please check your input."
+);
 </script>

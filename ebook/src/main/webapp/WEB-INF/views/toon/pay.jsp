@@ -139,7 +139,9 @@
 			<button type="submit" class="payment-submit-btn">충전</button>
 		</div>
 		</div>
+		<input type="hidden" name="p_title" value="충전">
 		<input type="hidden" name="p_charging">
+		<input type="hidden" name="p_one" value="N">
 		<input type="hidden" name="p_price">
 	</div>
 </div>

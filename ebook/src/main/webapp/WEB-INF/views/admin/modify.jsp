@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${member.name==null||member.auth=='USER'}">
+	<h1>접근할 수 없는 경로 입니다.</h1>
+</c:if>
+<c:if test="${member.name!=null&&member.auth=='ADMIN'}">
 		<form action="<%=request.getContextPath()%>/admin/modify" enctype="multipart/form-data" method="post" >
 			<table class="table table-hover">
 				<thead>
@@ -55,7 +59,6 @@
 					</tr>
 				</thead>
 			</table>
-			<input type="checkbox" name="t_type" value="전체" checked="checked" class="checkbox display-none">
 			<div class="ad-img-box display-flex">
 				<div class="ad-img-box">
 					<h4 class="ad-img-h">대표(big) 이미지</h4>
@@ -93,11 +96,12 @@
 			<a href="<%=request.getContextPath() %>/admin/toon?page=${cri.page}&type=${cri.type}&search=${cri.search}" class="float-left"><button type="button" class="btn btn-outline-secondary">목록</button></a>	
 			<div class="float-right"><button class="btn btn-primary">수정완료</button></div>
 		</form>
-		
+</c:if>		
 		
 <script>
 	function Selinput(input){
-	    document.getElementById("t_week").value =input;
+		var value = $(".t_week-box").val(); 
+		$('input[name=t_week]').val(value); 
 	}
 	$(function(){		
 		var genre=$('.ad-genre').val();

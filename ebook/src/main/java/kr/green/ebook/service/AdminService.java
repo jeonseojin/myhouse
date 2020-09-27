@@ -29,8 +29,6 @@ public interface AdminService {
 
 	void insertEp(EpisodeVo ep);
 
-	GenreVo getGr(String t_code);
-
 	WeekVo getWeek(Integer t_week);
 	
 	ToonVo getToonT(String Title);
@@ -60,5 +58,18 @@ public interface AdminService {
 	ArrayList<ToonVo> toonRanking(Criteria cri);
 
 	ArrayList<ToonVo> toonRankviews(Criteria cri);
+
+	BookeventVo getEvent(String title);
+
+	void updateEvent(BookeventVo event);
+
+	PayVo payattend(PayVo pay);
+
+	void getPay(String now);
+
+	ClaimVo getClaimAnswer(int cl_num);
+
+	void deletePay(PayVo pay);
+
 
 }

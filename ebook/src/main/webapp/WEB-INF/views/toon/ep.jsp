@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
 <div id="comic-info" class="comicInfo">
 	<img class="comicInfo-img" src="/ebook/resources/img${toon.t_typify}" alt="">
 	<div class="comicInfo-Epdetail">
@@ -156,7 +154,13 @@ $(function(){
 	        dataType:"json",
 	        contentType:"application/json; charset=UTF-8",
 		        success : function(data){
+					if(data["res"]!=null){
+						alert(data["res"]);
+					}else{
+						window.location.href = "<%=request.getContextPath()%>/toon/comic?Title="+title+"&edition="+edition;
+					}
 		        }
+        
 		});
     })
     
