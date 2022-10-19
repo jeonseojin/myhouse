@@ -198,7 +198,7 @@
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
-		    <version>2.11.1</version>
+		    <version>2.13.4.1</version>
 		</dependency>
 		<!-- 파일 업로드 의존성 -->
 		<dependency>
